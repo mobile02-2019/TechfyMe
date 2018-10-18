@@ -24,7 +24,7 @@
     <android.support.design.widget.TextInputLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="48dp"/>
+        android:layout_marginTop="48dp">
 
     <android.support.design.widget.TextInputEditText
         android:id="@+id/edit_text_email_id"
@@ -32,13 +32,13 @@
         android:layout_height="wrap_content"
         android:hint="Username or Email*"
         android:layout_marginRight="16dp"
-        android:layout_marginLeft="16dp"
-
-        />
+        android:layout_marginLeft="16dp">
+    </android.support.design.widget.TextInputEditText>
+    </android.support.design.widget.TextInputLayout>
 
     <android.support.design.widget.TextInputLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content" >
 
     <android.support.design.widget.TextInputEditText
         android:id="@+id/edit_text_password_id"
@@ -46,8 +46,9 @@
         android:layout_height="wrap_content"
         android:hint="Password*"
         android:layout_marginRight="16dp"
-        android:layout_marginLeft="16dp"
-        />
+        android:layout_marginLeft="16dp">
+    </android.support.design.widget.TextInputEditText>
+    </android.support.design.widget.TextInputLayout>
 
         <Button
             style="@style/Widget.AppCompat.Button.Colored"
@@ -57,7 +58,6 @@
             android:layout_marginLeft="16dp"
             android:layout_marginTop="36dp"
             android:layout_marginRight="16dp"
-            android:onClick="loginClicado"
             android:padding="16dp"
             android:text="Login"
             android:textColor="@color/preto" />
