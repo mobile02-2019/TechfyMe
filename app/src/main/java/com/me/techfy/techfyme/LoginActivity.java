@@ -8,6 +8,10 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
+import com.me.techfy.techfyme.CadastroActivity;
+import com.me.techfy.techfyme.HomeActivity;
+import com.me.techfy.techfyme.R;
+
 public class LoginActivity extends AppCompatActivity {
     public static final String CHAVE_EMAIL = "chave_email";
 
