@@ -19,7 +19,7 @@ public class CadastroActivity extends AppCompatActivity {
         botaoCadastro.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(v.getContext(), HomeActivity.class);
+                Intent intent = new Intent(v.getContext(),PreferenciaActivity.class);
                 startActivity(intent);
             }
         });
