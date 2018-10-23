@@ -45,13 +45,13 @@ public class NoticiaFragment extends Fragment {
         return view;
     }
 
-    private void setupRecyclerView(View view) {
-        RecyclerView recyclerView = view.findViewById(R.id.recyclerview_news_id);
+        private void setupRecyclerView(View view) {
+            RecyclerView recyclerView = view.findViewById(R.id.recyclerview_news_id);
 
 
-        RecyclerViewNewsAdapter adapter = new RecyclerViewNewsAdapter(createNoticiaList());
-        recyclerView.setAdapter(adapter);
-        recyclerView.setLayoutManager(new LinearLayoutManager(view.getContext()));
+            RecyclerViewNewsAdapter adapter = new RecyclerViewNewsAdapter(createNoticiaList());
+            recyclerView.setAdapter(adapter);
+            recyclerView.setLayoutManager(new LinearLayoutManager(view.getContext()));
     }
 
     private List<Noticia> createNoticiaList() {
@@ -68,6 +68,8 @@ public class NoticiaFragment extends Fragment {
         noticia2.setDescricao("Depois de receber multa de US$ 5 bilhões da União Europeia por Android, Google irá cobrar fabricantes em novo modelo de licenciamento do sistema operacional.");
         noticia2.setDataCriacao(new Date());
         noticiaList.add(noticia2);
+
+
 
         return noticiaList;
 
