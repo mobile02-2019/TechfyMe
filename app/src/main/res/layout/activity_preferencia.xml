@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".PreferenciaActivity"
+    android:orientation="vertical">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Selecione até 4 categorias para fixar no menu inferior:"
+        android:layout_marginTop="15dp"/>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <CheckBox
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:text="Google"
+                android:textSize="16sp"
+                android:layout_margin="8dp"
+                android:checked="false"
+                />
+
+            <CheckBox
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:text="Apple"
+                android:textSize="16sp"
+                android:id="@+id/cat_apple"
+                android:layout_margin="8dp"
+                android:checked="false"/>
+
+            <CheckBox
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:text="Mobile"
+                android:textSize="16sp"
+                android:layout_margin="8dp"
+                android:checked="false"
+                android:id="@+id/cat_mobile"/>
+
+            <CheckBox
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:text="Futuro"
+                android:textSize="16sp"
+                android:layout_margin="8dp"
+                android:id="@+id/cat_futuro"
+                android:checked="false"
+                />
+
+            <CheckBox
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:text="Android"
+                android:textSize="16sp"
+                android:layout_margin="8dp"
+                android:id="@+id/cat_android"
+                android:checked="true"
+                />
+
+            <CheckBox
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:text="IOS"
+                android:textSize="16sp"
+                android:layout_margin="8dp"
+                android:id="@+id/cat_ios"
+                android:checked="true"
+                />
+
+            <CheckBox
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:text="Sistema Operacional"
+                android:textSize="16sp"
+                android:id="@+id/cat_so"
+                android:layout_margin="8dp"
+                android:checked="true"
+                />
+            <CheckBox
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:text="Mercado"
+                android:textSize="16sp"
+                android:layout_margin="8dp"
+                android:id="@+id/cat_mercado"
+                android:checked="true"/>
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:text="Enviar"
+                android:textColor="@color/azulSecundarioDark"
+                android:backgroundTint="@color/verdePrimario"
+                android:onClick="home"/>
+
+
+
+
+
+
+
+        </LinearLayout>
+    </ScrollView>
+</LinearLayout>
