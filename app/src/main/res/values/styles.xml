@@ -8,4 +8,9 @@
         <item name="colorAccent">@color/colorAccent</item>
     </style>
 
+    <style name="AppTheme2" parent="AppTheme">
+        <!-- Se quiser deixar a linha azul sempre, tirar comentário da linha de baixo-->
+        <!--<item name="colorControlNormal">@color/azulSecundarioDark</item>-->
+        <item name="colorControlActivated">@color/azulSecundarioDark</item></style>
+
 </resources>

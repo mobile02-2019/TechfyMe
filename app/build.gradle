@@ -28,4 +28,10 @@ dependencies {
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
     implementation 'com.android.support:design:28.0.0'
 
+    //Máscara para data e telefone
+    implementation 'com.vicmikhailau:MaskedEditText:2.0.4'
+
+    //Biblioteca de Spinner com Material Design
+    implementation 'com.weiwangcn.betterspinner:library-material:1.1.0'
+
 }

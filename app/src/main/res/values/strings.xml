@@ -3,4 +3,10 @@
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string-array name="lista_de_generos">
+        <item>Escolha o gênero:</item>
+        <item>Feminino</item>
+        <item>Masculino</item>
+        <item>Outros</item>
+    </string-array>
 </resources>
