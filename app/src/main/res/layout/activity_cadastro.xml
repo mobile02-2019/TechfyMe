@@ -128,6 +128,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
+        app:passwordToggleEnabled="true"
         android:theme="@style/AppTheme2">
 
         <android.support.design.widget.TextInputEditText
@@ -135,6 +136,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="Senha*"
+            android:inputType="textPassword"
             android:layout_marginRight="16dp"
             android:layout_marginLeft="16dp">
 
@@ -145,6 +147,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
+        app:passwordToggleEnabled="true"
         android:theme="@style/AppTheme2">
 
         <android.support.design.widget.TextInputEditText
@@ -152,6 +155,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="Confirme sua senha"
+            android:inputType="textPassword"
             android:layout_marginRight="16dp"
             android:layout_marginLeft="16dp">
 
