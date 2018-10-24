@@ -15,40 +15,44 @@
         android:layout_height="match_parent"
         android:orientation="vertical">
 
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="8dp"
-        android:background="@color/verdePrimario">
-    </View>
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="8dp"
+            android:background="@color/verdePrimario">
+        </View>
 
-    <android.support.design.widget.TextInputLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="48dp">
+        <android.support.design.widget.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="48dp"
+            android:theme="@style/AppTheme2">
 
-    <android.support.design.widget.TextInputEditText
-        android:id="@+id/edit_text_email_id"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="Username or Email*"
-        android:layout_marginRight="16dp"
-        android:layout_marginLeft="16dp">
-    </android.support.design.widget.TextInputEditText>
-    </android.support.design.widget.TextInputLayout>
+            <android.support.design.widget.TextInputEditText
+                android:id="@+id/edit_text_email_id"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Username or Email*"
+                android:layout_marginRight="16dp"
+                android:layout_marginLeft="16dp">
+            </android.support.design.widget.TextInputEditText>
+        </android.support.design.widget.TextInputLayout>
 
-    <android.support.design.widget.TextInputLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" >
+        <android.support.design.widget.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:passwordToggleEnabled="true"
+            android:theme="@style/AppTheme2">
 
-    <android.support.design.widget.TextInputEditText
-        android:id="@+id/edit_text_password_id"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="Password*"
-        android:layout_marginRight="16dp"
-        android:layout_marginLeft="16dp">
-    </android.support.design.widget.TextInputEditText>
-    </android.support.design.widget.TextInputLayout>
+            <android.support.design.widget.TextInputEditText
+                android:id="@+id/edit_text_password_id"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Password*"
+                android:inputType="textPassword"
+                android:layout_marginRight="16dp"
+                android:layout_marginLeft="16dp">
+            </android.support.design.widget.TextInputEditText>
+        </android.support.design.widget.TextInputLayout>
 
         <Button
             style="@style/Widget.AppCompat.Button.Colored"
@@ -62,85 +66,80 @@
             android:text="Login"
             android:textColor="@color/preto" />
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/text_register"
-        android:text="Novo na Techfy.Me? Registre-se"
-        android:layout_gravity="right"
-        android:layout_marginRight="16dp"
-        android:layout_marginTop="16dp"
-
-        />
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="24dp"
-        android:layout_marginTop="24dp"
-        android:orientation="horizontal"
-        android:layout_weight="1">
-
-        <View
-            android:layout_width="wrap_content"
-            android:layout_height="0.2dp"
-            android:layout_gravity="center_vertical"
-            android:layout_weight="1"
-            android:background="@color/preto"
-            android:layout_marginRight="16dp"
-            android:layout_marginLeft="16dp">
-
-        </View>
-
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="OR"
-            android:layout_gravity="center_vertical"
+            android:id="@+id/text_register"
+            android:text="Novo na Techfy.Me? Registre-se"
+            android:layout_gravity="right"
+            android:layout_marginRight="16dp"
+            android:layout_marginTop="16dp"
+
             />
 
-        <View
-            android:layout_width="wrap_content"
-            android:layout_height="0.2dp"
-            android:layout_gravity="center"
-            android:layout_weight="1"
-            android:background="@color/preto"
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="24dp"
+            android:layout_marginTop="24dp"
+            android:orientation="horizontal"
+            android:layout_weight="1">
+
+            <View
+                android:layout_width="wrap_content"
+                android:layout_height="0.2dp"
+                android:layout_gravity="center_vertical"
+                android:layout_weight="1"
+                android:background="@color/preto"
+                android:layout_marginRight="16dp"
+                android:layout_marginLeft="16dp">
+
+            </View>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="OR"
+                android:layout_gravity="center_vertical"
+                />
+
+            <View
+                android:layout_width="wrap_content"
+                android:layout_height="0.2dp"
+                android:layout_gravity="center"
+                android:layout_weight="1"
+                android:background="@color/preto"
+                android:layout_marginRight="16dp"
+                android:layout_marginLeft="16dp">
+
+            </View>
+
+
+        </LinearLayout>
+
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
             android:layout_marginRight="16dp"
-            android:layout_marginLeft="16dp">
+            android:layout_marginLeft="16dp"
+            android:layout_marginTop="48dp"
+            android:padding="16dp"
+            android:text="Login with facebook"
+            android:textColor="@color/branco"
+            android:backgroundTint="@color/colorFacebook"
+            android:drawableLeft="@drawable/ic_facebook" />
 
-        </View>
-
-
-    </LinearLayout>
-
-    <Button
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginRight="16dp"
-        android:layout_marginLeft="16dp"
-        android:layout_marginTop="48dp"
-        android:padding="16dp"
-        android:text="Login with facebook"
-        android:textColor="@color/branco"
-        android:backgroundTint="@color/colorFacebook"
-       android:drawableLeft="@drawable/ic_facebook"
-
-        />
-
-    <Button
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginRight="16dp"
-        android:layout_marginLeft="16dp"
-        android:layout_marginTop="16dp"
-        android:padding="16dp"
-        android:text="Login with Google"
-        android:textColor="@color/branco"
-        android:backgroundTint="@color/colorGoogle"
-        android:drawableLeft="@drawable/ic_google"
-        android:layout_marginBottom="48dp"
-
-
-        />
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="16dp"
+            android:layout_marginLeft="16dp"
+            android:layout_marginTop="16dp"
+            android:padding="16dp"
+            android:text="Login with Google"
+            android:textColor="@color/branco"
+            android:backgroundTint="@color/colorGoogle"
+            android:drawableLeft="@drawable/ic_google"
+            android:layout_marginBottom="48dp" />
     </LinearLayout>
 
 </ScrollView>
