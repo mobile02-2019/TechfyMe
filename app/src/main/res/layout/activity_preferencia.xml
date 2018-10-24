@@ -10,8 +10,10 @@
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Selecione até 4 categorias para fixar no menu inferior:"
-        android:layout_marginTop="15dp"/>
+        android:text="Selecione 4 Favoritos:"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        android:layout_margin="18dp" />
 
     <ScrollView
         android:layout_width="match_parent"
@@ -20,7 +22,8 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            android:layout_margin="16dp">
 
             <CheckBox
                 android:layout_width="fill_parent"

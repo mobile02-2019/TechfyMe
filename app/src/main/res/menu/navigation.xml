@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/navigation_marketplace"
+        android:icon="@drawable/marketplace_icon"
+        android:title="Market Place"
+        />
+
+    <item
+        android:id="@+id/navigation_google"
+        android:icon="@drawable/google_icons"
+        android:title="Google"/>
+
+    <item
+        android:id="@+id/navigation_mobile"
+        android:icon="@drawable/mobile_icons"
+        android:title="Mobile"/>
+
+    <item
+        android:id="@+id/navigation_android"
+        android:icon="@drawable/android_icon"
+        android:title="Android"/>
+
+
+
+</menu>

@@ -21,7 +21,8 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".PreferenciaActivity"></activity>
+        <activity android:name=".PreferenciaActivity" />
+        <activity android:name=".NoticiaDetalheActivity"></activity>
     </application>
 
 </manifest>

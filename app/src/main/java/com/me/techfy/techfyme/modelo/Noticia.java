@@ -7,6 +7,7 @@ public class Noticia implements Serializable {
     private String titulo;
     private String fonte;
     private String descricao;
+    private  String textoCompleto;
     private String imagemUrl;
     private Date dataCriacao;
 

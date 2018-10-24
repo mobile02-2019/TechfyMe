@@ -2,9 +2,12 @@ package com.me.techfy.techfyme;
 
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -22,7 +25,7 @@ import java.util.List;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class NoticiaFragment extends Fragment {
+public class NoticiaFragment extends Fragment implements RecyclerViewNewsAdapter.CardPostClicado {
 
 
     public NoticiaFragment() {
@@ -49,7 +52,7 @@ public class NoticiaFragment extends Fragment {
             RecyclerView recyclerView = view.findViewById(R.id.recyclerview_news_id);
 
 
-            RecyclerViewNewsAdapter adapter = new RecyclerViewNewsAdapter(createNoticiaList());
+            RecyclerViewNewsAdapter adapter = new RecyclerViewNewsAdapter(createNoticiaList(),this );
             recyclerView.setAdapter(adapter);
             recyclerView.setLayoutManager(new LinearLayoutManager(view.getContext()));
     }
@@ -72,6 +75,24 @@ public class NoticiaFragment extends Fragment {
 
 
         return noticiaList;
+
+
+    }
+
+    @Override
+    public void onCardClicado(Noticia noticia) {
+        Bundle bundle = new Bundle();
+        bundle.putString("noticia_titulo", noticia.getTitulo());
+        bundle.putString("noticia_fonte", noticia.getFonte());
+        bundle.putString("noticia_descricao" , noticia.getDescricao());
+
+        Intent intencao = new Intent(getContext(), NoticiaDetalheActivity.class);
+        intencao.putExtras(bundle);
+        startActivity(intencao);
+
+
+
+
 
 
     }

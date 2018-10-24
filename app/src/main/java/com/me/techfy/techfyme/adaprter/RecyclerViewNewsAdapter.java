@@ -5,6 +5,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.me.techfy.techfyme.R;
@@ -15,11 +16,18 @@ import java.util.List;
 
 public class RecyclerViewNewsAdapter extends RecyclerView.Adapter<RecyclerViewNewsAdapter.ViewHolder> {
     private List<Noticia> noticiaList;
+    private CardPostClicado listener;
 
-    public RecyclerViewNewsAdapter(List<Noticia> noticiaListt){
-        this.noticiaList = noticiaListt;
 
+    public interface CardPostClicado {
+        void onCardClicado(Noticia noticia);
     }
+
+    public RecyclerViewNewsAdapter(List<Noticia> noticiaListt, CardPostClicado listener){
+        this.noticiaList = noticiaListt;
+        this.listener = listener;
+        }
+
 
     @NonNull
     @Override
@@ -45,6 +53,7 @@ public class RecyclerViewNewsAdapter extends RecyclerView.Adapter<RecyclerViewNe
         private  TextView fonte;
         private TextView descricao;
         private  TextView data;
+        private ImageView imagem;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -53,13 +62,21 @@ public class RecyclerViewNewsAdapter extends RecyclerView.Adapter<RecyclerViewNe
             fonte = itemView.findViewById(R.id.text_fonte_noticia_id);
             descricao = itemView.findViewById(R.id.text_descricao_id);
             data = itemView.findViewById(R.id.text_fonte_noticia_id);
+            imagem = itemView.findViewById(R.id.imagem_celulares_id);
 
         }
-        public void bind(Noticia noticia){
+        public void bind(final Noticia noticia){
             titulo.setText(noticia.getTitulo());
             fonte.setText(noticia.getFonte());
             descricao.setText(noticia.getDescricao());
             data.setText(noticia.getDataCriacao().toString());
+            imagem.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    listener.onCardClicado(noticia);
+
+                }
+            });
 
 
         }
