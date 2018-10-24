@@ -11,6 +11,13 @@ public class Noticia implements Serializable {
     private String imagemUrl;
     private Date dataCriacao;
 
+    public String getTextoCompleto() {
+        return textoCompleto;
+    }
+
+    public void setTextoCompleto(String textoCompleto) {
+        this.textoCompleto = textoCompleto;
+    }
 
     public String getFonte() {
         return fonte;
