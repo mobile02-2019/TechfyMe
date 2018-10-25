@@ -11,6 +11,16 @@
     <style name="AppTheme2" parent="AppTheme">
         <!-- Se quiser deixar a linha azul sempre, tirar comentário da linha de baixo-->
         <!--<item name="colorControlNormal">@color/azulSecundarioDark</item>-->
-        <item name="colorControlActivated">@color/azulSecundarioDark</item></style>
+        <item name="colorControlActivated">@color/azulSecundarioDark</item>
+    </style>
+
+    <style name="AppTheme.NoActionBar">
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+    </style>
+
+    <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
+
+    <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
 
 </resources>

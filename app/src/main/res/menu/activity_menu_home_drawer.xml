@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:showIn="navigation_view"
+    >
+
+    <group android:checkableBehavior="single">
+
+        <item
+            android:id="@+id/nav_android"
+            android:icon="@drawable/icon_androidbranco"
+            android:title="Android" />
+        <item
+            android:id="@+id/nav_apple"
+            android:icon="@drawable/icon_applebranco"
+            android:title="Apple" />
+        <item
+            android:id="@+id/nav_futuo"
+            android:icon="@drawable/icon_futurobranco"
+            android:title="Futuro" />
+        <item
+            android:id="@+id/nav_google"
+            android:icon="@drawable/icon_googlebranco"
+            android:title="Google" />
+
+        <item
+        android:id="@+id/nav_ios"
+        android:icon="@drawable/icon_iosbranco"
+        android:title="IOS" />
+
+        <item
+            android:id="@+id/nav_mercado"
+            android:icon="@drawable/iconmercadobranco"
+            android:title="Mercado" />
+
+
+        <item
+            android:id="@+id/nav_mobile"
+            android:icon="@drawable/icon_mobilebranco"
+            android:title="Mobile" />
+
+        <item
+            android:id="@+id/nav_manage"
+            android:icon="@drawable/icon_pcbranco"
+            android:title="Sistema Operacional" />
+
+
+    </group>
+
+    <item android:title="Communicate">
+        <menu>
+            <item
+                android:id="@+id/nav_editar"
+                android:icon="@drawable/icon_editarbranco"
+                android:title="Editar" />
+            <item
+                android:id="@+id/nav_sair"
+                android:icon="@drawable/icon_sairbranco"
+                android:title="Sair" />
+        </menu>
+    </item>
+
+</menu>

@@ -41,15 +41,16 @@ public class LoginActivity extends AppCompatActivity {
         login.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent (view.getContext(), HomeActivity.class);
+                Intent intent = new Intent (LoginActivity.this, MenuHomeActivity.class);
                 Bundle bundle = new Bundle();
+                startActivity(intent);
 
-                TextInputEditText emailDigitado = findViewById(R.id.edit_text_email_id);
+               /* TextInputEditText emailDigitado = findViewById(R.id.edit_text_email_id);
                 TextInputEditText passwordDigitado = findViewById(R.id.edit_text_password_id);
 
                 bundle.putString(CHAVE_EMAIL, emailDigitado.getText().toString());
                 intent.putExtras(bundle);
-                startActivity(intent);
+                startActivity(intent);*/
 
 
             }

@@ -21,7 +21,7 @@ public class PreferenciaActivity extends Activity {
 
 
     public void home(View view) {
-        Intent intent = new Intent(view.getContext(), HomeActivity.class);
+        Intent intent = new Intent(view.getContext(), MenuHomeActivity.class);
 
 
         startActivity(intent);

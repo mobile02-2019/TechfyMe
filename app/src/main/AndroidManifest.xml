@@ -22,7 +22,11 @@
             </intent-filter>
         </activity>
         <activity android:name=".PreferenciaActivity" />
-        <activity android:name=".NoticiaDetalheActivity"></activity>
+        <activity android:name=".NoticiaDetalheActivity" />
+        <activity
+            android:name=".MenuHomeActivity"
+            android:label="@string/title_activity_menu_home"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>
 
 </manifest>

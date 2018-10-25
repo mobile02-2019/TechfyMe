@@ -3,8 +3,8 @@
 
     <item
         android:id="@+id/navigation_marketplace"
-        android:icon="@drawable/marketplace_icon"
-        android:title="Market Place"
+        android:icon="@drawable/icon_marketblack"
+        android:title="Mercado"
         />
 
     <item
