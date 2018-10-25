@@ -4,16 +4,15 @@ package com.me.techfy.techfyme;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentTransaction;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.afollestad.materialdialogs.DialogAction;
+import com.afollestad.materialdialogs.MaterialDialog;
 import com.me.techfy.techfyme.adaprter.RecyclerViewNewsAdapter;
 import com.me.techfy.techfyme.modelo.Noticia;
 
@@ -33,6 +32,8 @@ public class NoticiaFragment extends Fragment implements RecyclerViewNewsAdapter
     public static final String NOTICIA_DESCRICAO = "noticia_descricao";
     public static final String NOTICIA_DATA = "Noticia_data";
     public static final String NOTICIA_TEXTO = "noticia_texto";
+    private List<Noticia> noticiaList;
+    RecyclerView recyclerView;
 
     public NoticiaFragment() {
         // Required empty public constructor
@@ -49,18 +50,20 @@ public class NoticiaFragment extends Fragment implements RecyclerViewNewsAdapter
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_noticia, container, false);
 
+        noticiaList = createNoticiaList();
+
         setupRecyclerView(view);
 
         return view;
     }
 
-        private void setupRecyclerView(View view) {
-            RecyclerView recyclerView = view.findViewById(R.id.recyclerview_news_id);
+    private void setupRecyclerView(View view) {
+        recyclerView = view.findViewById(R.id.recyclerview_news_id);
 
 
-            RecyclerViewNewsAdapter adapter = new RecyclerViewNewsAdapter(createNoticiaList(),this );
-            recyclerView.setAdapter(adapter);
-            recyclerView.setLayoutManager(new LinearLayoutManager(view.getContext()));
+        RecyclerViewNewsAdapter adapter = new RecyclerViewNewsAdapter(noticiaList, this);
+        recyclerView.setAdapter(adapter);
+        recyclerView.setLayoutManager(new LinearLayoutManager(view.getContext()));
     }
 
     private List<Noticia> createNoticiaList() {
@@ -119,7 +122,6 @@ public class NoticiaFragment extends Fragment implements RecyclerViewNewsAdapter
         noticiaList.add(noticia2);
 
 
-
         return noticiaList;
 
 
@@ -141,9 +143,30 @@ public class NoticiaFragment extends Fragment implements RecyclerViewNewsAdapter
         startActivity(intent);
 
 
+    }
+
+    @Override
+    public void onExcluirClicado(final Noticia noticia) {
+        new MaterialDialog.Builder(getContext())
+                .title("Atenção")
+                .content("Deseja realmente excluir a notícia?")
+                .positiveText("ok")
+                .onPositive(new MaterialDialog.SingleButtonCallback() {
+                    @Override
+                    public void onClick(MaterialDialog dialog, DialogAction which) {
+                        ((RecyclerViewNewsAdapter) recyclerView.getAdapter()).deletarNoticia(noticia);
+                    }
+                })
+                .negativeText("Cancel")
+                .show();
 
 
 
+
+    }
+
+    @Override
+    public void onShareClicado(Noticia noticia) {
 
     }
 }

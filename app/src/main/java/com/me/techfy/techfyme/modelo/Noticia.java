@@ -1,5 +1,7 @@
 package com.me.techfy.techfyme.modelo;
 
+import android.media.Image;
+
 import java.io.Serializable;
 import java.util.Date;
 
@@ -10,6 +12,7 @@ public class Noticia implements Serializable {
     private  String textoCompleto;
     private String imagemUrl;
     private Date dataCriacao;
+
 
     public String getTextoCompleto() {
         return textoCompleto;

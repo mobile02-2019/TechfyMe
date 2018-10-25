@@ -12,5 +12,6 @@
     <color name="preto">#000000</color>
     <color name="colorFacebook">#2f66ab</color>
     <color name="colorGoogle">#ce2a15</color>
+    <color name="colorErro">#ce2a15</color>
 
 </resources>

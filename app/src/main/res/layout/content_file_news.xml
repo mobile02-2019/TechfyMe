@@ -58,36 +58,36 @@
         app:layout_constraintTop_toBottomOf="@+id/text_titulo_id" />
 
     <ImageView
-        android:id="@+id/imageView4"
+        android:id="@+id/icone_comentar"
         android:layout_width="20dp"
         android:layout_height="20dp"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
-        app:layout_constraintEnd_toStartOf="@+id/imageView"
+        app:layout_constraintEnd_toStartOf="@+id/icone_armazenar"
         app:layout_constraintTop_toBottomOf="@+id/text_descricao_id"
         app:srcCompat="@drawable/chat_icone" />
 
     <ImageView
-        android:id="@+id/imageView5"
+        android:id="@+id/iconeCompartilhar"
         android:layout_width="20dp"
         android:layout_height="20dp"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
         android:layout_marginBottom="16dp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/imageView4"
+        app:layout_constraintEnd_toStartOf="@+id/icone_comentar"
         app:layout_constraintTop_toBottomOf="@+id/text_descricao_id"
         app:srcCompat="@drawable/comparilhar_icone" />
 
     <ImageView
-        android:id="@+id/imageView6"
+        android:id="@+id/icone_lixeira"
         android:layout_width="20dp"
         android:layout_height="20dp"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
         android:layout_marginBottom="16dp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/imageView5"
+        app:layout_constraintEnd_toStartOf="@+id/iconeCompartilhar"
         app:layout_constraintTop_toBottomOf="@+id/text_descricao_id"
         app:srcCompat="@drawable/lixeira_icone" />
 
@@ -104,7 +104,7 @@
         app:layout_constraintTop_toBottomOf="@+id/imagem_celulares_id" />
 
     <ImageView
-        android:id="@+id/imageView"
+        android:id="@+id/icone_armazenar"
         android:layout_width="20dp"
         android:layout_height="20dp"
         android:layout_marginTop="8dp"

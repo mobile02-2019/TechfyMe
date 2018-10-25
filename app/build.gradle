@@ -34,4 +34,7 @@ dependencies {
     //Biblioteca de Spinner com Material Design
     implementation 'com.weiwangcn.betterspinner:library-material:1.1.0'
 
+    //Biblioteca de materialDialog
+    implementation 'com.afollestad.material-dialogs:core:0.9.6.0'
+
 }
