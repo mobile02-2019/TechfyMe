@@ -122,7 +122,61 @@ public class NoticiaFragment extends Fragment implements RecyclerViewNewsAdapter
         noticiaList.add(noticia2);
 
 
+        Noticia noticia3 = new Noticia();
+        noticia3.setTitulo("Como usar a tecnologia para tornar os negócios inteligentes e conectados");
+        noticia3.setDescricao("O mundo está ficando cada vez mais digital. É cada vez mais frequente vermos os investimentos das grandes companhias em plataformas que possam otimizar todo e qualquer processo dentro de suas instalações.");
+        noticia3.setFonte("TechMundo");
+        noticia3.setTextoCompleto("O mundo está ficando cada vez mais digital; processos que antes eram completamente manuais hoje não sobreviveriam sem o auxílio de máquinas. Por isso, também é cada vez mais frequente vermos os investimentos das grandes companhias em plataformas que possam otimizar todo e qualquer processo dentro de suas instalações, sejam eles para o público interno ou externo da empresa.\n" +
+                "\n" +
+                "E se alguns anos atrás era necessário comprar exclusivamente softwares de gestão e se adaptar às suas funcionalidades, hoje há plataformas muito mais completas e modulares, que podem se adequar às necessidades de cada empresa para que os resultados sejam sempre os melhores.\n" +
+                "\n" +
+                "\n" +
+                "Quem prova isso é a SAP, que está trazendo para o Brasil a metodologia SAP Leonardo Services. Unindo alta tecnologia e consultoria business-oriented, ela funciona como um verdadeiro parceiro de inovação e transformação digital para os clientes, ajudando na capacitação das ferramentas e também na modelagem dos negócios.\n" +
+                "\n" +
+                "Ou seja: um serviço completo que pode permitir aos profissionais se dedicarem mais às suas atividades e menos a burocracias. De acordo com a necessidade de cada empresa, a SAP pode fornecer o Leonardo Services em módulos ou em pacotes completos para construir soluções para diferentes setores do mercado. Conheça agora um pouco sobre esses módulos:\n" +
+                "\n" +
+                "Explore: módulo em que o cliente participa de sessões de inspiração sobre possibilidades futuras. Além disso, visa descobrir como um desafio específico do negócio pode ser abordado. \n" +
+                "Re-Imagine: geração de novas ideias e construção detalhada de uma solução que seja factível, escalável, desejável e viável.\n" +
+                "Create: criação de protótipos funcionais para testes com dados reais do cliente, com o objetivo de testar as funcionalidades e encontrar potenciais riscos na solução. \n" +
+                "Validate: nesta etapa ocorre a validação do protótipo e o planejamento de escalabilidade do projeto.\n" +
+                "Scale & Transform: no módulo final, são realizadas a implementação da solução desenvolvida, a ativação dos usuários e uma análise de sucesso do sistema.\n" +
+                "O sucesso das soluções desenvolvidas através da metodologia de Leonardo Services é possível a partir de um engajamento entre as equipes da SAP e do cliente, possibilitando uma sinergia entre times e a correta seleção do problema, assim como desenho da solução. A SAP espera, com esse serviço, oportunizar a inovação assertiva auxiliando as empresas a entrarem de forma efetiva no mundo digital.");
+
+        noticia3.setDataCriacao(new Date());
+        noticiaList.add(noticia3);
+
+        Noticia noticia4 = new Noticia();
+        noticia4.setTitulo("Ao trocar de celular, brasileiros preferem doar aparelhos em vez de vender");
+        noticia4.setDescricao("e acordo com um estudo realizado pela Deloitte, boa parte dos brasileiros prefere doar seu smartphone antigo para algum amigo ou parente quando troca de aparelho. ");
+        noticia4.setTextoCompleto("De acordo com um estudo realizado pela Deloitte, boa parte dos brasileiros prefere doar seu smartphone antigo para algum amigo ou parente quando troca de aparelho. 28% dos entrevistados pela empresa disseram que essa é sua opção preferida quando possuem um aparelho que já não usam em mãos.\n" +
+                "\n" +
+                "Em segundo lugar, apareceu a opção “vender para um amigo ou familiar”, com 12% e, curiosamente, 10% dos entrevistados não precisaram se desfazer de seus celulares antigos porque foram roubados. Outros 6% disseram que perderam seus últimos aparelhos, 5% jogaram fora.\n" +
+                "\n" +
+                "4% dos pesquisados prefeririam vender seus smartphones em sites em que consumidores podem passar seus produtos diretamente para outros consumidores. Fora esses, outros 2% afirmaram que não tinham celular antes, mais 2% reciclaram.\n" +
+                "\n" +
+                "No total, 20% dos pesquisados venderam seus últimos aparelhos\n" +
+                "\n" +
+                "2% venderam ou trocaram por um modelo novo diretamente com a fabricante. 1% dos entrevistados venderam para alguma loja, mais 1% venderam ou trocaram por outro aparelho em sua operadora. No total, 20% dos pesquisados venderam seus últimos aparelhos, somando todas as formas de venda/troca acima descritas.\n" +
+                "\n" +
+                "É interessante destacar também que 18% dessas pessoas simplesmente não se desfez do celular antigo, permanecendo com ele sem nenhuma razão específica.\n" +
+                "\n" +
+                "Essa grande quantidade de aparelhos ociosos indica que o Brasil tem um grande potencial não aproveitado para o mercado de smartphones usados. A Deloitte revelou que o mercado de aparelhos de segunda mão representa apenas 9% de todas as vendas realizadas no país nesse setor.\n" +
+                "\n" +
+                "Expectativa do 5G\n" +
+                "A pesquisa ainda sondou a expectativa dos brasileiros com relação ao 5G, as redes móveis de quinta geração que podem começar a aparecer já em 2019, caso o processo regulatório seja rápido.\n" +
+                "\n" +
+                "Entre os pesquisados, 46% disseram que mudariam para o 5G assim que o serviço estivesse disponível em sua região. 21% mudariam caso ouvissem comentários positivos e 19% mudariam eventualmente com o decorrer do tempo.\n" +
+                "\n" +
+                "O estudo ainda descobriu que 8% ainda não sabem o que fariam e 5% só migrariam quando o serviço se tornasse padrão, basicamente como é o 4G hoje, uma vez que as operadoras não fazem mais distinção de preço entre 3G e 4G.");
+
+        noticia4.setFonte("TechMundo");
+        noticia4.setDataCriacao(new Date());
+        noticiaList.add(noticia4);
+
         return noticiaList;
+
+
+
 
 
     }

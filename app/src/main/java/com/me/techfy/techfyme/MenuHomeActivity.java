@@ -1,5 +1,6 @@
 package com.me.techfy.techfyme;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
@@ -83,8 +84,9 @@ public class MenuHomeActivity extends AppCompatActivity
         // Handle navigation view item clicks here.
         int id = item.getItemId();
 
-        if (id == R.id.nav_android) {
-            // Handle the camera action
+        if (id == R.id.nav_editar) {
+            chamarConteudo();
+
         } else if (id == R.id.nav_apple) {
         }
 
@@ -92,4 +94,11 @@ public class MenuHomeActivity extends AppCompatActivity
         drawer.closeDrawer(GravityCompat.START);
         return true;
     }
+
+    public void chamarConteudo(){
+        Intent intent = new Intent(this, PreferenciaActivity.class);
+        startActivity(intent);
+
+    }
+
 }
