@@ -1,5 +1,6 @@
 package com.me.techfy.techfyme;
 
+import android.content.Context;
 import android.content.Intent;
 import android.support.design.widget.BaseTransientBottomBar;
 import android.support.design.widget.Snackbar;
@@ -8,6 +9,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -19,6 +21,7 @@ public class LoginActivity extends AppCompatActivity {
 
     public static final String CHAVE_EMAIL = "chave_email";
     Button botaoLogin;
+    TextView cadastrar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,6 +30,8 @@ public class LoginActivity extends AppCompatActivity {
 
 
          botaoLogin = findViewById(R.id.button_login);
+        cadastrar = findViewById(R.id.text_register);
+
 
         botaoLogin.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -35,6 +40,20 @@ public class LoginActivity extends AppCompatActivity {
             }
         });
 
+
+        cadastrar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                cadastrarUsuario();
+
+            }
+        });
+
+    }
+
+    public void cadastrarUsuario() {
+        Intent intent = new Intent(this, CadastroActivity.class);
+        startActivity(intent);
 
 
     }
@@ -70,6 +89,7 @@ public class LoginActivity extends AppCompatActivity {
         }
 
     }
+
 }
 
 

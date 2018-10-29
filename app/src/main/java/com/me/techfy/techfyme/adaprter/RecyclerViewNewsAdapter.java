@@ -27,11 +27,6 @@ public class RecyclerViewNewsAdapter extends RecyclerView.Adapter<RecyclerViewNe
         void onShareClicado(Noticia noticia);
     }
 
-//    public interface IconeClicado{
-//        void excluirNoticia();
-//
-//    }
-
     public RecyclerViewNewsAdapter(List<Noticia> noticiaListt, CardPostClicado listener){
         this.noticiaList = noticiaListt;
         this.listener = listener;
