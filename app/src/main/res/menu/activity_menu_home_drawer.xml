@@ -1,8 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    tools:showIn="navigation_view"
-    >
+    tools:showIn="navigation_view">
+
+
+
 
     <group android:checkableBehavior="single">
 
@@ -46,8 +48,13 @@
 
 
     </group>
+    <View
+        android:layout_width="fill_parent"
+        android:layout_height="1dp"
+        android:layout_marginBottom="8dp"
+        android:background="@color/verdePrimario"/>
 
-    <item android:title="Communicate">
+    <item android:title="Opções">
         <menu>
             <item
                 android:id="@+id/nav_editar"

@@ -20,6 +20,8 @@ public class NoticiaDetalheActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_noticia_detalhe);
+        getSupportActionBar().setDisplayUseLogoEnabled(true);
+        getSupportActionBar().setIcon(R.drawable.techfyme_logo_action_bar);
 
         Bundle bundle = getIntent().getExtras();
 

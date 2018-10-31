@@ -27,9 +27,12 @@ public class LoginActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
+        getSupportActionBar().setDisplayUseLogoEnabled(true);
+        getSupportActionBar().setIcon(R.drawable.techfyme_logo_action_bar);
 
 
-         botaoLogin = findViewById(R.id.button_login);
+
+        botaoLogin = findViewById(R.id.button_login);
         cadastrar = findViewById(R.id.text_register);
 
 

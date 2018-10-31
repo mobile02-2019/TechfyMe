@@ -9,9 +9,10 @@
         android:roundIcon="@mipmap/ic_launcher"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".HomeActivity" />
-        <activity android:name=".LoginActivity" />
-        <activity android:name=".CadastroActivity" />
+        <activity android:name=".HomeActivity"/>
+
+        <activity android:name=".LoginActivity"/>
+        <activity android:name=".CadastroActivity"/>
         <activity
             android:name=".SplashActivity"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar">
@@ -21,12 +22,14 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".PreferenciaActivity" />
-        <activity android:name=".NoticiaDetalheActivity" />
+        <activity android:name=".PreferenciaActivity"/>
+        <activity android:name=".NoticiaDetalheActivity"/>
+
         <activity
             android:name=".MenuHomeActivity"
             android:label="@string/title_activity_menu_home"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+            android:theme="@style/AppTheme.NoActionBar"
+            android:logo="@drawable/techfyme_logo_action_bar"></activity>
     </application>
 
 </manifest>
