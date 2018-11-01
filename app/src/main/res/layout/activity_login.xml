@@ -65,7 +65,8 @@
             android:layout_marginRight="16dp"
             android:padding="16dp"
             android:text="Login"
-            android:textColor="@color/preto" />
+            android:textColor="@color/preto"
+            android:backgroundTint="@color/verdePrimario"/>
 
         <TextView
             android:layout_width="wrap_content"
