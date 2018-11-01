@@ -1,27 +1,55 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <item
-        android:id="@+id/navigation_marketplace"
-        android:icon="@drawable/icon_marketblack"
-        android:title="Mercado"
-        />
+    <!--<item-->
+        <!--android:id="@+id/navigation_marketplace"-->
+        <!--android:icon="@drawable/icon_marketblack"-->
+        <!--android:title="Mercado"-->
+        <!--android:visible="false"-->
+        <!--/>-->
 
-    <item
-        android:id="@+id/navigation_google"
-        android:icon="@drawable/google_icons"
-        android:title="Google"/>
+    <!--<item-->
+        <!--android:id="@+id/navigation_google"-->
+        <!--android:icon="@drawable/google_icons"-->
+        <!--android:title="Google"-->
+        <!--android:visible="false"/>-->
 
-    <item
-        android:id="@+id/navigation_mobile"
-        android:icon="@drawable/mobile_icons"
-        android:title="Mobile"/>
+    <!--<item-->
+        <!--android:id="@+id/navigation_mobile"-->
+        <!--android:icon="@drawable/mobile_icons"-->
+        <!--android:title="Mobile"-->
+        <!--android:visible="false"/>-->
 
-    <item
-        android:id="@+id/navigation_android"
-        android:icon="@drawable/android_icon"
-        android:title="Android"/>
+    <!--<item-->
+        <!--android:id="@+id/navigation_android"-->
+        <!--android:icon="@drawable/android_icon"-->
+        <!--android:title="Android"-->
+        <!--android:visible="false"/>-->
 
+
+    <!--<item-->
+        <!--android:id="@+id/navigation_apple"-->
+        <!--android:icon="@drawable/icon_apple_preto"-->
+        <!--android:title="Imagens"-->
+        <!--android:visible="false"/>-->
+
+    <!--<item-->
+        <!--android:id="@+id/navigation_futuro"-->
+        <!--android:icon="@drawable/icon_futuro_preto"-->
+        <!--android:title="futuro"-->
+        <!--android:visible="false"/>-->
+
+    <!--<item-->
+        <!--android:id="@+id/navigation_ios"-->
+        <!--android:icon="@drawable/icon_ios_preto"-->
+        <!--android:title="ios"-->
+        <!--android:visible="false"/>-->
+
+    <!--<item-->
+        <!--android:id="@+id/navigation_so"-->
+        <!--android:icon="@drawable/icon_pc_preto"-->
+        <!--android:title="so"-->
+        <!--android:visible="false"/>-->
 
 
 </menu>
