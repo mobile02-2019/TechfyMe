@@ -2,16 +2,28 @@ package com.me.techfy.techfyme.modelo;
 
 import android.media.Image;
 
+import com.google.gson.annotations.SerializedName;
+
 import java.io.Serializable;
 import java.util.Date;
 
 public class Noticia implements Serializable {
+
+    @SerializedName("title")
     private String titulo;
+    @SerializedName("name")
     private String fonte;
+    @SerializedName("description")
     private String descricao;
+    @SerializedName("content")
     private  String textoCompleto;
+    @SerializedName("urlToImage")
     private String imagemUrl;
+    @SerializedName("publishedAt")
     private Date dataCriacao;
+    @SerializedName("url")
+    private String linkDaMateria;
+
 
 
     public String getTextoCompleto() {
@@ -60,5 +72,13 @@ public class Noticia implements Serializable {
 
     public void setDataCriacao(Date dataCriacao) {
         this.dataCriacao = dataCriacao;
+    }
+
+    public String getLinkDaMateria() {
+        return linkDaMateria;
+    }
+
+    public void setLinkDaMateria(String linkDaMateria) {
+        this.linkDaMateria = linkDaMateria;
     }
 }

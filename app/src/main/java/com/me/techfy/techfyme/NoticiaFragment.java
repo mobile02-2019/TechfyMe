@@ -4,6 +4,7 @@ package com.me.techfy.techfyme;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -13,8 +14,11 @@ import android.view.ViewGroup;
 
 import com.afollestad.materialdialogs.DialogAction;
 import com.afollestad.materialdialogs.MaterialDialog;
+import com.me.techfy.techfyme.DAO.NewsDAO;
 import com.me.techfy.techfyme.adaprter.RecyclerViewNewsAdapter;
 import com.me.techfy.techfyme.modelo.Noticia;
+import com.me.techfy.techfyme.modelo.ResultadoAPI;
+import com.me.techfy.techfyme.service.ServiceListener;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -24,7 +28,7 @@ import java.util.List;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class NoticiaFragment extends Fragment implements RecyclerViewNewsAdapter.CardPostClicado {
+public class NoticiaFragment extends Fragment implements RecyclerViewNewsAdapter.CardPostClicado,ServiceListener {
 
 
     public static final String NOTICIA_TITULO = "noticia_titulo";
@@ -33,7 +37,8 @@ public class NoticiaFragment extends Fragment implements RecyclerViewNewsAdapter
     public static final String NOTICIA_DATA = "Noticia_data";
     public static final String NOTICIA_TEXTO = "noticia_texto";
     private List<Noticia> noticiaList;
-    RecyclerView recyclerView;
+    private RecyclerView recyclerView;
+    private RecyclerViewNewsAdapter adapter;
 
     public NoticiaFragment() {
         // Required empty public constructor
@@ -50,7 +55,7 @@ public class NoticiaFragment extends Fragment implements RecyclerViewNewsAdapter
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_noticia, container, false);
 
-        noticiaList = createNoticiaList();
+        //noticiaList = createNoticiaList();
 
         setupRecyclerView(view);
 
@@ -60,8 +65,9 @@ public class NoticiaFragment extends Fragment implements RecyclerViewNewsAdapter
     private void setupRecyclerView(View view) {
         recyclerView = view.findViewById(R.id.recyclerview_news_id);
 
+        NewsDAO newsDAO = new NewsDAO();
 
-        RecyclerViewNewsAdapter adapter = new RecyclerViewNewsAdapter(noticiaList, this);
+        adapter = new RecyclerViewNewsAdapter(newsDAO.getNewsList(getContext(),this), this);
         recyclerView.setAdapter(adapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(view.getContext()));
     }
@@ -222,6 +228,17 @@ public class NoticiaFragment extends Fragment implements RecyclerViewNewsAdapter
     @Override
     public void onShareClicado(Noticia noticia) {
 
+    }
+
+    @Override
+    public void onSuccess(Object object) {
+        ResultadoAPI resultadoAPI = (ResultadoAPI) object;
+        adapter.setNewsList(resultadoAPI.getNoticiaList());
+    }
+
+    @Override
+    public void onError(Throwable throwable) {
+        Snackbar.make(recyclerView,throwable.getMessage(),Snackbar.LENGTH_INDEFINITE).show();
     }
 }
 

@@ -37,4 +37,14 @@ dependencies {
     //Biblioteca de materialDialog
     implementation 'com.afollestad.material-dialogs:core:0.9.6.0'
 
+    //Retrofit
+    implementation 'com.squareup.retrofit2:retrofit:2.4.0'
+    implementation 'com.squareup.retrofit2:converter-gson:2.4.0'
+
+    //Gson
+    implementation 'com.google.code.gson:gson:2.3.1'
+
+    //Picasso
+    implementation 'com.squareup.picasso:picasso:2.71828'
+
 }

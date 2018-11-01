@@ -52,6 +52,11 @@ public class RecyclerViewNewsAdapter extends RecyclerView.Adapter<RecyclerViewNe
         notifyDataSetChanged();
     }
 
+    public void setNewsList(List<Noticia> newsList){
+        this.noticiaList = newsList;
+        notifyDataSetChanged();
+    }
+
     @Override
     public int getItemCount() {
         return noticiaList.size();
