@@ -18,12 +18,14 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.Toast;
 
 public class MenuHomeActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
     Bundle bundle;
     BottomNavigationView menuDeBaixo;
     int contador = 0;
+    public static final String CHAVE_KEY = "chave_key";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,11 +33,6 @@ public class MenuHomeActivity extends AppCompatActivity
         setContentView(R.layout.activity_menu_home);
 
         menuDeBaixo = findViewById(R.id.navigationView);
-
-        FragmentManager manager = getSupportFragmentManager();
-        FragmentTransaction transaction = manager.beginTransaction();
-        transaction.replace(R.id.framelayout_home_id, new NoticiaFragment());
-        transaction.commit();
 
 
         Toolbar toolbar = findViewById(R.id.toolbar);
@@ -45,7 +42,7 @@ public class MenuHomeActivity extends AppCompatActivity
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
-                drawer.addDrawerListener(toggle);
+        drawer.addDrawerListener(toggle);
         toggle.syncState();
 
         NavigationView navigationView = findViewById(R.id.nav_view);
@@ -56,40 +53,70 @@ public class MenuHomeActivity extends AppCompatActivity
         bundle = intent.getExtras();
 
 
-        if(bundle.getBoolean("ck_android")) {
-            menuDeBaixo.getMenu().add(0, contador, 0, "Android").setIcon(R.drawable.android_icon);
-            contador++;
+        if (bundle.getBoolean("ck_android")) {
+            setupMenuItem("android", R.drawable.android_icon);
         }
-        if(bundle.getBoolean("ck_mercado")) {
-            menuDeBaixo.getMenu().add(0, contador, 0, "Mercado").setIcon(R.drawable.marketplace_icon);
-            contador++;
+        if (bundle.getBoolean("ck_mercado")) {
+            setupMenuItem("Mercado", R.drawable.marketplace_icon);
         }
-        if(bundle.getBoolean("ck_mobile")) {
-            menuDeBaixo.getMenu().add(0, contador, 0, "Mobile").setIcon(R.drawable.mobile_icons);
-            contador++;
+        if (bundle.getBoolean("ck_mobile")) {
+            setupMenuItem("Mobile", R.drawable.mobile_icons);
         }
-        if(bundle.getBoolean("ck_google")) {
-            menuDeBaixo.getMenu().add(0, contador, 0, "Google").setIcon(R.drawable.google_icons);
-            contador++;
+        if (bundle.getBoolean("ck_google")) {
+            setupMenuItem("Google", R.drawable.google_icons);
         }
 //        todo: verificar and match onde estao esses indexes
-        if(bundle.getBoolean("ck_apple")){
-            menuDeBaixo.getMenu().add(0, contador, 0, "Apple").setIcon(R.drawable.icon_apple_preto);
+        if (bundle.getBoolean("ck_apple")) {
+            setupMenuItem("Apple", R.drawable.icon_apple_preto);
+        }
+        if (bundle.getBoolean("ck_futuro")) {
+            setupMenuItem("Futuro", R.drawable.icon_futuro_preto);
+        }
+        if (bundle.getBoolean("ck_ios")) {
+            setupMenuItem("IOS", R.drawable.icon_ios_preto);
+        }
+        if (bundle.getBoolean("ck_so")) {
+            setupMenuItem("Sistema+Operacional", R.drawable.icon_pc_preto);
+        }
+
+    }
+
+    public void setupHome(){
+        final MenuItem menuItem = menuDeBaixo.getMenu().add(0, 4, 0, "Home");
+        menuItem.setIcon(R.drawable.icon_marketblack);
+
+    }
+
+    private void setupMenuItem(String title, int icon) {
+        if(contador == 2){
+            setupHome();
             contador++;
         }
-        if(bundle.getBoolean("ck_futuro")){
-            menuDeBaixo.getMenu().add(0, contador, 0, "Futuro").setIcon(R.drawable.icon_futuro_preto);
-            contador++;
-        }
-        if(bundle.getBoolean("ck_ios")){
-            menuDeBaixo.getMenu().add(0, contador, 0, "IOS").setIcon(R.drawable.icon_ios_preto);
-            contador++;
-        }
-        if(bundle.getBoolean("ck_so")){
-            menuDeBaixo.getMenu().add(0, contador, 0, "Sistema Operacional").setIcon(R.drawable.icon_pc_preto);
-            contador++;
-        }
+
+        final MenuItem menuItem = menuDeBaixo.getMenu().add(0, contador, 0, title);
+        menuItem.setIcon(icon);
+        menuItem.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
+            @Override
+            public boolean onMenuItemClick(MenuItem item) {
+                item.setChecked(true);
+                setupFragment(menuItem.getTitle().toString());
+                return true;
             }
+        });
+        contador++;
+    }
+
+    private void setupFragment(String query) {
+        Bundle bundle = new Bundle();
+        bundle.putString(CHAVE_KEY, query);
+
+        FragmentManager manager = getSupportFragmentManager();
+        FragmentTransaction transaction = manager.beginTransaction();
+        NoticiaFragment noticiaFragment = new NoticiaFragment();
+        noticiaFragment.setArguments(bundle);
+        transaction.replace(R.id.framelayout_home_id, noticiaFragment);
+        transaction.commit();
+    }
 
     @Override
     public void onBackPressed() {
@@ -139,7 +166,7 @@ public class MenuHomeActivity extends AppCompatActivity
         return true;
     }
 
-    public void chamarConteudo(){
+    public void chamarConteudo() {
         Intent intent = new Intent(this, PreferenciaActivity.class);
         startActivity(intent);
 

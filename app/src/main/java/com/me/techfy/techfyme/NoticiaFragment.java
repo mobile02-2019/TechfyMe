@@ -24,6 +24,8 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import static com.me.techfy.techfyme.MenuHomeActivity.CHAVE_KEY;
+
 
 /**
  * A simple {@link Fragment} subclass.
@@ -39,6 +41,7 @@ public class NoticiaFragment extends Fragment implements RecyclerViewNewsAdapter
     private List<Noticia> noticiaList;
     private RecyclerView recyclerView;
     private RecyclerViewNewsAdapter adapter;
+    private String query;
 
     public NoticiaFragment() {
         // Required empty public constructor
@@ -57,6 +60,11 @@ public class NoticiaFragment extends Fragment implements RecyclerViewNewsAdapter
 
         //noticiaList = createNoticiaList();
 
+        // Receber bundle com o keyword e colocar na propriedade query
+
+        Bundle bundle = getArguments();
+        query = bundle.getString(CHAVE_KEY);
+
         setupRecyclerView(view);
 
         return view;
@@ -67,12 +75,12 @@ public class NoticiaFragment extends Fragment implements RecyclerViewNewsAdapter
 
         NewsDAO newsDAO = new NewsDAO();
 
-        adapter = new RecyclerViewNewsAdapter(newsDAO.getNewsList(getContext(),this), this);
+        adapter = new RecyclerViewNewsAdapter(newsDAO.getNewsList(getContext(),this,query), this);
         recyclerView.setAdapter(adapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(view.getContext()));
     }
 
-    private List<Noticia> createNoticiaList() {
+   /* private List<Noticia> createNoticiaList() {
         List<Noticia> noticiaList = new ArrayList<>();
 
         Noticia noticia1 = new Noticia();
@@ -185,7 +193,7 @@ public class NoticiaFragment extends Fragment implements RecyclerViewNewsAdapter
 
 
 
-    }
+    }*/
 
     @Override
     public void onCardClicado(Noticia noticia) {
