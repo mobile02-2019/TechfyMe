@@ -13,7 +13,9 @@ import android.widget.Toast;
 import com.me.techfy.techfyme.MenuHomeActivity;
 import com.me.techfy.techfyme.R;
 import com.me.techfy.techfyme.modelo.Noticia;
+import com.squareup.picasso.Picasso;
 
+import java.text.SimpleDateFormat;
 import java.util.List;
 
 public class RecyclerViewNewsAdapter extends RecyclerView.Adapter<RecyclerViewNewsAdapter.ViewHolder> {
@@ -72,6 +74,7 @@ public class RecyclerViewNewsAdapter extends RecyclerView.Adapter<RecyclerViewNe
         private ImageView iconeCompartilhar;
         private ImageView iconeComentar;
         private ImageView iconeArmazenar;
+        private SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
 
 
 
@@ -90,6 +93,7 @@ public class RecyclerViewNewsAdapter extends RecyclerView.Adapter<RecyclerViewNe
             iconeArmazenar=itemView.findViewById(R.id.icone_armazenar);
 
 
+
         }
 
 
@@ -99,6 +103,8 @@ public class RecyclerViewNewsAdapter extends RecyclerView.Adapter<RecyclerViewNe
             fonte.setText(noticia.getFonte());
             descricao.setText(noticia.getDescricao());
             data.setText(noticia.getDataCriacao().toString());
+            //sdf.format(data.getText().toString());
+            Picasso.get().load(noticia.getImagemUrl()).into(imagemDaNoticia);
             imagemDaNoticia.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {

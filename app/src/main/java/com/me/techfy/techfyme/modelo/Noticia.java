@@ -1,10 +1,12 @@
 package com.me.techfy.techfyme.modelo;
 
 import android.media.Image;
+import android.util.Log;
 
 import com.google.gson.annotations.SerializedName;
 
 import java.io.Serializable;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 public class Noticia implements Serializable {
@@ -20,7 +22,7 @@ public class Noticia implements Serializable {
     @SerializedName("urlToImage")
     private String imagemUrl;
     @SerializedName("publishedAt")
-    private Date dataCriacao;
+    private String dataCriacao;
     @SerializedName("url")
     private String linkDaMateria;
 
@@ -66,11 +68,11 @@ public class Noticia implements Serializable {
         this.imagemUrl = imagemUrl;
     }
 
-    public Date getDataCriacao() {
+    public String getDataCriacao() {
         return dataCriacao;
     }
 
-    public void setDataCriacao(Date dataCriacao) {
+    public void setDataCriacao(String dataCriacao) {
         this.dataCriacao = dataCriacao;
     }
 
