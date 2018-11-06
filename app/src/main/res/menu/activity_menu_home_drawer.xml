@@ -17,23 +17,33 @@
             android:icon="@drawable/icon_applebranco"
             android:title="Apple" />
         <item
-            android:id="@+id/nav_futuo"
-            android:icon="@drawable/icon_futurobranco"
-            android:title="Futuro" />
+            android:id="@+id/nav_blockchain"
+            android:icon="@drawable/icon_blockchain_branco"
+            android:title="Blocchain" />
         <item
-            android:id="@+id/nav_google"
-            android:icon="@drawable/icon_googlebranco"
-            android:title="Google" />
+            android:id="@+id/nav_cloud"
+            android:icon="@drawable/icon_nuvem_branca"
+            android:title="Cloud" />
 
         <item
-        android:id="@+id/nav_ios"
-        android:icon="@drawable/icon_iosbranco"
-        android:title="IOS" />
+        android:id="@+id/nav_criptomoedas"
+        android:icon="@drawable/icon_moedas_branca"
+        android:title="Criptomoedas" />
 
         <item
-            android:id="@+id/nav_mercado"
-            android:icon="@drawable/iconmercadobranco"
-            android:title="Mercado" />
+            android:id="@+id/nav_ebusiness"
+            android:icon="@drawable/icon_business_Branca"
+            android:title="E-Business" />
+
+        <item
+            android:id="@+id/nav_games"
+            android:icon="@drawable/icon_game_branca"
+            android:title="Games" />
+
+        <item
+            android:id="@+id/nav_inteligencia_artificial"
+            android:icon="@drawable/icon_intelig_artif_branca"
+            android:title="Inteligência Artificial" />
 
 
         <item
