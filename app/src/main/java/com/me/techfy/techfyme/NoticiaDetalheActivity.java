@@ -28,22 +28,17 @@ public class NoticiaDetalheActivity extends AppCompatActivity {
         getSupportActionBar().setDisplayUseLogoEnabled(true);
         getSupportActionBar().setIcon(R.drawable.techfyme_logo_action_bar);
 
+//        url = "https://www.google.com.br/";
         Bundle bundle = getIntent().getExtras();
+
+        url = bundle.getString(NoticiaFragment.NOTICIA_URL);
 
         ImageView imagem = findViewById(R.id.imagem_celulares_id);
 
-
-        titulo.setText(bundle.getString(NoticiaFragment.NOTICIA_TITULO));
-        fonte.setText(bundle.getString(NoticiaFragment.NOTICIA_FONTE));
-        dataNoticia.setText(bundle.getString(NoticiaFragment.NOTICIA_DATA));
-        textoCompleto.setText(bundle.getString(NoticiaFragment.NOTICIA_TEXTO));
-        //TODO mostrar a imagem na tela de detalhes
-        //imagem.setImageBitmap(bundle.get);
-
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Toast.makeText(v.getContext(), "Noticia adicionado aos favoritos", Toast.LENGTH_LONG).show();
+//        fab.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                Toast.makeText(v.getContext(), "Noticia adicionado aos favoritos", Toast.LENGTH_LONG).show();
 
                 webView = findViewById(R.id.webView);
                 webView.setWebViewClient(new WebViewClient());
@@ -52,8 +47,8 @@ public class NoticiaDetalheActivity extends AppCompatActivity {
                 WebSettings webSettings = webView.getSettings();
                 webSettings.setJavaScriptEnabled(true);
 
-            }
-        });
+//            }
+//        });
 
 
     }
