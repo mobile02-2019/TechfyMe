@@ -63,9 +63,15 @@ public class NoticiaFragment extends Fragment implements RecyclerViewNewsAdapter
         // Receber bundle com o keyword e colocar na propriedade query
 
         Bundle bundle = getArguments();
-        query = bundle.getString(CHAVE_KEY);
 
-        setupRecyclerView(view);
+//        if(bundle.getString(CHAVE_KEY) == "home"){
+//            setupRecyclerViewResultado(view);
+//        } else {
+            query = bundle.getString(CHAVE_KEY);
+
+            setupRecyclerView(view);
+//        }
+
 
         return view;
     }
@@ -76,9 +82,25 @@ public class NoticiaFragment extends Fragment implements RecyclerViewNewsAdapter
         NewsDAO newsDAO = new NewsDAO();
 
         adapter = new RecyclerViewNewsAdapter(newsDAO.getNewsList(getContext(),this,query), this);
+
         recyclerView.setAdapter(adapter);
+
         recyclerView.setLayoutManager(new LinearLayoutManager(view.getContext()));
+
     }
+
+//    private void setupRecyclerViewResultado(View view){
+//
+//        NewsDAO newsDAOTec = new NewsDAO();
+//
+//        adapterTec = new RecyclerViewNewsAdapter(newsDAOTec.getNewsListResultado(getContext(),this), this);
+//
+//        recyclerViewTec.setAdapter(adapterTec);
+//
+//        recyclerViewTec.setLayoutManager(new LinearLayoutManager(view.getContext()));
+//    }
+
+
 
    /* private List<Noticia> createNoticiaList() {
         List<Noticia> noticiaList = new ArrayList<>();

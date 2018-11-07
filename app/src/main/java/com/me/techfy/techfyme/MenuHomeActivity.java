@@ -18,6 +18,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.Toast;
 
 public class MenuHomeActivity extends AppCompatActivity
@@ -91,6 +92,22 @@ public class MenuHomeActivity extends AppCompatActivity
     public void setupHome() {
         final MenuItem menuItem = menuDeBaixo.getMenu().add(0, 4, 0, "Home");
         menuItem.setIcon(R.drawable.icon_marketblack);
+        menuItem.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
+            @Override
+            public boolean onMenuItemClick(MenuItem item) {
+                item.setChecked(true);
+                Bundle bundle = new Bundle();
+                bundle.putString(CHAVE_KEY, "home");
+
+                FragmentManager manager = getSupportFragmentManager();
+                FragmentTransaction transaction = manager.beginTransaction();
+                NoticiaFragment noticiaFragment = new NoticiaFragment();
+                noticiaFragment.setArguments(bundle);
+                transaction.replace(R.id.framelayout_home_id, noticiaFragment);
+                transaction.commit();
+                return true;
+            }
+        });
 
     }
 
