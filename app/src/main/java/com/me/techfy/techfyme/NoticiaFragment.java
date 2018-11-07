@@ -36,6 +36,7 @@ public class NoticiaFragment extends Fragment implements RecyclerViewNewsAdapter
     public static final String NOTICIA_DESCRICAO = "noticia_descricao";
     public static final String NOTICIA_DATA = "Noticia_data";
     public static final String NOTICIA_TEXTO = "noticia_texto";
+    public static final String NOTICIA_URL = "noticia_url";
     private List<Noticia> noticiaList;
     private RecyclerView recyclerView;
     private RecyclerViewNewsAdapter adapter;
@@ -196,6 +197,7 @@ public class NoticiaFragment extends Fragment implements RecyclerViewNewsAdapter
         bundle.putString(NOTICIA_FONTE, noticia.getFonte());
         bundle.putString(NOTICIA_DATA, dataNoticia);
         bundle.putString(NOTICIA_TEXTO, noticia.getTextoCompleto());
+        bundle.putString(NOTICIA_URL,noticia.getLinkDaMateria());
 
 
         Intent intent = new Intent(getContext(), NoticiaDetalheActivity.class);
