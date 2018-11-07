@@ -54,6 +54,12 @@
             android:icon="@drawable/icon_pcbranco"
             android:title="Sistema Operacional" />
 
+        <item
+            android:id="@+id/nav_home"
+            android:icon="@drawable/homebranca"
+            android:title="Home" />
+
+
 
     </group>
     <View
@@ -62,7 +68,8 @@
         android:layout_marginBottom="8dp"
         android:background="@color/verdePrimario"/>
 
-    <item android:title="Opções">
+    <item
+        android:title="Opções">
         <menu>
             <item
                 android:id="@+id/nav_editar"
