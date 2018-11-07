@@ -90,7 +90,7 @@ public class MenuHomeActivity extends AppCompatActivity
 
     public void setupHome() {
         final MenuItem menuItem = menuDeBaixo.getMenu().add(0, 4, 0, "Home");
-        menuItem.setIcon(R.drawable.icon_marketblack);
+        menuItem.setIcon(R.drawable.homeazul);
 
     }
 
@@ -187,14 +187,21 @@ public class MenuHomeActivity extends AppCompatActivity
         else if (id == R.id.nav_games) {
             setupFragment("games");
         }
+
+        else if (id == R.id.nav_home) {
+            setupFragment("Home");
+
+        }
         else if (id == R.id.nav_inteligencia_artificial) {
             setupFragment("inteligencia artificial");
         }
         else if (id == R.id.nav_mobile) {
             setupFragment("mobile");
         }
+
         else if (id == R.id.nav_sistemaoperacional) {
             setupFragment("sistema operacional");
+
         }
 
 

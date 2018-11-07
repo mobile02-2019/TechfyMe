@@ -117,7 +117,7 @@ public class RecyclerViewNewsAdapter extends RecyclerView.Adapter<RecyclerViewNe
             String dataFormatoInicial = noticia.getDataCriacao();
 
             titulo.setText(noticia.getTitulo());
-            data.setText(noticia.getFonte() + " "+formatarData(dataFormatoInicial));
+            data.setText(formatarData(dataFormatoInicial));
             descricao.setText(noticia.getDescricao());
 //            data.setText(formatarData(dataFormatoInicial));
             Picasso.get().load(noticia.getImagemUrl()).into(imagemDaNoticia);
