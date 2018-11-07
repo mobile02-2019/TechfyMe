@@ -28,12 +28,12 @@ import retrofit2.Response;
 
 public class NewsDAO {
 
-    public List<Noticia> getNewsList(Context context, final ServiceListener listener) {
+    public List<Noticia> getNewsList(Context context, final ServiceListener listener,String query) {
 
         List<Noticia> newsList = new ArrayList<>();
 
         if (isConected(context)){
-            getRemoteNews(listener);
+            getRemoteNews(listener,query);
         } else {
             Toast.makeText(context, "Falha na conexão!", Toast.LENGTH_LONG).show();
         }
@@ -41,8 +41,8 @@ public class NewsDAO {
         return newsList;
     }
 
-    private void getRemoteNews(final ServiceListener listener) {
-        Call<ResultadoAPI> call = RetrofitService.getNewsApi().getResultado();
+    private void getRemoteNews(final ServiceListener listener, String query) {
+        Call<ResultadoAPI> call = RetrofitService.getNewsApi().getWithKey(query);
 
         call.enqueue(new Callback<ResultadoAPI>() {
             @Override

@@ -19,6 +19,15 @@ public class RetrofitService {
             httpClient.connectTimeout(30, TimeUnit.SECONDS);
             httpClient.writeTimeout(30, TimeUnit.SECONDS);
 
+//            Gson gson = new GsonBuilder()
+//                    .setDateFormat("yyyy-MM-dd'T'HH:mm:ss")
+//                    .create();
+//
+//            Retrofit retrofitAdapter = new Retrofit.Builder()
+//                    .baseUrl(API_BASE_URL)
+//                    .addConverterFactory(GsonConverterFactory.create(gson))
+//                    .build();
+
             retrofit = new Retrofit.Builder()
                     .baseUrl(BASE_URL)
                     .addConverterFactory(GsonConverterFactory.create())

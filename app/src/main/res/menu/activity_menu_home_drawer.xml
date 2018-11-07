@@ -4,8 +4,6 @@
     tools:showIn="navigation_view">
 
 
-
-
     <group android:checkableBehavior="single">
 
         <item
@@ -18,26 +16,26 @@
             android:title="Apple" />
         <item
             android:id="@+id/nav_blockchain"
-            android:icon="@drawable/icon_blockchain_branco"
-            android:title="Blocchain" />
+            android:icon="@drawable/blockchainbranco"
+            android:title="Blockchain" />
         <item
             android:id="@+id/nav_cloud"
-            android:icon="@drawable/icon_nuvem_branca"
+            android:icon="@drawable/nuvembranca"
             android:title="Cloud" />
 
         <item
         android:id="@+id/nav_criptomoedas"
-        android:icon="@drawable/icon_moedas_branca"
+        android:icon="@drawable/moedabranca"
         android:title="Criptomoedas" />
 
         <item
             android:id="@+id/nav_ebusiness"
-            android:icon="@drawable/icon_business_Branca"
+            android:icon="@drawable/businessbranco"
             android:title="E-Business" />
 
         <item
             android:id="@+id/nav_games"
-            android:icon="@drawable/icon_game_branca"
+            android:icon="@drawable/gamebranco"
             android:title="Games" />
 
         <item
@@ -52,7 +50,7 @@
             android:title="Mobile" />
 
         <item
-            android:id="@+id/nav_manage"
+            android:id="@+id/nav_sistemaoperacional"
             android:icon="@drawable/icon_pcbranco"
             android:title="Sistema Operacional" />
 

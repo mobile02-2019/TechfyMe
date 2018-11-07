@@ -17,14 +17,20 @@ public class PreferenciaActivity extends Activity {
 
     private Button home;
     private Button btnEnviar;
-    private CheckBox checkBoxGoogle;
-    private CheckBox checkBoxApple;
-    private CheckBox checkBoxMobile;
-    private CheckBox checkBoxFuturo;
     private CheckBox checkBoxAndroid;
-    private CheckBox checkBoxIos;
-    private CheckBox checkBoxSo;
-    private CheckBox checkBoxMercado;
+    private CheckBox checkBoxApple;
+    private CheckBox checkBoxBlockchain;
+    private CheckBox checkBoxCloud;
+    private CheckBox checkBoxCriptomoedas;
+    private CheckBox checkBoxEBusiness;
+    private CheckBox checkBoxGames;
+    private CheckBox checkBoxInteligenciaArtificial;
+    private CheckBox checkBoxMobile;
+    private CheckBox checkBoxSistemaOperacional;
+
+
+
+
     private List<CheckBox> checkBoxList = new ArrayList<>();
     private List<Integer> checkBoxListApoio = new ArrayList<>();
 
@@ -35,13 +41,15 @@ public class PreferenciaActivity extends Activity {
         intViews();
 
         checkBoxList.add(checkBoxAndroid);
-        checkBoxList.add(checkBoxGoogle);
         checkBoxList.add(checkBoxApple);
+        checkBoxList.add(checkBoxBlockchain);
+        checkBoxList.add(checkBoxCloud);
+        checkBoxList.add(checkBoxCriptomoedas);
+        checkBoxList.add(checkBoxEBusiness);
+        checkBoxList.add(checkBoxGames);
+        checkBoxList.add(checkBoxInteligenciaArtificial);
         checkBoxList.add(checkBoxMobile);
-        checkBoxList.add(checkBoxFuturo);
-        checkBoxList.add(checkBoxIos);
-        checkBoxList.add(checkBoxSo);
-        checkBoxList.add(checkBoxMercado);
+        checkBoxList.add(checkBoxSistemaOperacional);
 
         btnEnviar.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -74,27 +82,33 @@ public class PreferenciaActivity extends Activity {
     }
 
     private void intViews() {
-        checkBoxGoogle = (CheckBox) findViewById(R.id.cat_google);
-        checkBoxApple = (CheckBox) findViewById(R.id.cat_apple);
-        checkBoxMobile = (CheckBox) findViewById(R.id.cat_mobile);
-        checkBoxFuturo = (CheckBox) findViewById(R.id.cat_futuro);
         checkBoxAndroid = (CheckBox) findViewById(R.id.cat_android);
-        checkBoxIos = (CheckBox) findViewById(R.id.cat_ios);
-        checkBoxSo = (CheckBox) findViewById(R.id.cat_so);
-        checkBoxMercado = (CheckBox) findViewById(R.id.cat_mercado);
+        checkBoxApple = (CheckBox) findViewById(R.id.cat_apple);
+        checkBoxBlockchain = (CheckBox) findViewById(R.id.cat_blockchain);
+        checkBoxCloud = (CheckBox) findViewById(R.id.cat_cloud);
+        checkBoxCriptomoedas = (CheckBox) findViewById(R.id.cat_criptomoedas);
+        checkBoxEBusiness= (CheckBox) findViewById(R.id.cat_business);
+        checkBoxGames = (CheckBox) findViewById(R.id.cat_games);
+        checkBoxInteligenciaArtificial = (CheckBox) findViewById(R.id.cat_ia);
+        checkBoxMobile = (CheckBox) findViewById(R.id.cat_mobile);
+        checkBoxSistemaOperacional = (CheckBox) findViewById(R.id.cat_so);
+
+
         btnEnviar = (Button) findViewById(R.id.btn_enviar);
     }
 
     public Bundle home() {
         Bundle bundle = new Bundle();
         bundle.putBoolean("ck_android", checkBoxAndroid.isChecked());
-        bundle.putBoolean("ck_google", checkBoxGoogle.isChecked());
         bundle.putBoolean("ck_apple", checkBoxApple.isChecked());
+        bundle.putBoolean("ck_blockchain", checkBoxBlockchain.isChecked());
+        bundle.putBoolean("ck_cloud", checkBoxCloud.isChecked());
+        bundle.putBoolean("ck_criptomoedas", checkBoxCriptomoedas.isChecked());
+        bundle.putBoolean("ck_ebusiness", checkBoxEBusiness.isChecked());
+        bundle.putBoolean("ck_games", checkBoxGames.isChecked());
+        bundle.putBoolean("ck_inteligenciaartificial", checkBoxInteligenciaArtificial.isChecked());
         bundle.putBoolean("ck_mobile", checkBoxMobile.isChecked());
-        bundle.putBoolean("ck_futuro", checkBoxFuturo.isChecked());
-        bundle.putBoolean("ck_ios", checkBoxIos.isChecked());
-        bundle.putBoolean("ck_so", checkBoxSo.isChecked());
-        bundle.putBoolean("ck_mercado", checkBoxMercado.isChecked());
+        bundle.putBoolean("ck_sistemaoperacional", checkBoxSistemaOperacional.isChecked());
 
         return bundle;
 
