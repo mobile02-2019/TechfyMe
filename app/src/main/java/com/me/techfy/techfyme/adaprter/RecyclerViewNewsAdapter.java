@@ -15,7 +15,9 @@ import com.me.techfy.techfyme.R;
 import com.me.techfy.techfyme.modelo.Noticia;
 import com.squareup.picasso.Picasso;
 
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 public class RecyclerViewNewsAdapter extends RecyclerView.Adapter<RecyclerViewNewsAdapter.ViewHolder> {
@@ -25,36 +27,38 @@ public class RecyclerViewNewsAdapter extends RecyclerView.Adapter<RecyclerViewNe
 
     public interface CardPostClicado {
         void onCardClicado(Noticia noticia);
+
         void onExcluirClicado(Noticia noticia);
+
         void onShareClicado(Noticia noticia);
     }
 
-    public RecyclerViewNewsAdapter(List<Noticia> noticiaListt, CardPostClicado listener){
+    public RecyclerViewNewsAdapter(List<Noticia> noticiaListt, CardPostClicado listener) {
         this.noticiaList = noticiaListt;
         this.listener = listener;
-        }
+    }
 
 
     @NonNull
     @Override
-    public RecyclerViewNewsAdapter .ViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
+    public RecyclerViewNewsAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
         View view = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.content_file_news, viewGroup, false);
         return new ViewHolder(view);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull RecyclerViewNewsAdapter .ViewHolder viewHolder, int position) {
+    public void onBindViewHolder(@NonNull RecyclerViewNewsAdapter.ViewHolder viewHolder, int position) {
         Noticia noticia = noticiaList.get(position);
         viewHolder.bind(noticia);
 
     }
 
-    public void deletarNoticia(Noticia noticia){
+    public void deletarNoticia(Noticia noticia) {
         noticiaList.remove(noticia);
         notifyDataSetChanged();
     }
 
-    public void setNewsList(List<Noticia> newsList){
+    public void setNewsList(List<Noticia> newsList) {
         this.noticiaList = newsList;
         notifyDataSetChanged();
     }
@@ -64,20 +68,33 @@ public class RecyclerViewNewsAdapter extends RecyclerView.Adapter<RecyclerViewNe
         return noticiaList.size();
     }
 
-    class ViewHolder extends RecyclerView.ViewHolder{
+    class ViewHolder extends RecyclerView.ViewHolder {
         private TextView titulo;
-        private  TextView fonte;
+        private TextView fonte;
         private TextView descricao;
-        private  TextView data;
+        private TextView data;
         private ImageView imagemDaNoticia;
         private ImageView iconeLixeira;
         private ImageView iconeCompartilhar;
         private ImageView iconeComentar;
         private ImageView iconeArmazenar;
-        private SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
 
 
 
+
+        public String formatarData(String data) {
+            SimpleDateFormat formatoInicial = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss");
+            SimpleDateFormat formatoFinal = new SimpleDateFormat("dd/MM/yyyy");
+            try {
+                Date date = formatoInicial.parse(data);
+                return formatoFinal.format(date);
+
+            } catch (ParseException e) {
+                e.printStackTrace();
+            }
+
+            return null;
+        }
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -90,20 +107,19 @@ public class RecyclerViewNewsAdapter extends RecyclerView.Adapter<RecyclerViewNe
             iconeLixeira = itemView.findViewById(R.id.icone_lixeira);
             iconeCompartilhar = itemView.findViewById(R.id.iconeCompartilhar);
             iconeComentar = itemView.findViewById(R.id.icone_comentar);
-            iconeArmazenar=itemView.findViewById(R.id.icone_armazenar);
-
+            iconeArmazenar = itemView.findViewById(R.id.icone_armazenar);
 
 
         }
 
 
+        public void bind(final Noticia noticia) {
+            String dataFormatoInicial = noticia.getDataCriacao();
 
-        public void bind(final Noticia noticia){
             titulo.setText(noticia.getTitulo());
-            fonte.setText(noticia.getFonte());
+            data.setText(noticia.getFonte() + " "+formatarData(dataFormatoInicial));
             descricao.setText(noticia.getDescricao());
-            data.setText(noticia.getDataCriacao().toString());
-            //sdf.format(data.getText().toString());
+//            data.setText(formatarData(dataFormatoInicial));
             Picasso.get().load(noticia.getImagemUrl()).into(imagemDaNoticia);
             imagemDaNoticia.setOnClickListener(new View.OnClickListener() {
                 @Override

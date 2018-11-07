@@ -54,41 +54,48 @@ public class MenuHomeActivity extends AppCompatActivity
 
 
         if (bundle.getBoolean("ck_android")) {
-            setupMenuItem("android", R.drawable.android_icon);
+            setupMenuItem("Android", R.drawable.android_icon);
         }
-        if (bundle.getBoolean("ck_mercado")) {
-            setupMenuItem("Mercado", R.drawable.marketplace_icon);
+        if (bundle.getBoolean("ck_apple")) {
+            setupMenuItem("Apple", R.drawable.icon_apple_preto);
+        }
+        if (bundle.getBoolean("ck_blockchain")) {
+            setupMenuItem("Blockchain", R.drawable.blockchainpreto);
+        }
+        if (bundle.getBoolean("ck_cloud")) {
+            setupMenuItem("Cloud", R.drawable.nuvempreta);
+        }
+//
+        if (bundle.getBoolean("ck_criptomoedas")) {
+            setupMenuItem("Criptomoedas", R.drawable.moedapreta);
+        }
+        if (bundle.getBoolean("ck_ebusiness")) {
+            setupMenuItem("E-business", R.drawable.businesspreto);
+        }
+        if (bundle.getBoolean("ck_games")) {
+            setupMenuItem("Games", R.drawable.gamepreta);
+        }
+
+        if (bundle.getBoolean("ck_inteligenciaartificial")) {
+            setupMenuItem("Inteligência Artificial", R.drawable.iapreto);
         }
         if (bundle.getBoolean("ck_mobile")) {
             setupMenuItem("Mobile", R.drawable.mobile_icons);
         }
-        if (bundle.getBoolean("ck_google")) {
-            setupMenuItem("Google", R.drawable.google_icons);
-        }
-//        todo: verificar and match onde estao esses indexes
-        if (bundle.getBoolean("ck_apple")) {
-            setupMenuItem("Apple", R.drawable.icon_apple_preto);
-        }
-        if (bundle.getBoolean("ck_futuro")) {
-            setupMenuItem("Futuro", R.drawable.icon_futuro_preto);
-        }
-        if (bundle.getBoolean("ck_ios")) {
-            setupMenuItem("IOS", R.drawable.icon_ios_preto);
-        }
-        if (bundle.getBoolean("ck_so")) {
-            setupMenuItem("Sistema+Operacional", R.drawable.icon_pc_preto);
+        if (bundle.getBoolean("ck_sistemaoperacional")) {
+            setupMenuItem("Sistema Operacional", R.drawable.icon_pc_preto);
         }
 
     }
 
-    public void setupHome(){
+    public void setupHome() {
         final MenuItem menuItem = menuDeBaixo.getMenu().add(0, 4, 0, "Home");
         menuItem.setIcon(R.drawable.icon_marketblack);
 
     }
 
     private void setupMenuItem(String title, int icon) {
-        if(contador == 2){
+        if (contador == 2) {
             setupHome();
             contador++;
         }
@@ -159,7 +166,37 @@ public class MenuHomeActivity extends AppCompatActivity
             chamarConteudo();
 
         } else if (id == R.id.nav_apple) {
+            setupFragment("apple");
+
         }
+        else if (id == R.id.nav_android) {
+            setupFragment("android");
+        }
+        else if (id == R.id.nav_cloud) {
+            setupFragment("cloud");
+        }
+        else if (id == R.id.nav_blockchain) {
+            setupFragment("blockchain");
+        }
+        else if (id == R.id.nav_criptomoedas) {
+            setupFragment("criptomoedas");
+        }
+        else if (id == R.id.nav_ebusiness) {
+            setupFragment("E-business");
+        }
+        else if (id == R.id.nav_games) {
+            setupFragment("games");
+        }
+        else if (id == R.id.nav_inteligencia_artificial) {
+            setupFragment("inteligencia artificial");
+        }
+        else if (id == R.id.nav_mobile) {
+            setupFragment("mobile");
+        }
+        else if (id == R.id.nav_sistemaoperacional) {
+            setupFragment("sistema operacional");
+        }
+
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
@@ -172,4 +209,15 @@ public class MenuHomeActivity extends AppCompatActivity
 
     }
 
+    public void chamarMateriasMenu(final MenuItem menuItem) {
+        menuItem.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
+            @Override
+            public boolean onMenuItemClick(MenuItem item) {
+                item.setChecked(true);
+                setupFragment(menuItem.getTitle().toString());
+                return true;
+            }
+
+        });
+    }
 }
