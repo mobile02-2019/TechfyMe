@@ -11,6 +11,7 @@ import android.widget.Toast;
 import com.google.gson.Gson;
 import com.me.techfy.techfyme.modelo.Noticia;
 import com.me.techfy.techfyme.modelo.ResultadoAPI;
+import com.me.techfy.techfyme.service.NewsAPI;
 import com.me.techfy.techfyme.service.RetrofitService;
 import com.me.techfy.techfyme.service.ServiceListener;
 
@@ -33,7 +34,12 @@ public class NewsDAO {
         List<Noticia> newsList = new ArrayList<>();
 
         if (isConected(context)){
-            getRemoteNews(listener,query);
+            if(query=="home"){
+                getRemoteNews(listener);
+            } else {
+                getRemoteNewsWithKey(listener,query);
+
+            }
         } else {
             Toast.makeText(context, "Falha na conexão!", Toast.LENGTH_LONG).show();
         }
@@ -41,8 +47,40 @@ public class NewsDAO {
         return newsList;
     }
 
-    private void getRemoteNews(final ServiceListener listener, String query) {
+    public List<Noticia> getNewsListResultado(Context context, final ServiceListener listener) {
+
+        List<Noticia> newsList = new ArrayList<>();
+
+        if (isConected(context)){
+            getRemoteNews(listener);
+        } else {
+            Toast.makeText(context, "Falha na conexão!", Toast.LENGTH_LONG).show();
+        }
+
+        return newsList;
+    }
+
+    private void getRemoteNewsWithKey(final ServiceListener listener, String query) {
         Call<ResultadoAPI> call = RetrofitService.getNewsApi().getWithKey(query);
+
+        call.enqueue(new Callback<ResultadoAPI>() {
+            @Override
+            public void onResponse(Call<ResultadoAPI> call, Response<ResultadoAPI> response) {
+                if (response.body() != null) {
+                    listener.onSuccess(response.body());
+                }
+            }
+            @Override
+            public void onFailure(Call<ResultadoAPI> call, Throwable t) {
+                listener.onError(t);
+            }
+        });
+    }
+
+
+
+    private void getRemoteNews(final ServiceListener listener) {
+        Call<ResultadoAPI> call = RetrofitService.getNewsApi().getResultado();
 
         call.enqueue(new Callback<ResultadoAPI>() {
             @Override
