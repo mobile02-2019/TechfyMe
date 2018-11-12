@@ -2,6 +2,9 @@ package com.me.techfy.techfyme;
 
 import android.content.Intent;
 import android.graphics.Color;
+import android.graphics.PorterDuff;
+import android.graphics.drawable.Drawable;
+import android.os.Build;
 import android.os.Bundle;
 
 import android.support.design.widget.BottomNavigationView;
@@ -93,6 +96,11 @@ public class MenuHomeActivity extends AppCompatActivity
         final MenuItem menuItem = menuDeBaixo.getMenu().add(0, 4, 0, "Home");
 
         menuItem.setIcon(R.drawable.homeazul);
+        Drawable drawable = menuItem.getIcon();
+        if (drawable != null) {
+            drawable.mutate();
+            drawable.setColorFilter(getResources().getColor(R.color.azulSecundario), PorterDuff.Mode.SRC_ATOP);
+        }
         menuItem.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
             @Override
             public boolean onMenuItemClick(MenuItem item) {
