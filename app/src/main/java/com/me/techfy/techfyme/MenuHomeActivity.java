@@ -52,10 +52,10 @@ public class MenuHomeActivity extends AppCompatActivity
         NavigationView navigationView = findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
+
 //        aqui comeca selecao dos favoritos pelo usuario = lista dos favoritos-->
         Intent intent = getIntent();
         bundle = intent.getExtras();
-
 
         if (bundle.getBoolean("ck_android")) {
             setupMenuItem("Android", R.drawable.android_icon);
@@ -90,6 +90,9 @@ public class MenuHomeActivity extends AppCompatActivity
             setupMenuItem("Sistema Operacional", R.drawable.icon_pc_preto);
         }
 
+
+
+
     }
 
     public void setupHome() {
@@ -101,19 +104,11 @@ public class MenuHomeActivity extends AppCompatActivity
             drawable.mutate();
             drawable.setColorFilter(getResources().getColor(R.color.azulSecundario), PorterDuff.Mode.SRC_ATOP);
         }
+
         menuItem.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
             @Override
             public boolean onMenuItemClick(MenuItem item) {
-                item.setChecked(true);
-                Bundle bundle = new Bundle();
-                bundle.putString(CHAVE_KEY, "home");
-
-                FragmentManager manager = getSupportFragmentManager();
-                FragmentTransaction transaction = manager.beginTransaction();
-                NoticiaFragment noticiaFragment = new NoticiaFragment();
-                noticiaFragment.setArguments(bundle);
-                transaction.replace(R.id.framelayout_home_id, noticiaFragment);
-                transaction.commit();
+                setupHomeFragment(item);
                 return true;
             }
         });
@@ -121,6 +116,18 @@ public class MenuHomeActivity extends AppCompatActivity
 
 
 
+    }
+
+    private void setupHomeFragment(MenuItem item) {
+        Bundle bundle = new Bundle();
+        bundle.putString(CHAVE_KEY, "home");
+
+        FragmentManager manager = getSupportFragmentManager();
+        FragmentTransaction transaction = manager.beginTransaction();
+        NoticiaFragment noticiaFragment = new NoticiaFragment();
+        noticiaFragment.setArguments(bundle);
+        transaction.replace(R.id.framelayout_home_id, noticiaFragment);
+        transaction.commit();
     }
 
     private void setupMenuItem(String title, int icon) {
@@ -193,10 +200,8 @@ public class MenuHomeActivity extends AppCompatActivity
 
         if (id == R.id.nav_editar) {
             chamarConteudo();
-
         } else if (id == R.id.nav_apple) {
             setupFragment("apple");
-
         }
         else if (id == R.id.nav_android) {
             setupFragment("android");
@@ -232,6 +237,7 @@ public class MenuHomeActivity extends AppCompatActivity
             setupFragment("sistema operacional");
 
         }
+
 
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
