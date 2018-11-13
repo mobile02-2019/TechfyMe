@@ -257,8 +257,15 @@ public class NoticiaFragment extends Fragment implements RecyclerViewNewsAdapter
 
     }
 
+
     @Override
     public void onShareClicado(Noticia noticia) {
+
+        Intent share = new Intent(Intent.ACTION_SEND);
+        share.setType("text/plain");
+        share.putExtra(Intent.EXTRA_SUBJECT, noticia.getTitulo());
+        share.putExtra(Intent.EXTRA_TEXT, noticia.getLinkDaMateria());
+        startActivity(Intent.createChooser(share, noticia.getDataCriacao()));
 
     }
 

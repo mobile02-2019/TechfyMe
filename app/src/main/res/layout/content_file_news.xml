@@ -71,13 +71,13 @@
         android:id="@+id/iconeCompartilhar"
         android:layout_width="20dp"
         android:layout_height="20dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="8dp"
         android:layout_marginBottom="16dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginTop="8dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/icone_comentar"
         app:layout_constraintTop_toBottomOf="@+id/text_descricao_id"
-        app:srcCompat="@drawable/comparilhar_icone" />
+        app:srcCompat="@drawable/ic_menu_share" />
 
     <ImageView
         android:id="@+id/icone_lixeira"
@@ -112,6 +112,8 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/text_descricao_id"
         card_view:srcCompat="@drawable/save_icnoe2" />
+
+
 
 </android.support.constraint.ConstraintLayout>
 </android.support.v7.widget.CardView>

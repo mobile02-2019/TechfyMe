@@ -1,5 +1,7 @@
 package com.me.techfy.techfyme.adaprter;
 
+import android.app.Activity;
+import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.design.widget.Snackbar;
 import android.support.v7.widget.RecyclerView;
@@ -140,7 +142,9 @@ public class RecyclerViewNewsAdapter extends RecyclerView.Adapter<RecyclerViewNe
             iconeCompartilhar.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Snackbar.make(iconeCompartilhar, "Notícia compartilhada", Snackbar.LENGTH_LONG).show();
+                    listener.onShareClicado(noticia);
+
+
                 }
             });
 
