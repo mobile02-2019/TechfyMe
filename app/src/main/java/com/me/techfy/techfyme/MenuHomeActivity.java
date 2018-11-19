@@ -92,7 +92,6 @@ public class MenuHomeActivity extends AppCompatActivity
 
 
 
-
     }
 
     public void setupHome() {
@@ -100,6 +99,9 @@ public class MenuHomeActivity extends AppCompatActivity
 
         menuItem.setIcon(R.drawable.homeazul);
         Drawable drawable = menuItem.getIcon();
+        setupHomeFragment(menuItem);
+        menuItem.setChecked(true);
+
         if (drawable != null) {
             drawable.mutate();
             drawable.setColorFilter(getResources().getColor(R.color.azulSecundario), PorterDuff.Mode.SRC_ATOP);
@@ -109,6 +111,7 @@ public class MenuHomeActivity extends AppCompatActivity
             @Override
             public boolean onMenuItemClick(MenuItem item) {
                 setupHomeFragment(item);
+                item.setChecked(true);
                 return true;
             }
         });
