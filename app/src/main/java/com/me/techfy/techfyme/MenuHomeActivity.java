@@ -24,12 +24,17 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Toast;
 
+import com.google.firebase.auth.FirebaseAuth;
+
 public class MenuHomeActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
     Bundle bundle;
     BottomNavigationView menuDeBaixo;
     int contador = 0;
     public static final String CHAVE_KEY = "chave_key";
+    private static final String TAG = "Home";
+    private FirebaseAuth firebaseAuth;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,6 +42,8 @@ public class MenuHomeActivity extends AppCompatActivity
         setContentView(R.layout.activity_menu_home);
 
         menuDeBaixo = findViewById(R.id.navigationView);
+
+        firebaseAuth = FirebaseAuth.getInstance();
 
 
         Toolbar toolbar = findViewById(R.id.toolbar);
@@ -240,12 +247,21 @@ public class MenuHomeActivity extends AppCompatActivity
             setupFragment("sistema operacional");
 
         }
+        else if (id == R.id.nav_sair) {
+            sair();
 
+        }
 
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
+    }
+
+    private void sair() {
+        FirebaseAuth.getInstance().signOut();
+        Intent intent = new Intent(this, LoginActivity.class);
+        startActivity(intent);
     }
 
     public void chamarConteudo() {

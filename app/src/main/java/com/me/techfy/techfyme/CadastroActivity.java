@@ -2,6 +2,7 @@ package com.me.techfy.techfyme;
 
 import android.content.Intent;
 import android.content.res.ColorStateList;
+import android.support.annotation.NonNull;
 import android.support.design.widget.BaseTransientBottomBar;
 import android.support.design.widget.Snackbar;
 import android.support.design.widget.TextInputEditText;
@@ -9,11 +10,19 @@ import android.support.v4.view.ViewCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.Toast;
 
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.AuthResult;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.auth.UserProfileChangeRequest;
 import com.weiwangcn.betterspinner.library.material.MaterialBetterSpinner;
 
 import java.util.ArrayList;
@@ -21,7 +30,9 @@ import java.util.List;
 
 public class CadastroActivity extends AppCompatActivity {
 
-   private Button botaoCadastro;
+    private Button botaoCadastro;
+    private static final String TAG = "Cadastro";
+    private FirebaseAuth mAuth;
 
     private String emBranco ="";
     private TextInputEditText nome;
@@ -76,7 +87,7 @@ public class CadastroActivity extends AppCompatActivity {
         getSupportActionBar().setDisplayUseLogoEnabled(true);
         getSupportActionBar().setIcon(R.drawable.techfyme_logo_action_bar);
 
-
+        mAuth = FirebaseAuth.getInstance();
 
         String [] GENEROS = getResources().getStringArray(R.array.lista_de_generos);
 
@@ -94,15 +105,19 @@ public class CadastroActivity extends AppCompatActivity {
         botaoCadastro.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(v.getContext(),PreferenciaActivity.class);
-                listaCampo.add(nome);
-                listaCampo.add(sobrenome);
-                listaCampo.add(email);
-                listaCampo.add(senha);
 
-                if (verificarCampos(listaCampo)&& senhasIguais(senha,confirmaSenha)){
-                    startActivity(intent);
-                }
+                cadastrarUsuario();
+
+
+//                Intent intent = new Intent(v.getContext(),PreferenciaActivity.class);
+//                listaCampo.add(nome);
+//                listaCampo.add(sobrenome);
+//                listaCampo.add(email);
+//                listaCampo.add(senha);
+//
+//                if (verificarCampos(listaCampo)&& senhasIguais(senha,confirmaSenha)){
+//                    startActivity(intent);
+//                }
 
 
 
@@ -110,7 +125,57 @@ public class CadastroActivity extends AppCompatActivity {
         });
 
         }
+
+    private void cadastrarUsuario() {
+
+        final EditText nomeCadastrado = findViewById(R.id.nome_usuario_id);
+        EditText emailCadastrado = findViewById(R.id.email_usuario_id);
+        EditText senhaCadastrado = findViewById(R.id.senha_usuario_id);
+
+        mAuth.createUserWithEmailAndPassword(emailCadastrado.getText().toString(), senhaCadastrado.getText().toString())
+                .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
+                    @Override
+                    public void onComplete(@NonNull Task<AuthResult> task) {
+                        if (task.isSuccessful()) {
+                            // Sign in success, update UI with the signed-in user's information
+                            Log.d(TAG, "createUserWithEmail:success");
+                            FirebaseUser user = mAuth.getCurrentUser();
+                            user = FirebaseAuth.getInstance().getCurrentUser();
+
+                            UserProfileChangeRequest profileUpdates = new UserProfileChangeRequest.Builder()
+                                    .setDisplayName(nomeCadastrado.getText().toString())
+                                    .build();
+
+                            user.updateProfile(profileUpdates)
+                                    .addOnCompleteListener(new OnCompleteListener<Void>() {
+                                        @Override
+                                        public void onComplete(@NonNull Task<Void> task) {
+                                            if (task.isSuccessful()) {
+                                                Log.d(TAG, "User profile updated.");
+                                                goToLogin();
+                                            }
+                                        }
+                                    });
+                        } else {
+                            // If sign in fails, display a message to the user.
+                            Log.w(TAG, "createUserWithEmail:failure", task.getException());
+                            Toast.makeText(CadastroActivity.this, "Authentication failed.",
+                                    Toast.LENGTH_SHORT).show();
+                            goToLogin();
+                        }
+
+                        // ...
+                    }
+                });
+
+
+
     }
+
+    private void goToLogin() {
+        finish();
+    }
+}
 
 
 
