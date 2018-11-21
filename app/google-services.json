@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "1016200627138",
+    "firebase_url": "https://techfyme.firebaseio.com",
+    "project_id": "techfyme",
+    "storage_bucket": "techfyme.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1016200627138:android:75f761bcdf5a309d",
+        "android_client_info": {
+          "package_name": "com.me.techfy.techfyme"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1016200627138-kgi28cud7upt7r1jbp5vf1rskgicnpst.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.me.techfy.techfyme",
+            "certificate_hash": "e629baf67944d8c11722df55471af8f858701d2e"
+          }
+        },
+        {
+          "client_id": "1016200627138-1qcvs99htvrki7smhrjol525igdpj4v6.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBqw07Ug0j9f1nde7aW8jcIFk8RKOuL2ic"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1016200627138-1qcvs99htvrki7smhrjol525igdpj4v6.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
