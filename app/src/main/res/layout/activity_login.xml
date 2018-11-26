@@ -137,7 +137,8 @@
             android:textColor="@color/branco"
             android:backgroundTint="@color/colorGoogle"
             android:drawableLeft="@drawable/ic_google"
-            android:layout_marginBottom="48dp" />
+            android:layout_marginBottom="48dp"
+            android:id="@+id/btn_login_google"/>
     </LinearLayout>
 
 </ScrollView>
