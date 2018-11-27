@@ -15,13 +15,11 @@ import android.view.ViewGroup;
 import com.afollestad.materialdialogs.DialogAction;
 import com.afollestad.materialdialogs.MaterialDialog;
 import com.me.techfy.techfyme.DAO.NewsDAO;
-import com.me.techfy.techfyme.adaprter.RecyclerViewNewsAdapter;
+import com.me.techfy.techfyme.adapter.RecyclerViewNewsAdapter;
 import com.me.techfy.techfyme.modelo.Noticia;
 import com.me.techfy.techfyme.modelo.ResultadoAPI;
 import com.me.techfy.techfyme.service.ServiceListener;
 
-import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 import static com.me.techfy.techfyme.MenuHomeActivity.CHAVE_KEY;
@@ -65,7 +63,7 @@ public class NoticiaFragment extends Fragment implements RecyclerViewNewsAdapter
 
         Bundle bundle = getArguments();
 
-//        if(bundle.getString(CHAVE_KEY) == "home"){
+//        if(bundle.getString(CHAVE_KEY) == "getBundleToHome"){
 //            setupRecyclerViewResultado(view);
 //        } else {
             query = bundle.getString(CHAVE_KEY);

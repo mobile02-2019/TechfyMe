@@ -1,7 +1,5 @@
-package com.me.techfy.techfyme.adaprter;
+package com.me.techfy.techfyme.adapter;
 
-import android.app.Activity;
-import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.design.widget.Snackbar;
 import android.support.v7.widget.RecyclerView;
@@ -10,9 +8,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
-import com.me.techfy.techfyme.MenuHomeActivity;
 import com.me.techfy.techfyme.R;
 import com.me.techfy.techfyme.modelo.Noticia;
 import com.squareup.picasso.Picasso;

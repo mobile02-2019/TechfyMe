@@ -24,9 +24,9 @@
             android:title="Cloud" />
 
         <item
-        android:id="@+id/nav_criptomoedas"
-        android:icon="@drawable/moedabranca"
-        android:title="Criptomoedas" />
+            android:id="@+id/nav_criptomoedas"
+            android:icon="@drawable/moedabranca"
+            android:title="Criptomoedas" />
 
         <item
             android:id="@+id/nav_ebusiness"

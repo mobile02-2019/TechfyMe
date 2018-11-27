@@ -93,7 +93,7 @@ public class CadastroActivity extends AppCompatActivity {
 
         ArrayAdapter<String> adapterSpinner = new ArrayAdapter<String>(this,
                 android.R.layout.simple_dropdown_item_1line,GENEROS);
-        MaterialBetterSpinner textView = (MaterialBetterSpinner) findViewById(R.id.spinner_id);
+        MaterialBetterSpinner textView = findViewById(R.id.spinner_id);
         textView.setAdapter(adapterSpinner);
 
         nome =findViewById(R.id.nome_usuario_id);
@@ -105,22 +105,7 @@ public class CadastroActivity extends AppCompatActivity {
         botaoCadastro.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
                 cadastrarUsuario();
-
-
-//                Intent intent = new Intent(v.getContext(),PreferenciaActivity.class);
-//                listaCampo.add(nome);
-//                listaCampo.add(sobrenome);
-//                listaCampo.add(email);
-//                listaCampo.add(senha);
-//
-//                if (verificarCampos(listaCampo)&& senhasIguais(senha,confirmaSenha)){
-//                    startActivity(intent);
-//                }
-
-
-
             }
         });
 
@@ -137,10 +122,8 @@ public class CadastroActivity extends AppCompatActivity {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if (task.isSuccessful()) {
-                            // Sign in success, update UI with the signed-in user's information
                             Log.d(TAG, "createUserWithEmail:success");
-                            FirebaseUser user = mAuth.getCurrentUser();
-                            user = FirebaseAuth.getInstance().getCurrentUser();
+                            FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
 
                             UserProfileChangeRequest profileUpdates = new UserProfileChangeRequest.Builder()
                                     .setDisplayName(nomeCadastrado.getText().toString())
@@ -152,28 +135,24 @@ public class CadastroActivity extends AppCompatActivity {
                                         public void onComplete(@NonNull Task<Void> task) {
                                             if (task.isSuccessful()) {
                                                 Log.d(TAG, "User profile updated.");
-                                                goToLogin();
+                                                goToPreferencia();
                                             }
                                         }
                                     });
                         } else {
-                            // If sign in fails, display a message to the user.
                             Log.w(TAG, "createUserWithEmail:failure", task.getException());
                             Toast.makeText(CadastroActivity.this, "Authentication failed.",
                                     Toast.LENGTH_SHORT).show();
-                            goToLogin();
+                            goToPreferencia();
                         }
-
-                        // ...
                     }
                 });
 
-
-
     }
 
-    private void goToLogin() {
-        finish();
+    private void goToPreferencia() {
+        Intent intent = new Intent(this, PreferenciaActivity.class);
+        startActivity(intent);
     }
 }
 

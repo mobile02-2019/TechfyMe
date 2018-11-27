@@ -34,7 +34,7 @@ public class NewsDAO {
         List<Noticia> newsList = new ArrayList<>();
 
         if (isConected(context)){
-            if(query=="home"){
+            if(query=="getBundleToHome"){
                 getRemoteNews(listener);
             } else {
                 getRemoteNewsWithKey(listener,query);

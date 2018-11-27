@@ -25,10 +25,11 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="48dp"
-            android:theme="@style/AppTheme2">
+            android:theme="@style/AppTheme2"
+            android:id="@+id/edit_text_email_id"
+            >
 
             <android.support.design.widget.TextInputEditText
-                android:id="@+id/edit_text_email_id"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:inputType="textEmailAddress"
@@ -42,10 +43,11 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             app:passwordToggleEnabled="true"
-            android:theme="@style/AppTheme2">
+            android:theme="@style/AppTheme2"
+            android:id="@+id/edit_text_password_id"
+            >
 
             <android.support.design.widget.TextInputEditText
-                android:id="@+id/edit_text_password_id"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="Password*"
@@ -120,8 +122,8 @@
 
         <com.facebook.login.widget.LoginButton
             android:id="@+id/login_button"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="322dp"
+            android:layout_height="59dp"
             android:layout_gravity="center_horizontal"
             android:layout_marginTop="30dp"
             android:layout_marginBottom="30dp" />

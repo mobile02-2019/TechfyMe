@@ -1,15 +1,11 @@
 package com.me.techfy.techfyme;
 
 import android.content.Intent;
-import android.graphics.Color;
 import android.graphics.PorterDuff;
 import android.graphics.drawable.Drawable;
-import android.os.Build;
 import android.os.Bundle;
 
 import android.support.design.widget.BottomNavigationView;
-
-import android.support.annotation.ColorInt;
 
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
@@ -21,8 +17,6 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
-import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
 
@@ -34,7 +28,7 @@ public class MenuHomeActivity extends AppCompatActivity
     public static final String CHAVE_KEY = "chave_key";
     private static final String TAG = "Home";
     private FirebaseAuth firebaseAuth;
-
+    public static final String VEIO_DA_HOME = "veio_da_home";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,7 +38,6 @@ public class MenuHomeActivity extends AppCompatActivity
         menuDeBaixo = findViewById(R.id.navigationView);
 
         firebaseAuth = FirebaseAuth.getInstance();
-
 
         Toolbar toolbar = findViewById(R.id.toolbar);
         toolbar.setLogo(getDrawable(R.drawable.techfyme_logo_action_bar));
@@ -59,45 +52,41 @@ public class MenuHomeActivity extends AppCompatActivity
         NavigationView navigationView = findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
-
-//        aqui comeca selecao dos favoritos pelo usuario = lista dos favoritos-->
         Intent intent = getIntent();
         bundle = intent.getExtras();
 
-        if (bundle.getBoolean("ck_android")) {
+        if (bundle.getBoolean(PreferenciaActivity.CK_ANDROID)) {
             setupMenuItem("Android", R.drawable.android_icon);
         }
-        if (bundle.getBoolean("ck_apple")) {
+        if (bundle.getBoolean(PreferenciaActivity.CK_APPLE)) {
             setupMenuItem("Apple", R.drawable.icon_apple_preto);
         }
-        if (bundle.getBoolean("ck_blockchain")) {
+        if (bundle.getBoolean(PreferenciaActivity.CK_BLOCKCHAIN)) {
             setupMenuItem("Blockchain", R.drawable.blockchainpreto);
         }
-        if (bundle.getBoolean("ck_cloud")) {
+        if (bundle.getBoolean(PreferenciaActivity.CK_CLOUD)) {
             setupMenuItem("Cloud", R.drawable.nuvempreta);
         }
-//
-        if (bundle.getBoolean("ck_criptomoedas")) {
+        if (bundle.getBoolean(PreferenciaActivity.CK_CRIPTOMOEDAS)) {
             setupMenuItem("Criptomoedas", R.drawable.moedapreta);
         }
-        if (bundle.getBoolean("ck_ebusiness")) {
+        if (bundle.getBoolean(PreferenciaActivity.CK_EBUSINESS)) {
             setupMenuItem("E-business", R.drawable.businesspreto);
         }
-        if (bundle.getBoolean("ck_games")) {
+        if (bundle.getBoolean(PreferenciaActivity.CK_GAMES)) {
             setupMenuItem("Games", R.drawable.gamepreta);
         }
-
-        if (bundle.getBoolean("ck_inteligenciaartificial")) {
+        if (bundle.getBoolean(PreferenciaActivity.CK_INTELIGENCIAARTIFICIAL)) {
             setupMenuItem("Inteligência Artificial", R.drawable.iapreto);
         }
-        if (bundle.getBoolean("ck_mobile")) {
+        if (bundle.getBoolean(PreferenciaActivity.CK_MOBILE)) {
             setupMenuItem("Mobile", R.drawable.mobile_icons);
         }
-        if (bundle.getBoolean("ck_sistemaoperacional")) {
+        if (bundle.getBoolean(PreferenciaActivity.CK_SISTEMAOPERACIONAL)) {
             setupMenuItem("Sistema Operacional", R.drawable.icon_pc_preto);
         }
 
-
+        bundleMenuHome(intent);
 
     }
 
@@ -123,14 +112,11 @@ public class MenuHomeActivity extends AppCompatActivity
             }
         });
 
-
-
-
     }
 
     private void setupHomeFragment(MenuItem item) {
         Bundle bundle = new Bundle();
-        bundle.putString(CHAVE_KEY, "home");
+        bundle.putString(CHAVE_KEY, "getBundleToHome");
 
         FragmentManager manager = getSupportFragmentManager();
         FragmentTransaction transaction = manager.beginTransaction();
@@ -173,7 +159,7 @@ public class MenuHomeActivity extends AppCompatActivity
 
     @Override
     public void onBackPressed() {
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        DrawerLayout drawer = findViewById(R.id.drawer_layout);
         if (drawer.isDrawerOpen(GravityCompat.START)) {
             drawer.closeDrawer(GravityCompat.START);
         } else {
@@ -183,19 +169,13 @@ public class MenuHomeActivity extends AppCompatActivity
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.menu_home, menu);
         return true;
     }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
-
-        //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
             return true;
         }
@@ -231,10 +211,8 @@ public class MenuHomeActivity extends AppCompatActivity
         else if (id == R.id.nav_games) {
             setupFragment("games");
         }
-
         else if (id == R.id.nav_home) {
             setupFragment("Home");
-
         }
         else if (id == R.id.nav_inteligencia_artificial) {
             setupFragment("inteligencia artificial");
@@ -242,24 +220,20 @@ public class MenuHomeActivity extends AppCompatActivity
         else if (id == R.id.nav_mobile) {
             setupFragment("mobile");
         }
-
         else if (id == R.id.nav_sistemaoperacional) {
             setupFragment("sistema operacional");
-
         }
         else if (id == R.id.nav_sair) {
             sair();
-
         }
 
-
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        DrawerLayout drawer = findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
     }
 
     private void sair() {
-        FirebaseAuth.getInstance().signOut();
+        firebaseAuth.getInstance().signOut();
         Intent intent = new Intent(this, LoginActivity.class);
         startActivity(intent);
     }
@@ -267,18 +241,12 @@ public class MenuHomeActivity extends AppCompatActivity
     public void chamarConteudo() {
         Intent intent = new Intent(this, PreferenciaActivity.class);
         startActivity(intent);
-
     }
 
-    public void chamarMateriasMenu(final MenuItem menuItem) {
-        menuItem.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
-            @Override
-            public boolean onMenuItemClick(MenuItem item) {
-                item.setChecked(true);
-                setupFragment(menuItem.getTitle().toString());
-                return true;
-            }
-
-        });
+    private void bundleMenuHome (Intent intent) {
+        bundle = new Bundle();
+        bundle.putBoolean(VEIO_DA_HOME, true);
+        intent.putExtras(bundle);
     }
+
 }
