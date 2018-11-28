@@ -1,17 +1,13 @@
 package com.me.techfy.techfyme;
 
 import android.content.Intent;
+import android.os.Bundle;
 import android.support.annotation.NonNull;
-import android.support.design.widget.BaseTransientBottomBar;
-import android.support.design.widget.Snackbar;
-import android.support.design.widget.TextInputEditText;
 import android.support.design.widget.TextInputLayout;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -33,9 +29,6 @@ import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.GoogleAuthProvider;
-import com.me.techfy.techfyme.CadastroActivity;
-import com.me.techfy.techfyme.HomeActivity;
-import com.me.techfy.techfyme.R;
 
 public class LoginActivity extends AppCompatActivity {
 
@@ -165,7 +158,9 @@ public class LoginActivity extends AppCompatActivity {
                             // Sign in success, update UI with the signed-in user's information
                             Log.d(TAG, "signInWithCredential:success");
                             FirebaseUser user = mAuth.getCurrentUser();
-                            goToHome();
+                            // TODO passar nome para home
+                            String nome = "Luara";
+                            goToHome(nome);
 //                            updateUI(user);
                         } else {
                             // If sign in fails, display a message to the user.
