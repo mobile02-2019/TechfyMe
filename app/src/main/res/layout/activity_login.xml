@@ -121,7 +121,7 @@
         </LinearLayout>
 
         <com.facebook.login.widget.LoginButton
-            android:id="@+id/login_button"
+            android:id="@+id/login_face"
             android:layout_width="322dp"
             android:layout_height="59dp"
             android:layout_gravity="center_horizontal"
