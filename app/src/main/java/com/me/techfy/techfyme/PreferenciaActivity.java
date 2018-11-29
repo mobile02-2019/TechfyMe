@@ -70,7 +70,7 @@ public class PreferenciaActivity extends Activity implements FirebasePreferencia
         preferencia = new Preferencia();
         Intent intent = getIntent();
         bundle = intent.getExtras();
-        //emailLogado = FirebaseAuth.getInstance().getCurrentUser().getEmail();
+        emailLogado = FirebaseAuth.getInstance().getCurrentUser().getEmail();
 
         String auxiliar = bundle.getString(LoginActivity.CHAVE_EMAIL);
         if(!(auxiliar == null)) {
