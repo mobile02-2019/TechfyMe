@@ -44,6 +44,4 @@ public class PreferenciaDTO {
         return retorno;
     }
 
-
-
 }

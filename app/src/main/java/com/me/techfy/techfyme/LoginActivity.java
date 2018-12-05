@@ -10,13 +10,10 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import com.facebook.AccessToken;
 import com.facebook.CallbackManager;
 import com.facebook.FacebookCallback;
 import com.facebook.FacebookException;
-import com.facebook.Profile;
-import com.facebook.login.LoginManager;
 import com.facebook.login.LoginResult;
 import com.facebook.login.widget.LoginButton;
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
@@ -49,7 +46,6 @@ public class LoginActivity extends AppCompatActivity {
     private LoginButton loginFacebook;
     private GoogleSignInClient mGoogleSignInClient;
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -59,11 +55,8 @@ public class LoginActivity extends AppCompatActivity {
         getSupportActionBar().setIcon(R.drawable.techfyme_logo_action_bar);
 
         mAuth = FirebaseAuth.getInstance();
-
-        loginFacebook = (LoginButton) findViewById(R.id.login_face);
-
+        loginFacebook = findViewById(R.id.login_face);
         loginFacebook.setReadPermissions("email","public_profile");
-
         callbackManager = CallbackManager.Factory.create();
 
         loginFacebook.registerCallback(callbackManager, new FacebookCallback<LoginResult>() {
@@ -72,7 +65,7 @@ public class LoginActivity extends AppCompatActivity {
             public void onSuccess(LoginResult loginResult) {
                 Log.d(TAG, "facebook:onSuccess:" + loginResult);
                 handleFacebookAccessToken(loginResult.getAccessToken());
-
+                irParaPreferencia(loginResult.getAccessToken().getUserId());
                 Intent intent = new Intent(loginFacebook.getContext(), PreferenciaActivity.class);
                 startActivity(intent);
             }
@@ -88,25 +81,6 @@ public class LoginActivity extends AppCompatActivity {
             }
         });
 
-        callbackManager = CallbackManager.Factory.create();
-
-        LoginManager.getInstance().registerCallback(callbackManager,
-                new FacebookCallback<LoginResult>() {
-                    @Override
-                    public void onSuccess(LoginResult loginResult) {
-                        Intent intent = new Intent(LoginActivity.this, PreferenciaActivity.class);
-                        bundleUsuarioLogado(intent, Profile.getCurrentProfile().getName());
-                        startActivity(intent);
-
-                    }
-                    @Override
-                    public void onCancel() {
-                    }
-                    @Override
-                    public void onError(FacebookException exception) {
-                    }
-                });
-
         botaoLogin = findViewById(R.id.button_login);
         cadastrar = findViewById(R.id.text_register);
         email = findViewById(R.id.edit_text_email_id);
@@ -116,7 +90,6 @@ public class LoginActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 loginClicado();
-
             }
         });
 
@@ -127,25 +100,28 @@ public class LoginActivity extends AppCompatActivity {
             }
         });
 
-        //        inicio login com google: - inicio do codigo
         GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
                 .requestIdToken(getString(R.string.default_web_client_id))
                 .requestEmail()
                 .build();
 
+        mAuth = FirebaseAuth.getInstance();
         mGoogleSignInClient = GoogleSignIn.getClient(this, gso);
-
         Button btnLoginGoogle = findViewById(R.id.btn_login_google);
 
         btnLoginGoogle.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                signIn();
+                switch (view.getId()) {
+                    case R.id.btn_login_google:
+                        signIn();
+                        break;
+                }
             }
         });
 
-
     }
+
             private void handleFacebookAccessToken(AccessToken token) {
             Log.d(TAG, "handleFacebookAccessToken:" + token);
 
@@ -155,16 +131,12 @@ public class LoginActivity extends AppCompatActivity {
                         @Override
                         public void onComplete(@NonNull Task<AuthResult> task) {
                             if (task.isSuccessful()) {
-//                            Log.d(TAG, "signInWithCredential:success");
-//                            FirebaseUser user = mAuth.getCurrentUser();
-                                // Sign in success, update UI with the signed-in user's information
                                 Log.d(TAG, "signInWithCredential:success");
                                 FirebaseUser user = mAuth.getCurrentUser();
                                 Intent intent = new Intent(getApplicationContext(),PreferenciaActivity.class);
                                 startActivity(intent);
 
                             } else {
-                                // If sign in fails, display a message to the user.
                                 Log.w(TAG, "signInWithCredential:failure", task.getException());
                                 Toast.makeText(LoginActivity.this, "Authentication failed.",
                                         Toast.LENGTH_SHORT).show();
@@ -172,9 +144,7 @@ public class LoginActivity extends AppCompatActivity {
                         }
                     });
         }
-    // METODOS LOGIN GOOGLE
 
-    // updateUI(user); foi subtituido no google para goToHome
     private void signIn() {
         Intent signInIntent = mGoogleSignInClient.getSignInIntent();
         startActivityForResult(signInIntent, RC_SIGN_IN);
@@ -185,21 +155,17 @@ public class LoginActivity extends AppCompatActivity {
         super.onActivityResult(requestCode, resultCode, data);
         callbackManager.onActivityResult(requestCode, resultCode, data);
 
-        // Result returned from launching the Intent from GoogleSignInApi.getSignInIntent(...);
         if (requestCode == RC_SIGN_IN) {
             Task<GoogleSignInAccount> task = GoogleSignIn.getSignedInAccountFromIntent(data);
             try {
-                // Google Sign In was successful, authenticate with Firebase
                 GoogleSignInAccount account = task.getResult(ApiException.class);
                 firebaseAuthWithGoogle(account);
             } catch (ApiException e) {
-                // Google Sign In failed, update UI appropriately
                 Log.w(TAG, "Google sign in failed", e);
                 // ...
             }
         }
     }
-
 
     private void firebaseAuthWithGoogle(GoogleSignInAccount acct) {
         Log.d(TAG, "firebaseAuthWithGoogle:" + acct.getId());
@@ -210,39 +176,28 @@ public class LoginActivity extends AppCompatActivity {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if (task.isSuccessful()) {
-                            // Sign in success, update UI with the signed-in user's information
                             Log.d(TAG, "signInWithCredential:success");
                             FirebaseUser user = mAuth.getCurrentUser();
                             // TODO passar nome para home
                             String nome = "Home";
-                            goToHome(nome);
-//                            updateUI(user);
+                            irParaPreferencia(nome);
                         } else {
-                            // If sign in fails, display a message to the user.
                             Log.w(TAG, "signInWithCredential:failure", task.getException());
-//                            Snackbar.make(findViewById(R.id.main_layout), "Authentication Failed.", Snackbar.LENGTH_SHORT).show();
-//                            updateUI(null);
                         }
-
-                        // ...
                     }
                 });
     }
 
-    // FIM METODOS LOGIN GOOGLE
-
-
     @Override
     public void onStart() {
         super.onStart();
-        // Check if user is signed in (non-null) and update UI accordingly.
         FirebaseUser currentUser = mAuth.getCurrentUser();
         if (currentUser != null) {
-            goToHome(currentUser.getEmail());
+            irParaPreferencia(currentUser.getEmail());
         }
     }
 
-    private void goToHome(String nome) {
+    private void irParaPreferencia(String nome) {
         Intent intent = new Intent(this, PreferenciaActivity.class);
         bundleUsuarioLogado(intent, nome);
         startActivity(intent);
@@ -261,8 +216,7 @@ public class LoginActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
-    public void loginClicado (){
-
+    public void loginClicado () {
 
         final TextInputLayout email = findViewById(R.id.edit_text_email_id);
         TextInputLayout senha = findViewById(R.id.edit_text_password_id);
@@ -277,7 +231,7 @@ public class LoginActivity extends AppCompatActivity {
                         if (task.isSuccessful()) {
                             Log.d(TAG, "createUserWithEmail:success");
                             FirebaseUser user = mAuth.getCurrentUser();
-                            goToHome(emailDigitado);
+                            irParaPreferencia(emailDigitado);
                         } else {
                             Log.w(TAG, "createUserWithEmail:failure", task.getException());
                             Toast.makeText(LoginActivity.this, "Authentication failed.",

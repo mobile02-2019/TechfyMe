@@ -121,12 +121,25 @@
         </LinearLayout>
 
         <com.facebook.login.widget.LoginButton
+            xmlns:facebook="http://schemas.android.com/apk/res-auto"
             android:id="@+id/login_face"
-            android:layout_width="322dp"
-            android:layout_height="59dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
             android:layout_marginTop="30dp"
-            android:layout_marginBottom="30dp" />
+            android:layout_marginBottom="30dp"
+            android:layout_marginLeft="18dp"
+            android:layout_marginStart="18dp"
+            android:layout_marginRight="18dp"
+            android:layout_marginEnd="18dp"
+            android:textSize="16sp"
+            android:textAllCaps="true"
+            android:paddingTop="14dp"
+            android:paddingBottom="14dp"
+            android:paddingLeft="14dp"
+            android:padding="16dp"
+            facebook:com_facebook_login_text="LOGIN COM FACEBOOK"
+            />
 
         <Button
             android:layout_width="match_parent"
@@ -134,8 +147,9 @@
             android:layout_marginRight="16dp"
             android:layout_marginLeft="16dp"
             android:layout_marginTop="16dp"
-            android:padding="16dp"
-            android:text="Login with Google"
+            android:padding="14dp"
+            android:text="LOGIN COM GOOGLE"
+            android:textSize="16sp"
             android:textColor="@color/branco"
             android:backgroundTint="@color/colorGoogle"
             android:drawableLeft="@drawable/ic_google"
