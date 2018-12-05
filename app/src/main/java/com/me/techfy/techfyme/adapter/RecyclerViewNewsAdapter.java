@@ -29,6 +29,8 @@ public class RecyclerViewNewsAdapter extends RecyclerView.Adapter<RecyclerViewNe
         void onExcluirClicado(Noticia noticia);
 
         void onShareClicado(Noticia noticia);
+
+        void onArmazenar(Noticia noticia);
     }
 
     public RecyclerViewNewsAdapter(List<Noticia> noticiaListt, CardPostClicado listener) {
@@ -154,7 +156,7 @@ public class RecyclerViewNewsAdapter extends RecyclerView.Adapter<RecyclerViewNe
             iconeArmazenar.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Snackbar.make(iconeArmazenar, "Notícia armazenada", Snackbar.LENGTH_LONG).show();
+                    listener.onArmazenar(noticia);
                 }
             });
 
