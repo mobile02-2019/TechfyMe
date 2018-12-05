@@ -1,6 +1,7 @@
 package com.me.techfy.techfyme;
 
 
+
 import android.arch.persistence.room.Room;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -11,6 +12,7 @@ import android.view.ViewGroup;
 import com.me.techfy.techfyme.adapter.RecyclerViewNewsAdapter;
 import com.me.techfy.techfyme.database.AppDatabase;
 import com.me.techfy.techfyme.modelo.Noticia;
+import com.me.techfy.techfyme.modelo.NoticiaDb;
 import com.me.techfy.techfyme.service.ServiceListener;
 
 import static com.facebook.FacebookSdk.getApplicationContext;
@@ -35,10 +37,8 @@ public class SalvarNoticiaFragment extends Fragment implements RecyclerViewNewsA
         // Inflate the layout for this fragment
         View view =  inflater.inflate(R.layout.fragment_salvar_noticia, container, false);
 
-
         db = Room.databaseBuilder(getApplicationContext(), AppDatabase.class,
                 "database-techfyme").build();
-
 
         return view;
     }
@@ -61,10 +61,20 @@ public class SalvarNoticiaFragment extends Fragment implements RecyclerViewNewsA
     @Override
     public void onArmazenar(final Noticia noticia) {
 
+        final NoticiaDb noticiaDb = new NoticiaDb();
+        noticiaDb.setDataCriacao(noticia.getDataCriacao());
+        noticiaDb.setDescricao(noticia.getDescricao());
+        noticiaDb.setFonte(noticia.getFonte());
+        noticiaDb.setImagemUrl(noticia.getImagemUrl());
+        noticiaDb.setLinkDaMateria(noticia.getLinkDaMateria());
+        noticiaDb.setTextoCompleto(noticia.getTextoCompleto());
+        noticiaDb.setTitulo(noticia.getTitulo());
+
+
         new Thread(new Runnable() {
             @Override
             public void run() {
-                db.noticiaDao().inserirNoticia(noticia);
+                db.noticiaDao().inserirNoticia(noticiaDb);
             }
         });
 
