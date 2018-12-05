@@ -4,9 +4,7 @@ import android.content.Intent;
 import android.graphics.PorterDuff;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
-
 import android.support.design.widget.BottomNavigationView;
-
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.design.widget.NavigationView;
@@ -17,8 +15,13 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.ImageView;
+import android.widget.TextView;
 
+import com.facebook.login.LoginManager;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.squareup.picasso.Picasso;
 
 public class MenuHomeActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
@@ -29,6 +32,9 @@ public class MenuHomeActivity extends AppCompatActivity
     private static final String TAG = "Home";
     private FirebaseAuth firebaseAuth;
     public static final String VEIO_DA_HOME = "veio_da_home";
+    TextView textNome;
+    TextView textEmail;
+    ImageView imagePerfil;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,6 +44,7 @@ public class MenuHomeActivity extends AppCompatActivity
         menuDeBaixo = findViewById(R.id.navigationView);
 
         firebaseAuth = FirebaseAuth.getInstance();
+
 
         Toolbar toolbar = findViewById(R.id.toolbar);
         toolbar.setLogo(getDrawable(R.drawable.techfyme_logo_action_bar));
@@ -170,6 +177,18 @@ public class MenuHomeActivity extends AppCompatActivity
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.menu_home, menu);
+        textNome = findViewById(R.id.textView_nome_id);
+        textEmail = findViewById(R.id.textView_email_id);
+        imagePerfil = findViewById(R.id.image_profile_id);
+
+        FirebaseUser user = firebaseAuth.getCurrentUser();
+
+        if (user != null) {
+            String teste = user.getEmail();
+            Picasso.get().load(user.getPhotoUrl()).into(imagePerfil);
+            textNome.setText(user.getDisplayName());
+            textEmail.setText(teste);
+        }
         return true;
     }
 
@@ -185,7 +204,6 @@ public class MenuHomeActivity extends AppCompatActivity
     @SuppressWarnings("StatementWithEmptyBody")
     @Override
     public boolean onNavigationItemSelected(MenuItem item) {
-        // Handle navigation view item clicks here.
         int id = item.getItemId();
 
         if (id == R.id.nav_editar) {
@@ -234,6 +252,7 @@ public class MenuHomeActivity extends AppCompatActivity
 
     private void sair() {
         firebaseAuth.getInstance().signOut();
+        LoginManager.getInstance().logOut();
         Intent intent = new Intent(this, LoginActivity.class);
         startActivity(intent);
     }

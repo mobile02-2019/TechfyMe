@@ -6,6 +6,8 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.support.annotation.NonNull;
 
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -16,10 +18,12 @@ import com.me.techfy.techfyme.adapter.PreferenciaDBHelper;
 
 public class PreferenciaDAO {
 
+    private FirebaseAuth auth;
     final FirebaseDatabase database;
     DatabaseReference reference;
     volatile PreferenciaDTO preferenciaDTO;
     PreferenciaDBHelper dbLocalHelper;
+    private String userId;
 
     public PreferenciaDAO () {
         database = FirebaseDatabase.getInstance();
@@ -33,7 +37,11 @@ public class PreferenciaDAO {
     }
 
     public void carregar (String idUsuario, final FirebasePreferenciaDatabaseCall listener) {
-         database.getReference("preferencias/" + idUsuario).limitToFirst(1).addValueEventListener(new ValueEventListener() {
+
+        auth = FirebaseAuth.getInstance();
+        FirebaseUser user = auth.getCurrentUser();
+
+         database.getReference("preferencias/" + auth.getUid()).limitToFirst(1).addValueEventListener(new ValueEventListener() {
              @Override
              public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                  preferenciaDTO = dataSnapshot.getValue(PreferenciaDTO.class);
@@ -84,9 +92,10 @@ public class PreferenciaDAO {
 
     public void apagarDoSQLite(PreferenciaDTO usuarios, Context context) {
         dbLocalHelper = new PreferenciaDBHelper(context);
+        String selection = PreferenciaDBHelper.Preferencia.COLUMN_NAME_USERID + " = ?";
         SQLiteDatabase dbLocal = dbLocalHelper.getWritableDatabase();
-        //String[] selectArgs = { usuarios.getDatabaseKey() };
-        dbLocal.delete(PreferenciaDBHelper.Preferencia.TABLE_NAME, PreferenciaDBHelper.Preferencia.COLUMN_NAME_USERID, null);
+        String[] selectArgs = { usuarios.getDatabaseKey() };
+        dbLocal.delete(PreferenciaDBHelper.Preferencia.TABLE_NAME,selection , selectArgs);
 
     }
 

@@ -13,42 +13,51 @@
     tools:layout_editor_absoluteY="81dp">
 
     <ImageView
-        android:id="@+id/icone_armazenar"
-        android:layout_width="60dp"
-        android:layout_height="60dp"
+        android:id="@+id/image_profile_id"
+        android:layout_width="65dp"
+        android:layout_height="65dp"
         android:layout_gravity="center"
-        android:layout_marginStart="4dp"
-        android:layout_marginBottom="44dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="8dp"
         android:contentDescription="@string/nav_header_desc"
         android:paddingTop="@dimen/nav_header_vertical_spacing"
         android:src="@drawable/tatiface"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.294" />
 
     <TextView
-        android:id="@+id/textView2"
+        android:id="@+id/textView_nome_id"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="2dp"
-        android:layout_marginTop="60dp"
-        android:text="Tatiana MirandaDias"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="40dp"
+        android:layout_marginEnd="8dp"
+        android:text="nome"
         android:textAppearance="@style/TextAppearance.AppCompat.Body1"
         android:textColor="@color/branco"
         android:textSize="18sp"
-        app:layout_constraintStart_toEndOf="@+id/icone_armazenar"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.126"
+        app:layout_constraintStart_toEndOf="@+id/image_profile_id"
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/textView"
+        android:id="@+id/textView_email_id"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="2dp"
-        android:layout_marginTop="2dp"
-        android:text="tati.m.d@hotmail.com"
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="60dp"
+        android:text="e-mail"
         android:textColor="@color/branco"
-        android:textSize="12sp"
-        app:layout_constraintStart_toEndOf="@+id/icone_armazenar"
-        app:layout_constraintTop_toBottomOf="@+id/textView2" />
+        android:textSize="14sp"
+        app:layout_constraintBottom_toTopOf="@+id/view"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.123"
+        app:layout_constraintStart_toEndOf="@+id/image_profile_id" />
 
     <View
         android:id="@+id/view"

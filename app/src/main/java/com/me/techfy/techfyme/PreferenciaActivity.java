@@ -47,7 +47,7 @@ public class PreferenciaActivity extends Activity implements FirebasePreferencia
     private List<String> checkBoxListApoio = new ArrayList<>();
 
     private Preferencia preferencia;
-    private String emailLogado;
+    private String userId;
     private Bundle bundle;
 
     @Override
@@ -70,11 +70,11 @@ public class PreferenciaActivity extends Activity implements FirebasePreferencia
         preferencia = new Preferencia();
         Intent intent = getIntent();
         bundle = intent.getExtras();
-        emailLogado = FirebaseAuth.getInstance().getCurrentUser().getEmail();
+        //userId = FirebaseAuth.getInstance();
 
         String auxiliar = bundle.getString(LoginActivity.CHAVE_EMAIL);
         if(!(auxiliar == null)) {
-            emailLogado = bundle.getString(LoginActivity.CHAVE_EMAIL);
+            userId = bundle.getString(LoginActivity.CHAVE_EMAIL);
         }
 
         btnEnviar.setOnClickListener(new View.OnClickListener() {
@@ -82,7 +82,7 @@ public class PreferenciaActivity extends Activity implements FirebasePreferencia
             public void onClick(View v) {
 
                 PreferenciaDTO preferenciaDTO = new PreferenciaDTO();
-                preferenciaDTO.setUsuarioId(emailLogado);
+                preferenciaDTO.setUsuarioId(userId);
 
                 checkBoxListApoio.clear();
                 for (CheckBox checkBox : checkBoxList) {
@@ -107,19 +107,16 @@ public class PreferenciaActivity extends Activity implements FirebasePreferencia
         PreferenciaDTO _preferenciaDTO =  preferencia.lerDoSQLite(this.getUserIDComoDatabaseKey(), this);
         if (_preferenciaDTO != null && _preferenciaDTO.getChecados() != null && _preferenciaDTO.getChecados().size() == 4) {
             onDataChange(_preferenciaDTO);
-
-            // MOSTRAR PARA PROFESSOR
-            // se origem era o login, vai direto para a home
-
+        }
             if(bundle.getBoolean(LoginActivity.VEIO_DO_LOGIN, false)) {
                 irParaHome();
             }
-        }
+
     }
 
     @NonNull
     private String getUserIDComoDatabaseKey() {
-        return emailLogado.replace(".", "");
+        return userId;
     }
 
     public void irParaHome() {
@@ -198,14 +195,12 @@ public class PreferenciaActivity extends Activity implements FirebasePreferencia
             }
 
             preferencia = new Preferencia();
-            preferenciaDTO.setUsuarioId(emailLogado);
+            preferenciaDTO.setUsuarioId(userId);
 
-            // preferencia.apagarDoSQLite(preferenciaDTO, this);
+            preferencia.apagarDoSQLite(preferenciaDTO, this);
 
-            preferencia.gravarNoSQLite(preferenciaDTO, this);
+            preferencia. gravarNoSQLite(preferenciaDTO, this);
             if (bundle.getBoolean(MenuHomeActivity.VEIO_DA_HOME, true)) {
-                //tadeshi fui o victor!
-                Log.e("Que jovem", "que jovem");
             } else {
                 irParaHome();
             }
