@@ -59,15 +59,14 @@ public class LoginActivity extends AppCompatActivity {
         loginFacebook.setReadPermissions("email","public_profile");
         callbackManager = CallbackManager.Factory.create();
 
+        //LOGIN COM FACEBOOK
         loginFacebook.registerCallback(callbackManager, new FacebookCallback<LoginResult>() {
 
             @Override
             public void onSuccess(LoginResult loginResult) {
                 Log.d(TAG, "facebook:onSuccess:" + loginResult);
                 handleFacebookAccessToken(loginResult.getAccessToken());
-                irParaPreferencia(loginResult.getAccessToken().getUserId());
-                Intent intent = new Intent(loginFacebook.getContext(), PreferenciaActivity.class);
-                startActivity(intent);
+
             }
 
             @Override
@@ -100,6 +99,7 @@ public class LoginActivity extends AppCompatActivity {
             }
         });
 
+        // LOGIN COM GOOGLE
         GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
                 .requestIdToken(getString(R.string.default_web_client_id))
                 .requestEmail()
@@ -134,6 +134,7 @@ public class LoginActivity extends AppCompatActivity {
                                 Log.d(TAG, "signInWithCredential:success");
                                 FirebaseUser user = mAuth.getCurrentUser();
                                 Intent intent = new Intent(getApplicationContext(),PreferenciaActivity.class);
+                                irParaPreferencia(user.getUid());
                                 startActivity(intent);
 
                             } else {
@@ -216,6 +217,7 @@ public class LoginActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
+    //EMAIL E SENHA
     public void loginClicado () {
 
         final TextInputLayout email = findViewById(R.id.edit_text_email_id);

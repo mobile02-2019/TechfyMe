@@ -8,6 +8,7 @@ public class PreferenciaDTO {
     private List<String> checados;
     private String usuarioId;
     private String databaseKey;
+    private String usuarioEmail;
 
     public PreferenciaDTO() {
         checados = new ArrayList<>();
@@ -44,4 +45,7 @@ public class PreferenciaDTO {
         return retorno;
     }
 
+    public void setUsuarioEmail(String email) {
+        usuarioEmail = email;
+    }
 }

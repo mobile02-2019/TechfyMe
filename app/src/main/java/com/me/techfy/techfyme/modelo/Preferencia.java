@@ -14,8 +14,8 @@ public class Preferencia {
         preferenciaDAO = new PreferenciaDAO();
     }
 
-    public void salvar (PreferenciaDTO preferenciaDTO) {
-        preferenciaDAO.salvar(preferenciaDTO);
+    public void salvar (PreferenciaDTO usuarios) {
+        preferenciaDAO.salvar(usuarios);
     }
 
     public void carregar (String usuarioId, FirebasePreferenciaDatabaseCall listener) {

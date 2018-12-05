@@ -70,34 +70,35 @@ public class PreferenciaActivity extends Activity implements FirebasePreferencia
         preferencia = new Preferencia();
         Intent intent = getIntent();
         bundle = intent.getExtras();
-        //userId = FirebaseAuth.getInstance();
-
-        String auxiliar = bundle.getString(LoginActivity.CHAVE_EMAIL);
-        if(!(auxiliar == null)) {
-            userId = bundle.getString(LoginActivity.CHAVE_EMAIL);
-        }
+        userId = FirebaseAuth.getInstance().getUid();
+//
+//        String auxiliar = bundle.getString(LoginActivity.CHAVE_EMAIL);
+//        if(auxiliar != null) {
+//            userId = bundle.getString(LoginActivity.CHAVE_EMAIL);
+//        }
 
         btnEnviar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
-                PreferenciaDTO preferenciaDTO = new PreferenciaDTO();
-                preferenciaDTO.setUsuarioId(userId);
+                PreferenciaDTO usuarios = new PreferenciaDTO();
+                usuarios.setUsuarioId(userId);
+                usuarios.setUsuarioEmail(FirebaseAuth.getInstance().getCurrentUser().getEmail());
 
                 checkBoxListApoio.clear();
                 for (CheckBox checkBox : checkBoxList) {
                     if (checkBox.isChecked()) {
                         checkBoxListApoio.add(checkBox.getText().toString());
-                        preferenciaDTO.adicionar(checkBox.getText().toString());
+                        usuarios.adicionar(checkBox.getText().toString());
                     }
                 }
 
                 if (checkBoxListApoio.size() == 4) {
-                    preferencia.salvar(preferenciaDTO);
+                    preferencia.salvar(usuarios);
                     irParaHome();
                 } else {
                     Toast.makeText(PreferenciaActivity.this, "Selecione 4 favoritos", Toast.LENGTH_LONG).show();
-                    preferenciaDTO.limpar();
+                    usuarios.limpar();
                 }
             }
         });

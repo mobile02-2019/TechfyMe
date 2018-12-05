@@ -184,10 +184,9 @@ public class MenuHomeActivity extends AppCompatActivity
         FirebaseUser user = firebaseAuth.getCurrentUser();
 
         if (user != null) {
-            String teste = user.getEmail();
             Picasso.get().load(user.getPhotoUrl()).into(imagePerfil);
             textNome.setText(user.getDisplayName());
-            textEmail.setText(teste);
+            textEmail.setText(user.getEmail());
         }
         return true;
     }

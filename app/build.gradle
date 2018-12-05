@@ -50,6 +50,8 @@ dependencies {
     //Facebook
     implementation 'com.facebook.android:facebook-share:[4,5)'
     implementation 'com.facebook.android:facebook-android-sdk:[4,5)'
+    implementation 'com.facebook.android:facebook-login:[4,5)'
+
 
     //Firebase
     implementation 'com.google.firebase:firebase-core:16.0.5'
