@@ -77,7 +77,7 @@
             <item
                 android:id="@+id/nav_editar"
                 android:icon="@drawable/icon_editarbranco"
-                android:title="Editar" />
+                android:title="Editar temas favorito " />
             <item
                 android:id="@+id/nav_sair"
                 android:icon="@drawable/icon_sairbranco"
