@@ -6,6 +6,12 @@
 
     <group android:checkableBehavior="single">
 
+
+        <item
+            android:id="@+id/nav_home"
+            android:icon="@drawable/icone_geral"
+            android:title="Conteúdo Geral" />
+
         <item
             android:id="@+id/nav_android"
             android:icon="@drawable/icon_androidbranco"
@@ -54,10 +60,7 @@
             android:icon="@drawable/icon_pcbranco"
             android:title="Sistema Operacional" />
 
-        <item
-            android:id="@+id/nav_home"
-            android:icon="@drawable/homebranca"
-            android:title="Home" />
+
 
 
 

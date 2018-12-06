@@ -201,14 +201,6 @@ public class MenuHomeActivity extends AppCompatActivity
         return true;
     }
 
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        int id = item.getItemId();
-        if (id == R.id.action_settings) {
-            return true;
-        }
-        return super.onOptionsItemSelected(item);
-    }
 
     @SuppressWarnings("StatementWithEmptyBody")
     @Override
@@ -239,7 +231,7 @@ public class MenuHomeActivity extends AppCompatActivity
             setupFragment("games");
         }
         else if (id == R.id.nav_home) {
-            setupFragment("Home");
+            setupFragment("Technology");
         }
         else if (id == R.id.nav_inteligencia_artificial) {
             setupFragment("inteligencia artificial");
@@ -275,6 +267,11 @@ public class MenuHomeActivity extends AppCompatActivity
         bundle = new Bundle();
         bundle.putBoolean(VEIO_DA_HOME, true);
         intent.putExtras(bundle);
+    }
+
+    public void irParaHome() {
+        Intent intent = new Intent(this, MenuHomeActivity.class);
+        startActivity(intent);
     }
 
 }

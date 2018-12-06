@@ -13,10 +13,11 @@
         <!-- Se quiser deixar a linha azul sempre, tirar comentário da linha de baixo-->
         <!--<item name="colorControlNormal">@color/azulSecundarioDark</item>-->
         <item name="colorControlActivated">@color/azulSecundarioDark</item>
+
     </style>
 
     <style name="logoTela" parent="@style/Widget.AppCompat.Light.ActionBar">
-       <item name="background">@color/azulSecundarioDark</item>
+       <item name="background">@color/colorPrimary</item>
         <item name="android:logo">@drawable/techfyme_logo_action_bar</item>
         <item name="displayOptions">useLogo|showHome</item>
     </style>
