@@ -268,6 +268,11 @@ public class NoticiaFragment extends Fragment implements RecyclerViewNewsAdapter
     }
 
     @Override
+    public void onArmazenar(Noticia noticia) {
+
+    }
+
+    @Override
     public void onSuccess(Object object) {
         ResultadoAPI resultadoAPI = (ResultadoAPI) object;
         adapter.setNewsList(resultadoAPI.getNoticiaList());

@@ -13,8 +13,8 @@ public class NoticiaDb {
     @PrimaryKey
     private Integer id;
 
-    @ColumnInfo(name = "dataDbNoticia")
-    private Date dataDbNoticia;
+//    @ColumnInfo(name = "dataDbNoticia")
+//    private Date dataDbNoticia;
 
     @ColumnInfo(name = "tituloNoticia")
     private String titulo;
@@ -45,13 +45,13 @@ public class NoticiaDb {
         this.id = id;
     }
 
-    public Date getDataDbNoticia() {
-        return dataDbNoticia;
-    }
-
-    public void setDataDbNoticia(Date dataDbNoticia) {
-        this.dataDbNoticia = dataDbNoticia;
-    }
+//    public Date getDataDbNoticia() {
+//        return dataDbNoticia;
+//    }
+//
+//    public void setDataDbNoticia(Date dataDbNoticia) {
+//        this.dataDbNoticia = dataDbNoticia;
+//    }
 
     public String getTitulo() {
         return titulo;

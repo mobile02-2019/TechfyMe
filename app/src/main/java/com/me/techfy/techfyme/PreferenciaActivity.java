@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.util.Log;
+import android.view.Menu;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
@@ -19,7 +20,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class PreferenciaActivity extends Activity implements FirebasePreferenciaDatabaseCall {
-
     public static final String CK_ANDROID = "Android";
     public static final String CK_APPLE = "Apple";
     public static final String CK_BLOCKCHAIN = "Blockchain";
@@ -81,6 +81,8 @@ public class PreferenciaActivity extends Activity implements FirebasePreferencia
             @Override
             public void onClick(View v) {
 
+//                MenuHomeActivity.reSetupMenu();
+
                 PreferenciaDTO usuarios = new PreferenciaDTO();
                 usuarios.setUsuarioId(userId);
                 usuarios.setUsuarioEmail(FirebaseAuth.getInstance().getCurrentUser().getEmail());
@@ -109,9 +111,9 @@ public class PreferenciaActivity extends Activity implements FirebasePreferencia
         if (_preferenciaDTO != null && _preferenciaDTO.getChecados() != null && _preferenciaDTO.getChecados().size() == 4) {
             onDataChange(_preferenciaDTO);
         }
-            if(bundle.getBoolean(LoginActivity.VEIO_DO_LOGIN, false)) {
-                irParaHome();
-            }
+//        if(veioDaLogin()) {
+//            irParaHome();
+//        }
 
     }
 
@@ -201,12 +203,20 @@ public class PreferenciaActivity extends Activity implements FirebasePreferencia
             preferencia.apagarDoSQLite(preferenciaDTO, this);
 
             preferencia. gravarNoSQLite(preferenciaDTO, this);
-            if (bundle.getBoolean(MenuHomeActivity.VEIO_DA_HOME, true)) {
-            } else {
-                irParaHome();
-            }
 
+            if (veioDaLogin()){
+                btnEnviar.callOnClick();
+            }
+//            irParaHome();
         }
+    }
+
+    public boolean veioDaHome(){
+        return bundle.getBoolean(MenuHomeActivity.VEIO_DA_HOME, false);
+    }
+
+    public boolean veioDaLogin(){
+        return bundle.getBoolean(LoginActivity.VEIO_DO_LOGIN, false);
     }
 
     @Override

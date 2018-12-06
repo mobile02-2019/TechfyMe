@@ -25,8 +25,8 @@ public interface NoticiaDao {
     @Query("SELECT * FROM updateNoticia WHERE TituloNoticia LIKE (:titulo)")
     public NoticiaDb getNoticiaByTitulo(String titulo);
 
-    @Query("SELECT * FROM updateNoticia ORDER BY dataDbNoticia DESC")
-    LiveData<List<NoticiaDb>> todasNoticias();
+//    @Query("SELECT * FROM updateNoticia ORDER BY dataDbNoticia DESC")
+//    LiveData<List<NoticiaDb>> todasNoticias();
 
 
 }

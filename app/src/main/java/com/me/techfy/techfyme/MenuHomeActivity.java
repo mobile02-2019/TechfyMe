@@ -17,6 +17,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.facebook.login.LoginManager;
 import com.google.firebase.auth.FirebaseAuth;
@@ -26,7 +27,7 @@ import com.squareup.picasso.Picasso;
 public class MenuHomeActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
     Bundle bundle;
-    BottomNavigationView menuDeBaixo;
+    private BottomNavigationView menuDeBaixo;
     int contador = 0;
     public static final String CHAVE_KEY = "chave_key";
     private static final String TAG = "Home";
@@ -61,6 +62,10 @@ public class MenuHomeActivity extends AppCompatActivity
 
         Intent intent = getIntent();
         bundle = intent.getExtras();
+
+//        menuDeBaixo.getMenu().clear();
+
+//        reSetupMenu();
 
         if (bundle.getBoolean(PreferenciaActivity.CK_ANDROID)) {
             setupMenuItem("Android", R.drawable.android_icon);
@@ -133,11 +138,16 @@ public class MenuHomeActivity extends AppCompatActivity
         transaction.commit();
     }
 
+//    public void reSetupMenu(){
+//        menuDeBaixo.getMenu().clear();
+//    }
+
     private void setupMenuItem(String title, int icon) {
         if (contador == 2) {
             setupHome();
             contador++;
         }
+
 
         final MenuItem menuItem = menuDeBaixo.getMenu().add(0, contador, 0, title);
         menuItem.setIcon(icon);
