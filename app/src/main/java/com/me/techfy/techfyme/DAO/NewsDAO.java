@@ -72,6 +72,7 @@ public class NewsDAO {
             }
             @Override
             public void onFailure(Call<ResultadoAPI> call, Throwable t) {
+
                 listener.onError(t);
             }
         });

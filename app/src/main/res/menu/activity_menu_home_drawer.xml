@@ -4,13 +4,15 @@
     tools:showIn="navigation_view">
 
 
-    <group android:checkableBehavior="single">
+    <group android:checkableBehavior="single"
+        >
 
 
         <item
             android:id="@+id/nav_home"
             android:icon="@drawable/icone_geral"
-            android:title="Conteúdo Geral" />
+            android:title="Conteúdo Geral"
+            />
 
         <item
             android:id="@+id/nav_android"
@@ -65,14 +67,12 @@
 
 
     </group>
-    <View
-        android:layout_width="fill_parent"
-        android:layout_height="1dp"
-        android:layout_marginBottom="8dp"
-        android:background="@color/verdePrimario"/>
 
     <item
-        android:title="Opções">
+
+        android:title="Opções"
+        android:id="@+id/title_opcoes_id"
+        >
         <menu>
             <item
                 android:id="@+id/nav_editar"

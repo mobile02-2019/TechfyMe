@@ -148,7 +148,8 @@ public class NoticiaFragment extends Fragment implements RecyclerViewNewsAdapter
 
     @Override
     public void onError(Throwable throwable) {
-        Snackbar.make(recyclerView,throwable.getMessage(),Snackbar.LENGTH_INDEFINITE).show();
+        Snackbar.make(recyclerView,"Ops! Algo deu errado, verifique sua conexão e tente novamente.",Snackbar.LENGTH_LONG).show();
+//        Snackbar.make(recyclerView,throwable.getMessage(),Snackbar.LENGTH_INDEFINITE).show();
         progressBar.setVisibility(View.GONE);
     }
 }
