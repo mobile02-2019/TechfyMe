@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.graphics.PorterDuff;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
+import android.provider.MediaStore;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
@@ -36,6 +37,7 @@ public class MenuHomeActivity extends AppCompatActivity
     TextView textNome;
     TextView textEmail;
     ImageView imagePerfil;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -268,5 +270,6 @@ public class MenuHomeActivity extends AppCompatActivity
         bundle.putBoolean(VEIO_DA_HOME, true);
         intent.putExtras(bundle);
     }
+
 
 }

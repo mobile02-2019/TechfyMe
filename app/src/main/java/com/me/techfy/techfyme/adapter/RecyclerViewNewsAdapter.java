@@ -76,7 +76,6 @@ public class RecyclerViewNewsAdapter extends RecyclerView.Adapter<RecyclerViewNe
         private ImageView imagemDaNoticia;
         private ImageView iconeLixeira;
         private ImageView iconeCompartilhar;
-        private ImageView iconeComentar;
         private ImageView iconeArmazenar;
 
 
@@ -106,7 +105,6 @@ public class RecyclerViewNewsAdapter extends RecyclerView.Adapter<RecyclerViewNe
             imagemDaNoticia = itemView.findViewById(R.id.imagem_celulares_id);
             iconeLixeira = itemView.findViewById(R.id.icone_lixeira);
             iconeCompartilhar = itemView.findViewById(R.id.iconeCompartilhar);
-            iconeComentar = itemView.findViewById(R.id.icone_comentar);
             iconeArmazenar = itemView.findViewById(R.id.icone_armazenar);
 
 
@@ -143,13 +141,6 @@ public class RecyclerViewNewsAdapter extends RecyclerView.Adapter<RecyclerViewNe
                     listener.onShareClicado(noticia);
 
 
-                }
-            });
-
-            iconeComentar.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    Snackbar.make(iconeComentar, "Ir para área de comentários", Snackbar.LENGTH_LONG).show();
                 }
             });
 
