@@ -76,7 +76,6 @@ public class RecyclerViewNewsAdapter extends RecyclerView.Adapter<RecyclerViewNe
         private ImageView imagemDaNoticia;
         private ImageView iconeLixeira;
         private ImageView iconeCompartilhar;
-        private ImageView iconeComentar;
         private ImageView iconeArmazenar;
 
 
@@ -144,7 +143,6 @@ public class RecyclerViewNewsAdapter extends RecyclerView.Adapter<RecyclerViewNe
 
                 }
             });
-
 
 
             iconeArmazenar.setOnClickListener(new View.OnClickListener() {

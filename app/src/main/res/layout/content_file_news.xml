@@ -18,7 +18,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:padding="4dp"
+    android:padding="8dp"
     >
 
     <ImageView
@@ -59,14 +59,24 @@
         app:layout_constraintTop_toBottomOf="@+id/text_titulo_id" />
 
     <ImageView
-        android:id="@+id/iconeCompartilhar"
+        android:id="@+id/icone_comentar"
         android:layout_width="20dp"
         android:layout_height="20dp"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
-        android:layout_marginBottom="16dp"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/icone_armazenar"
+        app:layout_constraintTop_toBottomOf="@+id/text_descricao_id"
+        app:srcCompat="@drawable/chat_icone" />
+
+    <ImageView
+        android:id="@+id/iconeCompartilhar"
+        android:layout_width="20dp"
+        android:layout_height="20dp"
+        android:layout_marginBottom="16dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginTop="8dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/icone_comentar"
         app:layout_constraintTop_toBottomOf="@+id/text_descricao_id"
         app:srcCompat="@drawable/ic_menu_share" />
 

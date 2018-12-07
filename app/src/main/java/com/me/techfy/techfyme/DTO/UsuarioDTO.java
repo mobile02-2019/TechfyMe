@@ -1,5 +1,7 @@
 package com.me.techfy.techfyme.DTO;
 
+import android.widget.ImageView;
+
 import java.util.Date;
 
 public class UsuarioDTO {
@@ -9,8 +11,20 @@ public class UsuarioDTO {
     private String email;
     private Date dataNascimento;
     private Integer genero;
+    private ImageView imagemUsuario;
+
+
+
   //  private List<Integer> checados;
 
+
+    public ImageView getImagemUsuario() {
+        return imagemUsuario;
+    }
+
+    public void setImagemUsuario(ImageView imagemUsuario) {
+        this.imagemUsuario = imagemUsuario;
+    }
 
     private PreferenciaDTO preferencias;
 

@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.graphics.PorterDuff;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
+import android.provider.MediaStore;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
@@ -89,13 +90,13 @@ public class MenuHomeActivity extends AppCompatActivity
             setupMenuItem("Games", R.drawable.gamepreta);
         }
         if (bundle.getBoolean(PreferenciaActivity.CK_INTELIGENCIAARTIFICIAL)) {
-            setupMenuItem("I.A", R.drawable.iapreto);
+            setupMenuItem("Inteligência Artificial", R.drawable.iapreto);
         }
         if (bundle.getBoolean(PreferenciaActivity.CK_MOBILE)) {
             setupMenuItem("Mobile", R.drawable.mobile_icons);
         }
         if (bundle.getBoolean(PreferenciaActivity.CK_SISTEMAOPERACIONAL)) {
-            setupMenuItem("S.O", R.drawable.icon_pc_preto);
+            setupMenuItem("Sistema Operacional", R.drawable.icon_pc_preto);
         }
 
         bundleMenuHome(intent);
@@ -231,7 +232,7 @@ public class MenuHomeActivity extends AppCompatActivity
             setupFragment("games");
         }
         else if (id == R.id.nav_home) {
-            setupFragment("Technology");
+            setupFragment("Home");
         }
         else if (id == R.id.nav_inteligencia_artificial) {
             setupFragment("inteligencia artificial");
@@ -267,11 +268,6 @@ public class MenuHomeActivity extends AppCompatActivity
         bundle = new Bundle();
         bundle.putBoolean(VEIO_DA_HOME, true);
         intent.putExtras(bundle);
-    }
-
-    public void irParaHome() {
-        Intent intent = new Intent(this, MenuHomeActivity.class);
-        startActivity(intent);
     }
 
 }

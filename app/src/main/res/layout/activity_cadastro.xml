@@ -12,16 +12,25 @@
         android:layout_height="match_parent"
         android:orientation="vertical">
 
+
     <View
         android:layout_width="match_parent"
         android:layout_height="4dp"
         android:background="@color/verdePrimario">
     </View>
 
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:layout_width="110dp"
+            android:layout_height="110dp"
+            android:layout_gravity="center"
+            android:layout_marginTop="16dp"
+            android:id="@+id/image_user_cadastro"
+            android:src="@drawable/user_icon_cadastrolapis" />
+
     <android.support.design.widget.TextInputLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="36dp"
+        android:layout_marginTop="24dp"
         android:theme="@style/AppTheme2">
 
         <android.support.design.widget.TextInputEditText
