@@ -38,6 +38,7 @@ public class MenuHomeActivity extends AppCompatActivity
     TextView textEmail;
     ImageView imagePerfil;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -269,5 +270,6 @@ public class MenuHomeActivity extends AppCompatActivity
         bundle.putBoolean(VEIO_DA_HOME, true);
         intent.putExtras(bundle);
     }
+
 
 }

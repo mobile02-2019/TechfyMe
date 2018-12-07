@@ -144,7 +144,6 @@ public class RecyclerViewNewsAdapter extends RecyclerView.Adapter<RecyclerViewNe
                 }
             });
 
-
             iconeArmazenar.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
