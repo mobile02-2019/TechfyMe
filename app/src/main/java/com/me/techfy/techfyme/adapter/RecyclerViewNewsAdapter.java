@@ -151,6 +151,13 @@ public class RecyclerViewNewsAdapter extends RecyclerView.Adapter<RecyclerViewNe
                 }
             });
 
+            titulo.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    listener.onCardClicado(noticia);
+                }
+            });
+
 
         }
     }

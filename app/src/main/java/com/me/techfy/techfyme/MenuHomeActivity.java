@@ -48,7 +48,6 @@ public class MenuHomeActivity extends AppCompatActivity
 
         firebaseAuth = FirebaseAuth.getInstance();
 
-
         Toolbar toolbar = findViewById(R.id.toolbar);
         toolbar.setLogo(getDrawable(R.drawable.techfyme_logo_action_bar));
         setSupportActionBar(toolbar);
@@ -194,6 +193,7 @@ public class MenuHomeActivity extends AppCompatActivity
         imagePerfil = findViewById(R.id.image_profile_id);
 
         FirebaseUser user = firebaseAuth.getCurrentUser();
+
 
         if (user != null) {
             Picasso.get().load(user.getPhotoUrl()).into(imagePerfil);

@@ -85,7 +85,9 @@ public class NoticiaFragment extends Fragment implements RecyclerViewNewsAdapter
 
     @Override
     public void onCardClicado(Noticia noticia) {
-        String dataNoticia = noticia.getDataCriacao().toString();
+        String dataNoticia = noticia.getDataCriacao();
+
+        progressBar.setVisibility(View.VISIBLE);
 
         Bundle bundle = new Bundle();
         bundle.putString(NOTICIA_TITULO, noticia.getTitulo());
@@ -99,6 +101,7 @@ public class NoticiaFragment extends Fragment implements RecyclerViewNewsAdapter
         intent.putExtras(bundle);
         startActivity(intent);
 
+        progressBar.setVisibility(View.INVISIBLE);
 
     }
 
