@@ -110,6 +110,7 @@ public class NoticiaFragment extends Fragment implements RecyclerViewNewsAdapter
         new MaterialDialog.Builder(getContext())
                 .title("Atenção")
                 .content("Deseja realmente excluir a notícia?")
+                .positiveColor(R.style.AppThemeDialog)
                 .positiveText("ok")
                 .onPositive(new MaterialDialog.SingleButtonCallback() {
                     @Override
@@ -117,11 +118,9 @@ public class NoticiaFragment extends Fragment implements RecyclerViewNewsAdapter
                         ((RecyclerViewNewsAdapter) recyclerView.getAdapter()).deletarNoticia(noticia);
                     }
                 })
+                .negativeColor(R.style.AppThemeDialog)
                 .negativeText("Cancel")
                 .show();
-
-
-
 
     }
 

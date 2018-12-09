@@ -36,4 +36,9 @@
         <item name="android:statusBarColor">@android:color/transparent</item>
     </style>
 
+    <style name="AppThemeDialog" parent="Theme.AppCompat">
+        <item name="colorAccent">@color/azulSecundarioDark</item>
+        <item name="android:dialogTheme">@color/azulSecundarioDark</item>
+    </style>
+
 </resources>
