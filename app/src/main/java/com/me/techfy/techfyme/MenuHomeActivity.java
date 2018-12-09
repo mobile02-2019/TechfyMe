@@ -91,13 +91,13 @@ public class MenuHomeActivity extends AppCompatActivity
             setupMenuItem("Games", R.drawable.gamepreta);
         }
         if (bundle.getBoolean(PreferenciaActivity.CK_INTELIGENCIAARTIFICIAL)) {
-            setupMenuItem("Inteligência Artificial", R.drawable.iapreto);
+            setupMenuItem("I.A", R.drawable.iapreto);
         }
         if (bundle.getBoolean(PreferenciaActivity.CK_MOBILE)) {
             setupMenuItem("Mobile", R.drawable.mobile_icons);
         }
         if (bundle.getBoolean(PreferenciaActivity.CK_SISTEMAOPERACIONAL)) {
-            setupMenuItem("Sistema Operacional", R.drawable.icon_pc_preto);
+            setupMenuItem("S.O", R.drawable.icon_pc_preto);
         }
 
         bundleMenuHome(intent);
@@ -233,7 +233,7 @@ public class MenuHomeActivity extends AppCompatActivity
             setupFragment("games");
         }
         else if (id == R.id.nav_home) {
-            setupFragment("Home");
+            setupFragment("Technology");
         }
         else if (id == R.id.nav_inteligencia_artificial) {
             setupFragment("inteligencia artificial");
