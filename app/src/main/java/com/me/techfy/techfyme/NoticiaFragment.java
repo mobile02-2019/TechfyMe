@@ -11,16 +11,23 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.ProgressBar;
+import android.widget.Toast;
 
 import com.afollestad.materialdialogs.DialogAction;
 import com.afollestad.materialdialogs.MaterialDialog;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 import com.me.techfy.techfyme.DAO.NewsDAO;
 import com.me.techfy.techfyme.adapter.RecyclerViewNewsAdapter;
+import com.me.techfy.techfyme.database.AppDatabase;
 import com.me.techfy.techfyme.modelo.Noticia;
 import com.me.techfy.techfyme.modelo.ResultadoAPI;
 import com.me.techfy.techfyme.service.ServiceListener;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import static com.me.techfy.techfyme.MenuHomeActivity.CHAVE_KEY;
@@ -42,6 +49,15 @@ public class NoticiaFragment extends Fragment implements RecyclerViewNewsAdapter
     private RecyclerViewNewsAdapter adapter;
     private String query;
     private ProgressBar progressBar;
+    private AppDatabase db;
+    private List<Noticia> noticiaList = new ArrayList<>();
+    private DatabaseReference mFirebaseDatabase;
+    private FirebaseDatabase mFirebaseInstance;
+    private FirebaseAuth firebaseAuth;
+    private ImageView botaoSalvar;
+    private Noticia noticia;
+
+
 
     public NoticiaFragment() {
         // Required empty public constructor
@@ -60,6 +76,7 @@ public class NoticiaFragment extends Fragment implements RecyclerViewNewsAdapter
         progressBar = view.findViewById(R.id.progressbar_id);
         progressBar.setVisibility(View.VISIBLE);
 
+        firebaseAuth = FirebaseAuth.getInstance();
 
         Bundle bundle = getArguments();
             query = bundle.getString(CHAVE_KEY);
@@ -139,7 +156,18 @@ public class NoticiaFragment extends Fragment implements RecyclerViewNewsAdapter
     @Override
     public void onArmazenar(Noticia noticia) {
 
-    }
+            noticiaList.add(noticia);
+
+            mFirebaseInstance = FirebaseDatabase.getInstance();
+
+            mFirebaseDatabase = mFirebaseInstance.getReference("users/" + firebaseAuth.getUid());
+
+            mFirebaseDatabase.push().setValue(noticia);
+
+        Toast.makeText(getContext(), "Salvooouu porra", Toast.LENGTH_SHORT).show();
+
+        }
+
 
     @Override
     public void onSuccess(Object object) {

@@ -4,16 +4,33 @@ package com.me.techfy.techfyme;
 
 import android.arch.persistence.room.Room;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.GenericTypeIndicator;
+import com.google.firebase.database.ValueEventListener;
+import com.me.techfy.techfyme.DAO.NewsDAO;
 import com.me.techfy.techfyme.adapter.RecyclerViewNewsAdapter;
+import com.me.techfy.techfyme.adapter.RecyclerViewNoticiasSalvasAdapter;
 import com.me.techfy.techfyme.database.AppDatabase;
 import com.me.techfy.techfyme.modelo.Noticia;
 import com.me.techfy.techfyme.modelo.NoticiaDb;
 import com.me.techfy.techfyme.service.ServiceListener;
+
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.List;
+import java.util.Map;
 
 import static com.facebook.FacebookSdk.getApplicationContext;
 
@@ -25,6 +42,14 @@ public class SalvarNoticiaFragment extends Fragment implements RecyclerViewNewsA
 
 
     private AppDatabase db;
+    private RecyclerView recyclerView;
+    private RecyclerViewNoticiasSalvasAdapter adapter;
+    private DatabaseReference mFirebaseDatabase;
+    private FirebaseDatabase mFirebaseInstance;
+    private FirebaseAuth firebaseAuth;
+    private FirebaseDatabase database;
+    private List<Noticia> noticiaList = new ArrayList<>();
+    private DatabaseReference mref;
 
     public SalvarNoticiaFragment() {
         // Required empty public constructor
@@ -35,12 +60,31 @@ public class SalvarNoticiaFragment extends Fragment implements RecyclerViewNewsA
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View view =  inflater.inflate(R.layout.fragment_salvar_noticia, container, false);
+        View view = inflater.inflate(R.layout.fragment_salvar_noticia, container, false);
 
         db = Room.databaseBuilder(getApplicationContext(), AppDatabase.class,
                 "database-techfyme").build();
 
+        firebaseAuth = FirebaseAuth.getInstance();
+
+        setupRecyclerView(view);
+
         return view;
+
+
+    }
+
+
+    private void setupRecyclerView(View view) {
+        recyclerView = view.findViewById(R.id.save_recyclerview_news_id);
+
+        adapter = new RecyclerViewNoticiasSalvasAdapter(noticiaList);
+
+        recyclerView.setAdapter(adapter);
+
+        recyclerView.setLayoutManager(new LinearLayoutManager(view.getContext()));
+        mostrarFavoritos();
+
     }
 
     @Override
@@ -59,24 +103,43 @@ public class SalvarNoticiaFragment extends Fragment implements RecyclerViewNewsA
     }
 
     @Override
-    public void onArmazenar(final Noticia noticia) {
+    public void onArmazenar(Noticia noticia) {
 
-        final NoticiaDb noticiaDb = new NoticiaDb();
-        noticiaDb.setDataCriacao(noticia.getDataCriacao());
-        noticiaDb.setDescricao(noticia.getDescricao());
-        noticiaDb.setFonte(noticia.getFonte());
-        noticiaDb.setImagemUrl(noticia.getImagemUrl());
-        noticiaDb.setLinkDaMateria(noticia.getLinkDaMateria());
-        noticiaDb.setTextoCompleto(noticia.getTextoCompleto());
-        noticiaDb.setTitulo(noticia.getTitulo());
+    }
+
+    private void mostrarFavoritos() {
 
 
-        new Thread(new Runnable() {
+        database = FirebaseDatabase.getInstance();
+
+        mref = database.getReference("users/" + FirebaseAuth.getInstance().getUid());
+
+        mref.addValueEventListener(new ValueEventListener() {
             @Override
-            public void run() {
-                db.noticiaDao().inserirNoticia(noticiaDb);
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+
+                GenericTypeIndicator<Map<String, Noticia>> genericTypeIndicator = new GenericTypeIndicator<Map<String, Noticia>>() {
+                };
+                if (dataSnapshot.getValue(genericTypeIndicator) != null) {
+                    Collection<Noticia> noticiaCollection = dataSnapshot.getValue(genericTypeIndicator).values();
+
+                    List<Noticia> noticiaFavoritaList = new ArrayList<>(noticiaCollection);
+
+                    adapter.setMateriasFavoritasList(noticiaFavoritaList);
+
+
+                }
+
+
             }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+
         });
+
 
     }
 

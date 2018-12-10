@@ -25,7 +25,8 @@ public class Noticia implements Serializable {
     private String dataCriacao;
     @SerializedName("url")
     private String linkDaMateria;
-
+    @SerializedName("id")
+    private String idMateria;
 
 
     public String getTextoCompleto() {
@@ -34,6 +35,14 @@ public class Noticia implements Serializable {
 
     public void setTextoCompleto(String textoCompleto) {
         this.textoCompleto = textoCompleto;
+    }
+
+    public String getIdMateria() {
+        return idMateria;
+    }
+
+    public void setIdMateria(String idMateria) {
+        this.idMateria = idMateria;
     }
 
     public String getFonte() {

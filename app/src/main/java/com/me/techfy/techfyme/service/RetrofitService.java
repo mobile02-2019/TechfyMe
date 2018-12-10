@@ -8,7 +8,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class RetrofitService {
 
-    private static final String BASE_URL = "https://newsapi.org/";
+    public static final String BASE_URL = "https://newsapi.org/";
     public static final String API_KEY = "&apiKey=a5627144665f41f7ab0fc979eea130f4";
     private static Retrofit retrofit;
 

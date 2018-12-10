@@ -97,6 +97,7 @@ public class MenuHomeActivity extends AppCompatActivity
         Intent intent = getIntent();
         bundle = intent.getExtras();
 
+
 //        menuDeBaixo.getMenu().clear();
 
 //        reSetupMenu();
@@ -331,6 +332,9 @@ public class MenuHomeActivity extends AppCompatActivity
         else if (id == R.id.nav_sair) {
             sair();
         }
+        else if (id == R.id.nav_materias_salvas){
+            setupFragmentNoticiasSalvas();
+        }
 
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
@@ -353,6 +357,16 @@ public class MenuHomeActivity extends AppCompatActivity
         bundle = new Bundle();
         bundle.putBoolean(VEIO_DA_HOME, true);
         intent.putExtras(bundle);
+    }
+
+    private void setupFragmentNoticiasSalvas() {
+
+        FragmentManager manager = getSupportFragmentManager();
+        FragmentTransaction transaction = manager.beginTransaction();
+        SalvarNoticiaFragment noticiaSalvaFragment = new SalvarNoticiaFragment();
+        noticiaSalvaFragment.setArguments(bundle);
+        transaction.replace(R.id.framelayout_home_id, noticiaSalvaFragment);
+        transaction.commit();
     }
 
 
