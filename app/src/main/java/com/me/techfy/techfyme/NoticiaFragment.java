@@ -164,7 +164,7 @@ public class NoticiaFragment extends Fragment implements RecyclerViewNewsAdapter
 
             mFirebaseDatabase.push().setValue(noticia);
 
-        Toast.makeText(getContext(), "Salvooouu porra", Toast.LENGTH_SHORT).show();
+        Toast.makeText(getContext(), "Noticia favoritada!", Toast.LENGTH_SHORT).show();
 
         }
 
