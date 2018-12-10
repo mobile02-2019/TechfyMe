@@ -2,6 +2,8 @@ package com.me.techfy.techfyme;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.preference.Preference;
+import android.preference.PreferenceActivity;
 import android.support.annotation.NonNull;
 import android.support.design.widget.TextInputLayout;
 import android.support.v7.app.AppCompatActivity;
@@ -29,6 +31,15 @@ import com.google.firebase.auth.FacebookAuthProvider;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.GoogleAuthProvider;
+import com.google.firebase.auth.UserInfo;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+import com.me.techfy.techfyme.modelo.Preferencia;
+
+import java.util.ArrayList;
 
 public class LoginActivity extends AppCompatActivity {
 
@@ -45,6 +56,10 @@ public class LoginActivity extends AppCompatActivity {
     Bundle bundle;
     private LoginButton loginFacebook;
     private GoogleSignInClient mGoogleSignInClient;
+
+    private FirebaseDatabase database;
+    private DatabaseReference myRef;
+    private ArrayList<String> listaNoticiaChecada = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -192,9 +207,55 @@ public class LoginActivity extends AppCompatActivity {
     @Override
     public void onStart() {
         super.onStart();
-        FirebaseUser currentUser = mAuth.getCurrentUser();
+        /*FirebaseUser currentUser = mAuth.getCurrentUser();
         if (currentUser != null) {
             irParaPreferencia(currentUser.getEmail());
+        }*/
+        if(mAuth.getCurrentUser()!=null){
+            FirebaseUser user = mAuth.getCurrentUser();
+            try {
+                //referencia database firebase
+                database = FirebaseDatabase.getInstance();
+                myRef = database.getReference("preferences/" + mAuth.getUid());
+                //tenta buscar preferencia
+                myRef.addValueEventListener(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                        //tenta atribuir preferencia do firebase
+                        Preferencia preference = dataSnapshot.getValue(Preferencia.class);
+                        Log.d(TAG, "Value is: " + preference);
+
+                        //se existir preferencias, criar array de string com os generos e enviar para Home
+                        if (preference != null) {
+                            //abre um intent
+                            //Cria bundle
+                            Bundle bundleParaHome = new Bundle();
+                            //adiciona na lista string de generos
+                            listaNoticiaChecada.add(preference.getPreferenciaSelecionada1());
+                            listaNoticiaChecada.add(preference.getPreferenciaSelecionada2());
+                            listaNoticiaChecada.add(preference.getPreferenciaSelecionada3());
+                            listaNoticiaChecada.add(preference.getPreferenciaSelecionada4());
+                            //adiciona lista de string no bundle
+                            bundleParaHome.putStringArrayList("checados" , listaNoticiaChecada);
+                            Intent intent = new Intent(getApplicationContext(),MenuHomeActivity.class);
+                            //adiciona bundle no intent
+                            intent.putExtras(bundleParaHome);
+                            startActivity(intent);
+                        }else{//se nao existir preferencia, vai para tela de preferencias para serem criadas
+                            //abre a outra Activity
+                            Intent intent = new Intent(getApplicationContext(),PreferenceActivity.class);
+                            startActivity(intent);
+                        }
+                    }
+
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                    }
+                });
+            } catch (Exception ex) {
+
+            }
         }
     }
 
