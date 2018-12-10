@@ -5,6 +5,7 @@ import android.content.res.ColorStateList;
 import android.graphics.Bitmap;
 import android.graphics.drawable.BitmapDrawable;
 import android.provider.MediaStore;
+import android.service.autofill.UserData;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BaseTransientBottomBar;
 import android.support.design.widget.Snackbar;
@@ -44,7 +45,7 @@ public class CadastroActivity extends AppCompatActivity {
     private Button botaoCadastro;
     private static final String TAG = "Cadastro";
     private FirebaseAuth mAuth;
-    private String emBranco ="";
+    private String emBranco = "";
     private TextInputEditText nome;
     private TextInputEditText sobrenome;
     private TextInputEditText email;
@@ -53,8 +54,9 @@ public class CadastroActivity extends AppCompatActivity {
     private List<TextInputEditText> listaCampo = new ArrayList<>();
     private static final int REQUEST_IMAGE_CAPTURE = 1;
     private CircleImageView imagemUser;
-    private FirebaseStorage storage = FirebaseStorage.getInstance();
-    private StorageReference storageRef = storage.getReference();
+    private FirebaseStorage storage;
+    private StorageReference storageRef;
+    private EditText emailCadastrado;
 
     public boolean verificarCampos(List<TextInputEditText> listaCampo) {
         boolean retorno = true;
@@ -71,16 +73,16 @@ public class CadastroActivity extends AppCompatActivity {
         return retorno;
     }
 
-    public boolean senhasIguais(final TextInputEditText senha,final TextInputEditText confirmaSenha){
+    public boolean senhasIguais(final TextInputEditText senha, final TextInputEditText confirmaSenha) {
         boolean retorno;
-        if(senha.getEditableText().toString().equals(confirmaSenha.getEditableText().toString())){
+        if (senha.getEditableText().toString().equals(confirmaSenha.getEditableText().toString())) {
             retorno = true;
 
-        }else{
+        } else {
             retorno = false;
             senha.setTextColor(getResources().getColor(R.color.colorErro));
             confirmaSenha.setTextColor(getResources().getColor(R.color.colorErro));
-            Snackbar.make(botaoCadastro,"Senhas diferentes", BaseTransientBottomBar.LENGTH_LONG).setAction("OK entendi", new View.OnClickListener() {
+            Snackbar.make(botaoCadastro, "Senhas diferentes", BaseTransientBottomBar.LENGTH_LONG).setAction("OK entendi", new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     senha.setTextColor(getResources().getColor(R.color.colorPrimary));
@@ -103,42 +105,35 @@ public class CadastroActivity extends AppCompatActivity {
 
         mAuth = FirebaseAuth.getInstance();
 
-        String [] GENEROS = getResources().getStringArray(R.array.lista_de_generos);
+        storage = FirebaseStorage.getInstance();
+
+        storageRef = storage.getReference();
+
+        String[] GENEROS = getResources().getStringArray(R.array.lista_de_generos);
 
         ArrayAdapter<String> adapterSpinner = new ArrayAdapter<String>(this,
-                android.R.layout.simple_dropdown_item_1line,GENEROS);
+                android.R.layout.simple_dropdown_item_1line, GENEROS);
         MaterialBetterSpinner textView = findViewById(R.id.spinner_id);
         textView.setAdapter(adapterSpinner);
 
-        nome =findViewById(R.id.nome_usuario_id);
-        sobrenome =findViewById(R.id.sobrenome_usuario_id);
-        email =findViewById(R.id.email_usuario_id);
-        senha =findViewById(R.id.senha_usuario_id);
-        confirmaSenha =findViewById(R.id.confirmacao_senha_usuario_id);
+        nome = findViewById(R.id.nome_usuario_id);
+        sobrenome = findViewById(R.id.sobrenome_usuario_id);
+        email = findViewById(R.id.email_usuario_id);
+        senha = findViewById(R.id.senha_usuario_id);
+        confirmaSenha = findViewById(R.id.confirmacao_senha_usuario_id);
         botaoCadastro = findViewById(R.id.button_cadastro_id);
-        botaoCadastro.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                cadastrarUsuario();
-            }
-        });
+        botaoCadastro.setOnClickListener(v -> cadastrarUsuario());
 
         imagemUser = findViewById(R.id.image_user_cadastro);
-        imagemUser.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                getCameraImage();
-
-            }
-        });
+        imagemUser.setOnClickListener(v -> getCameraImage());
 
 
-        }
+    }
 
     private void cadastrarUsuario() {
 
         final EditText nomeCadastrado = findViewById(R.id.nome_usuario_id);
-        EditText emailCadastrado = findViewById(R.id.email_usuario_id);
+        emailCadastrado = findViewById(R.id.email_usuario_id);
         EditText senhaCadastrado = findViewById(R.id.senha_usuario_id);
 
         mAuth.createUserWithEmailAndPassword(emailCadastrado.getText().toString(), senhaCadastrado.getText().toString())
@@ -163,6 +158,8 @@ public class CadastroActivity extends AppCompatActivity {
                                             }
                                         }
                                     });
+                            salvarImagemNoFirebase();
+
                         } else {
                             Log.w(TAG, "createUserWithEmail:failure", task.getException());
                             Toast.makeText(CadastroActivity.this, "Authentication failed.",
@@ -172,12 +169,16 @@ public class CadastroActivity extends AppCompatActivity {
                     }
                 });
 
+
     }
 
     private void goToPreferencia() {
         Intent intent = new Intent(this, PreferenciaActivity.class);
         startActivity(intent);
     }
+
+
+
 
     private void getCameraImage() {
         Intent takePictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
@@ -193,30 +194,34 @@ public class CadastroActivity extends AppCompatActivity {
             Bitmap imageBitmap = (Bitmap) extras.get("data");
             imagemUser.setImageBitmap(imageBitmap);
 
-            // Get the data from an ImageView as bytes
-            imagemUser.setDrawingCacheEnabled(true);
-            imagemUser.buildDrawingCache();
-            Bitmap bitmap = ((BitmapDrawable) imagemUser.getDrawable()).getBitmap();
-            ByteArrayOutputStream baos = new ByteArrayOutputStream();
-            bitmap.compress(Bitmap.CompressFormat.JPEG, 100, baos);
-            byte[] dataByte = baos.toByteArray();
-
-            UploadTask uploadTask = storageRef.child(UsuarioDTO.class.getName()).putBytes(dataByte);
-            uploadTask.addOnFailureListener(new OnFailureListener() {
-                @Override
-                public void onFailure(@NonNull Exception exception) {
-                    // Handle unsuccessful uploads
-                }
-            }).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
-                @Override
-                public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
-                    // taskSnapshot.getMetadata() contains file metadata such as size, content-type, etc.
-                    // ...
-                }
-            });
         }
     }
 
+    public void salvarImagemNoFirebase() {
+        // Get the data from an ImageView as bytes
+        imagemUser.setDrawingCacheEnabled(true);
+        imagemUser.buildDrawingCache();
+        Bitmap bitmap = ((BitmapDrawable) imagemUser.getDrawable()).getBitmap();
+        ByteArrayOutputStream baos = new ByteArrayOutputStream();
+        bitmap.compress(Bitmap.CompressFormat.JPEG, 100, baos);
+        byte[] dataByte = baos.toByteArray();
+
+        UploadTask uploadTask = storageRef.child(mAuth.getUid()).putBytes(dataByte);
+        uploadTask.addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception exception) {
+                Toast.makeText(CadastroActivity.this, "Falhou ao salvar foto!" + exception.getMessage(), Toast.LENGTH_LONG).show();
+                Log.e("autenticacao", exception.getMessage());
+            }
+        }).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+            @Override
+            public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+                Toast.makeText(CadastroActivity.this, "Foto armazenada!", Toast.LENGTH_SHORT).show();
+                // taskSnapshot.getMetadata() contains file metadata such as size, content-type, etc.
+                // ...
+            }
+        });
+    }
 
 }
 

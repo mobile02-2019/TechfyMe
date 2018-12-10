@@ -17,6 +17,10 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
+    compileOptions {
+        sourceCompatibility = '1.8'
+        targetCompatibility = '1.8'
+    }
 }
 
 dependencies {
@@ -72,6 +76,10 @@ dependencies {
 
     //Crashlytics
     implementation 'com.crashlytics.sdk.android:crashlytics:2.9.7'
+    implementation 'com.google.firebase:firebase-storage:16.0.4'
+
+    //CloudMessaging
+    implementation 'com.google.firebase:firebase-messaging:17.3.4'
 
 }
 apply plugin: 'com.google.gms.google-services'
