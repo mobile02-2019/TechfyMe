@@ -13,6 +13,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ProgressBar;
+import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
@@ -121,11 +122,17 @@ public class SalvarNoticiaFragment extends Fragment implements RecyclerViewNewsA
 
     @Override
     public void onExcluirClicado(Noticia noticia) {
+        Toast.makeText(getContext(), "Notícia excluída", Toast.LENGTH_SHORT).show();
 
     }
 
     @Override
     public void onShareClicado(Noticia noticia) {
+        Intent share = new Intent(Intent.ACTION_SEND);
+        share.setType("text/plain");
+        share.putExtra(Intent.EXTRA_SUBJECT, noticia.getTitulo());
+        share.putExtra(Intent.EXTRA_TEXT, noticia.getLinkDaMateria());
+        startActivity(Intent.createChooser(share, noticia.getDataCriacao()));
 
     }
 
@@ -136,7 +143,7 @@ public class SalvarNoticiaFragment extends Fragment implements RecyclerViewNewsA
 
     private void mostrarFavoritos() {
 
-
+        progressBar.setVisibility(View.GONE);
         database = FirebaseDatabase.getInstance();
 
         mref = database.getReference("users/" + FirebaseAuth.getInstance().getUid());
