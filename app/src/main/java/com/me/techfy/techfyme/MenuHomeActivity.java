@@ -3,8 +3,10 @@ package com.me.techfy.techfyme;
 import android.content.Intent;
 import android.graphics.PorterDuff;
 import android.graphics.drawable.Drawable;
+import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
+import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
@@ -21,9 +23,15 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.facebook.login.LoginManager;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
 import com.squareup.picasso.Picasso;
+
+import de.hdodenhof.circleimageview.CircleImageView;
 
 public class MenuHomeActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
@@ -36,7 +44,10 @@ public class MenuHomeActivity extends AppCompatActivity
     public static final String VEIO_DA_HOME = "veio_da_home";
     TextView textNome;
     TextView textEmail;
-    ImageView imagePerfil;
+    private CircleImageView imagePerfil;
+    private StorageReference storageRef;
+    private FirebaseStorage storage;
+
 
 
     @Override
@@ -47,6 +58,9 @@ public class MenuHomeActivity extends AppCompatActivity
         menuDeBaixo = findViewById(R.id.navigationView);
 
         firebaseAuth = FirebaseAuth.getInstance();
+
+        storage = FirebaseStorage.getInstance();
+        storageRef = storage.getReference();
 
 
         Toolbar toolbar = findViewById(R.id.toolbar);
@@ -196,7 +210,25 @@ public class MenuHomeActivity extends AppCompatActivity
         FirebaseUser user = firebaseAuth.getCurrentUser();
 
         if (user != null) {
-            Picasso.get().load(user.getPhotoUrl()).into(imagePerfil);
+
+            if (user.getPhotoUrl() == null) {
+
+                storageRef.child(firebaseAuth.getUid()).getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+                    @Override
+                    public void onSuccess(Uri uri) {
+                        // Got the download URL for 'users/me/profile.png'
+                        Picasso.get().load(uri).into(imagePerfil);
+
+                    }
+                }).addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception exception) {
+                        // Handle any errors
+                    }
+                });
+            } else {
+                Picasso.get().load(user.getPhotoUrl()).into(imagePerfil);
+            }
             textNome.setText(user.getDisplayName());
             textEmail.setText(user.getEmail());
         }

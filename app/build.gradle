@@ -17,6 +17,10 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
+    compileOptions {
+        sourceCompatibility = '1.8'
+        targetCompatibility = '1.8'
+    }
 }
 
 dependencies {
@@ -57,22 +61,22 @@ dependencies {
     implementation 'com.facebook.android:facebook-android-sdk:[4,5)'
     implementation 'com.facebook.android:facebook-login:[4,5)'
 
-
     //Firebase
     implementation 'com.google.firebase:firebase-core:16.0.5'
     implementation 'com.google.firebase:firebase-auth:16.0.5'
     implementation 'com.google.firebase:firebase-database:16.0.4'
     implementation 'com.google.android.gms:play-services-auth:16.0.1'
 
-
     // db room
     implementation "android.arch.persistence.room:runtime:1.1.1"
     annotationProcessor "android.arch.persistence.room:compiler:1.1.1"
 
-
     //storage
-    implementation 'com.google.firebase:firebase-storage:16.0.5'
-    
+    implementation 'com.google.firebase:firebase-storage:16.0.4'
+
+    //CloudMessaging
+    implementation 'com.google.firebase:firebase-messaging:17.3.4'
+
 
 }
 apply plugin: 'com.google.gms.google-services'
