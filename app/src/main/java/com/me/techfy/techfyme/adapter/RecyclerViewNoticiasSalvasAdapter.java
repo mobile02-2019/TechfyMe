@@ -39,7 +39,8 @@ public class RecyclerViewNoticiasSalvasAdapter extends RecyclerView.Adapter<Recy
 
 
 
-    public RecyclerViewNoticiasSalvasAdapter(List<Noticia> noticiaList) {
+
+    public RecyclerViewNoticiasSalvasAdapter(List<Noticia> noticiaList, RecyclerViewNewsAdapter.CardPostClicado listener) {
         this.noticiaList = noticiaList;
         this.listener = listener;
     }
@@ -53,7 +54,7 @@ public class RecyclerViewNoticiasSalvasAdapter extends RecyclerView.Adapter<Recy
     @Override
     public RecyclerViewNoticiasSalvasAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
 
-       View view = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.content_file_news, viewGroup, false);
+       View view = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.content_item_news_save, viewGroup, false);
 
         return new ViewHolder(view);
     }
@@ -99,7 +100,7 @@ public class RecyclerViewNoticiasSalvasAdapter extends RecyclerView.Adapter<Recy
              imagemDaNoticia = itemView.findViewById(R.id.imagem_celulares_id);
              iconeLixeira = itemView.findViewById(R.id.icone_lixeira);
              iconeCompartilhar = itemView.findViewById(R.id.iconeCompartilhar);
-             botaoSalvar = itemView.findViewById(R.id.imageview_salvar_noticia_id);
+
 
 
          }
@@ -109,14 +110,14 @@ public class RecyclerViewNoticiasSalvasAdapter extends RecyclerView.Adapter<Recy
              titulo.setText(noticia.getTitulo());
              descricao.setText(noticia.getDescricao());
              data.setText(noticia.getDataCriacao());
-             Picasso.get().load(RetrofitService.BASE_URL+ noticia.getImagemUrl()).into(imagemDaNoticia);
-             botaoSalvar.setOnClickListener(new View.OnClickListener() {
+             Picasso.get().load(noticia.getImagemUrl()).into(imagemDaNoticia);
+             imagemDaNoticia.setOnClickListener(new View.OnClickListener() {
                  @Override
                  public void onClick(View v) {
-                     onArmazenar(noticia);
+                     listener.onCardClicado(noticia);
+
                  }
              });
-
          }
      }
 }

@@ -3,6 +3,7 @@ package com.me.techfy.techfyme;
 
 
 import android.arch.persistence.room.Room;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
@@ -11,6 +12,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ProgressBar;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
@@ -40,7 +42,12 @@ import static com.facebook.FacebookSdk.getApplicationContext;
  */
 public class SalvarNoticiaFragment extends Fragment implements RecyclerViewNewsAdapter.CardPostClicado, ServiceListener {
 
-
+    public static final String NOTICIA_TITULO = "noticia_titulo";
+    public static final String NOTICIA_FONTE = "noticia_fonte";
+    public static final String NOTICIA_DESCRICAO = "noticia_descricao";
+    public static final String NOTICIA_DATA = "Noticia_data";
+    public static final String NOTICIA_TEXTO = "noticia_texto";
+    public static final String NOTICIA_URL = "noticia_url";
     private AppDatabase db;
     private RecyclerView recyclerView;
     private RecyclerViewNoticiasSalvasAdapter adapter;
@@ -50,6 +57,7 @@ public class SalvarNoticiaFragment extends Fragment implements RecyclerViewNewsA
     private FirebaseDatabase database;
     private List<Noticia> noticiaList = new ArrayList<>();
     private DatabaseReference mref;
+    private ProgressBar progressBar;
 
     public SalvarNoticiaFragment() {
         // Required empty public constructor
@@ -66,6 +74,8 @@ public class SalvarNoticiaFragment extends Fragment implements RecyclerViewNewsA
                 "database-techfyme").build();
 
         firebaseAuth = FirebaseAuth.getInstance();
+        progressBar = view.findViewById(R.id.progressbar_id);
+        progressBar.setVisibility(View.VISIBLE);
 
         setupRecyclerView(view);
 
@@ -78,7 +88,7 @@ public class SalvarNoticiaFragment extends Fragment implements RecyclerViewNewsA
     private void setupRecyclerView(View view) {
         recyclerView = view.findViewById(R.id.save_recyclerview_news_id);
 
-        adapter = new RecyclerViewNoticiasSalvasAdapter(noticiaList);
+        adapter = new RecyclerViewNoticiasSalvasAdapter(noticiaList, this);
 
         recyclerView.setAdapter(adapter);
 
@@ -89,8 +99,25 @@ public class SalvarNoticiaFragment extends Fragment implements RecyclerViewNewsA
 
     @Override
     public void onCardClicado(Noticia noticia) {
+            String dataNoticia = noticia.getDataCriacao();
+            progressBar.setVisibility(View.VISIBLE);
 
-    }
+            Bundle bundle = new Bundle();
+            bundle.putString(NOTICIA_TITULO, noticia.getTitulo());
+            bundle.putString(NOTICIA_FONTE, noticia.getFonte());
+            bundle.putString(NOTICIA_DATA, dataNoticia);
+            bundle.putString(NOTICIA_TEXTO, noticia.getTextoCompleto());
+            bundle.putString(NOTICIA_URL,noticia.getLinkDaMateria());
+
+
+            Intent intent = new Intent(getContext(), NoticiaDetalheActivity.class);
+            intent.putExtras(bundle);
+            startActivity(intent);
+
+            progressBar.setVisibility(View.INVISIBLE);
+
+        }
+
 
     @Override
     public void onExcluirClicado(Noticia noticia) {
@@ -145,11 +172,12 @@ public class SalvarNoticiaFragment extends Fragment implements RecyclerViewNewsA
 
     @Override
     public void onSuccess(Object object) {
+        progressBar.setVisibility(View.GONE);
 
     }
 
     @Override
     public void onError(Throwable throwable) {
-
+        progressBar.setVisibility(View.GONE);
     }
 }
