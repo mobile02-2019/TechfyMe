@@ -76,7 +76,7 @@
         android:layout_marginEnd="12dp"
         android:layout_marginBottom="12dp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/icone_armazenar"
+        app:layout_constraintEnd_toStartOf="@+id/imageview_salvar_noticia_id"
         app:layout_constraintTop_toBottomOf="@+id/text_descricao_id"
         app:srcCompat="@drawable/ic_menu_share" />
 
@@ -105,7 +105,7 @@
         app:layout_constraintTop_toBottomOf="@+id/imagem_celulares_id" />
 
     <ImageView
-        android:id="@+id/icone_armazenar"
+        android:id="@+id/imageview_salvar_noticia_id"
         android:layout_width="20dp"
         android:layout_height="20dp"
         android:layout_marginTop="8dp"

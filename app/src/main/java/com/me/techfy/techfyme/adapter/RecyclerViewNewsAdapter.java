@@ -1,7 +1,6 @@
 package com.me.techfy.techfyme.adapter;
 
 import android.support.annotation.NonNull;
-import android.support.design.widget.Snackbar;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -105,7 +104,7 @@ public class RecyclerViewNewsAdapter extends RecyclerView.Adapter<RecyclerViewNe
             imagemDaNoticia = itemView.findViewById(R.id.imagem_celulares_id);
             iconeLixeira = itemView.findViewById(R.id.icone_lixeira);
             iconeCompartilhar = itemView.findViewById(R.id.iconeCompartilhar);
-            iconeArmazenar = itemView.findViewById(R.id.icone_armazenar);
+            iconeArmazenar = itemView.findViewById(R.id.imageview_salvar_noticia_id);
 
 
         }

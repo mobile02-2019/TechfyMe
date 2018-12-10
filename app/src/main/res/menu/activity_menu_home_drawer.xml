@@ -61,7 +61,11 @@
             android:id="@+id/nav_sistemaoperacional"
             android:icon="@drawable/icon_pcbranco"
             android:title="Sistema Operacional" />
-
+        <item
+            android:id="@+id/nav_materias_salvas"
+            android:icon="@drawable/tatiface"
+            android:title="Matérias Salvas"
+/>
 
 
 
