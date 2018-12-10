@@ -1,6 +1,10 @@
 package com.me.techfy.techfyme;
 
+import android.accounts.Account;
+import android.accounts.AccountManager;
+import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.graphics.PorterDuff;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
@@ -16,20 +20,34 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.facebook.AccessToken;
+import com.facebook.GraphRequest;
+import com.facebook.GraphResponse;
 import com.facebook.login.LoginManager;
+import com.google.android.gms.auth.api.signin.GoogleSignIn;
+import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
+import com.google.android.gms.auth.api.signin.GoogleSignInResult;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.auth.UserInfo;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.squareup.picasso.Picasso;
+
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.util.LinkedList;
+import java.util.List;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
@@ -209,7 +227,6 @@ public class MenuHomeActivity extends AppCompatActivity
 
         FirebaseUser user = firebaseAuth.getCurrentUser();
 
-
         if (user != null) {
 
             if (user.getPhotoUrl() == null) {
@@ -230,11 +247,45 @@ public class MenuHomeActivity extends AppCompatActivity
             } else {
                 Picasso.get().load(user.getPhotoUrl()).into(imagePerfil);
             }
-            textNome.setText(user.getDisplayName());
-            textEmail.setText(user.getEmail());
-        }
+
+            for (UserInfo userInfo : firebaseAuth.getCurrentUser().getProviderData()) {
+                if (userInfo.getProviderId().equals("facebook.com")) {
+                    Toast.makeText(getApplicationContext(), "Usuário logado pelo Facebook", Toast.LENGTH_LONG).show();
+                    GraphRequest request = GraphRequest.newMeRequest(
+                            AccessToken.getCurrentAccessToken(),
+                            new GraphRequest.GraphJSONObjectCallback() {
+                                @Override
+                                public void onCompleted(JSONObject object, GraphResponse response) {
+                                    Log.v("LoginActivity", response.toString());
+
+                                    // Application code
+                                    String email = null;
+                                    try {
+                                        email = object.getString("email");
+                                    } catch (JSONException e) {
+                                        e.printStackTrace();
+                                    }
+                                    textEmail.setText(email);
+                                }
+                            });
+                    Bundle parameters = new Bundle();
+                    parameters.putString("fields", "email");
+                    request.setParameters(parameters);
+                    request.executeAsync();
+                } else if (userInfo.getProviderId().equals("google.com")){
+                    Toast.makeText(getApplicationContext(), "Usuário logado pelo Gmail", Toast.LENGTH_LONG).show();
+                    GoogleSignInAccount acct = GoogleSignIn.getLastSignedInAccount(getApplicationContext());
+                    String personEmail = acct.getEmail();
+                    textEmail.setText(personEmail);
+                }else{
+                    textEmail.setText(user.getEmail());
+                    textNome.setText(user.getDisplayName());
+                    }
+                }
+
+            }
         return true;
-    }
+        }
 
 
     @SuppressWarnings("StatementWithEmptyBody")
