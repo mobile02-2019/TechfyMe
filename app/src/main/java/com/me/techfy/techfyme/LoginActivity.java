@@ -103,7 +103,12 @@ public class LoginActivity extends AppCompatActivity {
         botaoLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                loginClicado();
+                if (email.getEditText().getText().toString().equals("") || senha.getEditText().getText().toString().equals("")){
+                    Toast.makeText(getApplicationContext(), "Para acesso ao aplicativo, " +
+                            "escolha uma das formas de login", Toast.LENGTH_LONG).show();
+                }else {
+                    loginClicado();
+                }
             }
         });
 
@@ -213,49 +218,53 @@ public class LoginActivity extends AppCompatActivity {
         }*/
         if(mAuth.getCurrentUser()!=null){
             FirebaseUser user = mAuth.getCurrentUser();
-            try {
-                //referencia database firebase
-                database = FirebaseDatabase.getInstance();
-                myRef = database.getReference("preferences/" + mAuth.getUid());
-                //tenta buscar preferencia
-                myRef.addValueEventListener(new ValueEventListener() {
-                    @Override
-                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                        //tenta atribuir preferencia do firebase
-                        Preferencia preference = dataSnapshot.getValue(Preferencia.class);
-                        Log.d(TAG, "Value is: " + preference);
+            verificarDadosPreferencia();
+        }
+    }
 
-                        //se existir preferencias, criar array de string com os generos e enviar para Home
-                        if (preference != null) {
-                            //abre um intent
-                            //Cria bundle
-                            Bundle bundleParaHome = new Bundle();
-                            //adiciona na lista string de generos
-                            listaNoticiaChecada.add(preference.getPreferenciaSelecionada1());
-                            listaNoticiaChecada.add(preference.getPreferenciaSelecionada2());
-                            listaNoticiaChecada.add(preference.getPreferenciaSelecionada3());
-                            listaNoticiaChecada.add(preference.getPreferenciaSelecionada4());
-                            //adiciona lista de string no bundle
-                            bundleParaHome.putStringArrayList("checados" , listaNoticiaChecada);
-                            Intent intent = new Intent(getApplicationContext(),MenuHomeActivity.class);
-                            //adiciona bundle no intent
-                            intent.putExtras(bundleParaHome);
-                            startActivity(intent);
-                        }else{//se nao existir preferencia, vai para tela de preferencias para serem criadas
-                            //abre a outra Activity
-                            Intent intent = new Intent(getApplicationContext(),PreferenciaActivity.class);
-                            startActivity(intent);
-                        }
+    private void verificarDadosPreferencia() {
+        try {
+            //referencia database firebase
+            database = FirebaseDatabase.getInstance();
+            myRef = database.getReference("preferences/" + mAuth.getUid());
+            //tenta buscar preferencia
+            myRef.addValueEventListener(new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                    //tenta atribuir preferencia do firebase
+                    Preferencia preference = dataSnapshot.getValue(Preferencia.class);
+                    Log.d(TAG, "Value is: " + preference);
+
+                    //se existir preferencias, criar array de string com os generos e enviar para Home
+                    if (preference != null) {
+                        //abre um intent
+                        //Cria bundle
+                        Bundle bundleParaHome = new Bundle();
+                        //adiciona na lista string de generos
+                        listaNoticiaChecada.add(preference.getPreferenciaSelecionada1());
+                        listaNoticiaChecada.add(preference.getPreferenciaSelecionada2());
+                        listaNoticiaChecada.add(preference.getPreferenciaSelecionada3());
+                        listaNoticiaChecada.add(preference.getPreferenciaSelecionada4());
+                        //adiciona lista de string no bundle
+                        bundleParaHome.putStringArrayList("checados" , listaNoticiaChecada);
+                        Intent intent = new Intent(getApplicationContext(),MenuHomeActivity.class);
+                        //adiciona bundle no intent
+                        intent.putExtras(bundleParaHome);
+                        startActivity(intent);
+                    }else{//se nao existir preferencia, vai para tela de preferencias para serem criadas
+                        //abre a outra Activity
+                        Intent intent = new Intent(getApplicationContext(),PreferenciaActivity.class);
+                        startActivity(intent);
                     }
+                }
 
-                    @Override
-                    public void onCancelled(@NonNull DatabaseError databaseError) {
+                @Override
+                public void onCancelled(@NonNull DatabaseError databaseError) {
 
-                    }
-                });
-            } catch (Exception ex) {
+                }
+            });
+        } catch (Exception ex) {
 
-            }
         }
     }
 
