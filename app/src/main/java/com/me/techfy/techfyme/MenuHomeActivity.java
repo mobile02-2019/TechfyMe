@@ -251,7 +251,7 @@ public class MenuHomeActivity extends AppCompatActivity
 
             for (UserInfo userInfo : firebaseAuth.getCurrentUser().getProviderData()) {
                 if (userInfo.getProviderId().equals("facebook.com")) {
-                    Toast.makeText(getApplicationContext(), "Usuário logado pelo Facebook", Toast.LENGTH_LONG).show();
+//                    Toast.makeText(getApplicationContext(), "Usuário logado pelo Facebook", Toast.LENGTH_LONG).show();
                     GraphRequest request = GraphRequest.newMeRequest(
                             AccessToken.getCurrentAccessToken(),
                             new GraphRequest.GraphJSONObjectCallback() {
@@ -274,7 +274,7 @@ public class MenuHomeActivity extends AppCompatActivity
                     request.setParameters(parameters);
                     request.executeAsync();
                 } else if (userInfo.getProviderId().equals("google.com")){
-                    Toast.makeText(getApplicationContext(), "Usuário logado pelo Gmail", Toast.LENGTH_LONG).show();
+//                    Toast.makeText(getApplicationContext(), "Usuário logado pelo Gmail", Toast.LENGTH_LONG).show();
                     GoogleSignInAccount acct = GoogleSignIn.getLastSignedInAccount(getApplicationContext());
                     String personEmail = acct.getEmail();
                     textEmail.setText(personEmail);
