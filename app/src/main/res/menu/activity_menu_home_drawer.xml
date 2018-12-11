@@ -63,7 +63,7 @@
             android:title="Sistema Operacional" />
         <item
             android:id="@+id/nav_materias_salvas"
-            android:icon="@drawable/tatiface"
+            android:icon="@drawable/icone_salvar_noticia"
             android:title="Matérias Salvas"
 />
 
