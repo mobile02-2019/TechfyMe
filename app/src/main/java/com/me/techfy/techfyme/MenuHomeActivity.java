@@ -251,33 +251,9 @@ public class MenuHomeActivity extends AppCompatActivity
 
             for (UserInfo userInfo : firebaseAuth.getCurrentUser().getProviderData()) {
                 if (userInfo.getProviderId().equals("facebook.com")) {
-                    Toast.makeText(getApplicationContext(), "Usuário logado pelo Facebook", Toast.LENGTH_LONG).show();
-                    GraphRequest request = GraphRequest.newMeRequest(
-                            AccessToken.getCurrentAccessToken(),
-                            new GraphRequest.GraphJSONObjectCallback() {
-                                @Override
-                                public void onCompleted(JSONObject object, GraphResponse response) {
-                                    Log.v("LoginActivity", response.toString());
-
-                                    // Application code
-                                    String email = null;
-                                    try {
-                                        email = object.getString("email");
-                                    } catch (JSONException e) {
-                                        e.printStackTrace();
-                                    }
-                                    textEmail.setText(email);
-                                }
-                            });
-                    Bundle parameters = new Bundle();
-                    parameters.putString("fields", "email");
-                    request.setParameters(parameters);
-                    request.executeAsync();
+                    definirDadosFacebook();
                 } else if (userInfo.getProviderId().equals("google.com")){
-                    Toast.makeText(getApplicationContext(), "Usuário logado pelo Gmail", Toast.LENGTH_LONG).show();
-                    GoogleSignInAccount acct = GoogleSignIn.getLastSignedInAccount(getApplicationContext());
-                    String personEmail = acct.getEmail();
-                    textEmail.setText(personEmail);
+                    definirDadosGoogle();
                 }else{
                     textEmail.setText(user.getEmail());
                     textNome.setText(user.getDisplayName());
@@ -287,6 +263,38 @@ public class MenuHomeActivity extends AppCompatActivity
             }
         return true;
         }
+
+    private void definirDadosGoogle() {
+        //Toast.makeText(getApplicationContext(), "Usuário logado pelo Gmail", Toast.LENGTH_LONG).show();
+        GoogleSignInAccount acct = GoogleSignIn.getLastSignedInAccount(getApplicationContext());
+        String personEmail = acct.getEmail();
+        textEmail.setText(personEmail);
+    }
+
+    private void definirDadosFacebook() {
+        //Toast.makeText(getApplicationContext(), "Usuário logado pelo Facebook", Toast.LENGTH_LONG).show();
+        GraphRequest request = GraphRequest.newMeRequest(
+                AccessToken.getCurrentAccessToken(),
+                new GraphRequest.GraphJSONObjectCallback() {
+                    @Override
+                    public void onCompleted(JSONObject object, GraphResponse response) {
+                        Log.v("LoginActivity", response.toString());
+
+                        // Application code
+                        String email = null;
+                        try {
+                            email = object.getString("email");
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                        textEmail.setText(email);
+                    }
+                });
+        Bundle parameters = new Bundle();
+        parameters.putString("fields", "email");
+        request.setParameters(parameters);
+        request.executeAsync();
+    }
 
 
     @SuppressWarnings("StatementWithEmptyBody")
