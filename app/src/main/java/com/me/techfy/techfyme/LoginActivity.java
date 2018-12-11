@@ -243,7 +243,7 @@ public class LoginActivity extends AppCompatActivity {
                             startActivity(intent);
                         }else{//se nao existir preferencia, vai para tela de preferencias para serem criadas
                             //abre a outra Activity
-                            Intent intent = new Intent(getApplicationContext(),PreferenceActivity.class);
+                            Intent intent = new Intent(getApplicationContext(),PreferenciaActivity.class);
                             startActivity(intent);
                         }
                     }
