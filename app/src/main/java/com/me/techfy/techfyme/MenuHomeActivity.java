@@ -259,7 +259,6 @@ public class MenuHomeActivity extends AppCompatActivity
                     textNome.setText(user.getDisplayName());
                     }
                 }
-
             }
         return true;
         }

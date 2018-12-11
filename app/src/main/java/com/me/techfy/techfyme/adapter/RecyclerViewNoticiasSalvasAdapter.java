@@ -118,6 +118,22 @@ public class RecyclerViewNoticiasSalvasAdapter extends RecyclerView.Adapter<Recy
 
                  }
              });
+
+             iconeLixeira.setOnClickListener(new View.OnClickListener() {
+                 @Override
+                 public void onClick(View v) {
+                     listener.onExcluirClicado(noticia);
+                 }
+             });
+
+             iconeCompartilhar.setOnClickListener(new View.OnClickListener() {
+                 @Override
+                 public void onClick(View v) {
+                     listener.onShareClicado(noticia);
+
+
+                 }
+             });
          }
      }
 }
