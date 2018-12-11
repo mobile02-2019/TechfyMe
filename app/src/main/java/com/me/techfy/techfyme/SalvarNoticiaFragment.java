@@ -78,6 +78,7 @@ public class SalvarNoticiaFragment extends Fragment implements RecyclerViewNewsA
         progressBar = view.findViewById(R.id.progressbar_id);
         progressBar.setVisibility(View.VISIBLE);
 
+
         setupRecyclerView(view);
 
         return view;
@@ -122,7 +123,10 @@ public class SalvarNoticiaFragment extends Fragment implements RecyclerViewNewsA
 
     @Override
     public void onExcluirClicado(Noticia noticia) {
-        Toast.makeText(getContext(), "Notícia excluída", Toast.LENGTH_SHORT).show();
+        noticiaList.remove(noticia);
+        mref = database.getReference("users/" + FirebaseAuth.getInstance().getUid() + "/" + noticia.getDataBaseKey());
+        mref.removeValue();
+        Toast.makeText(getContext(), "Notícia excluída com sucesso", Toast.LENGTH_SHORT).show();
 
     }
 

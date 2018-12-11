@@ -162,7 +162,9 @@ public class NoticiaFragment extends Fragment implements RecyclerViewNewsAdapter
 
             mFirebaseDatabase = mFirebaseInstance.getReference("users/" + firebaseAuth.getUid());
 
-            mFirebaseDatabase.push().setValue(noticia);
+        DatabaseReference push = mFirebaseDatabase.push();
+        noticia.setDataBaseKey(push.getKey());
+        push.setValue(noticia);
 
         Toast.makeText(getContext(), "Noticia favoritada!", Toast.LENGTH_SHORT).show();
 

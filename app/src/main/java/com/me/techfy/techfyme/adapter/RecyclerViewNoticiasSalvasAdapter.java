@@ -36,6 +36,7 @@ public class RecyclerViewNoticiasSalvasAdapter extends RecyclerView.Adapter<Recy
     private FirebaseDatabase mFirebaseInstance;
     private FirebaseAuth firebaseAuth;
     private List<Noticia> noticiaList = new ArrayList<>();
+    private FirebaseAuth mAuth;
 
 
 
@@ -64,7 +65,6 @@ public class RecyclerViewNoticiasSalvasAdapter extends RecyclerView.Adapter<Recy
         Noticia noticia = noticiaList.get(i);
         viewHolder.bind(noticia);
 
-
     }
 
 
@@ -72,6 +72,18 @@ public class RecyclerViewNoticiasSalvasAdapter extends RecyclerView.Adapter<Recy
     public int getItemCount() {
         return noticiaList.size();
     }
+
+    public void deletarNoticiaFavorita (Noticia noticia){
+        mAuth = FirebaseAuth.getInstance();
+        noticiaList.remove(noticia);
+        DatabaseReference myRef = FirebaseDatabase.getInstance().getReference("users/"+mAuth.getUid());
+
+        myRef.child(noticia.getDataBaseKey()).removeValue();
+
+        notifyDataSetChanged();
+    }
+
+
 
 
     public void onArmazenar(Noticia noticia) {
@@ -122,7 +134,7 @@ public class RecyclerViewNoticiasSalvasAdapter extends RecyclerView.Adapter<Recy
              iconeLixeira.setOnClickListener(new View.OnClickListener() {
                  @Override
                  public void onClick(View v) {
-                     listener.onExcluirClicado(noticia);
+                     deletarNoticiaFavorita(noticia);
                  }
              });
 

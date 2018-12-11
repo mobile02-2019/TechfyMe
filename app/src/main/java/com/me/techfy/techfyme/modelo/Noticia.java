@@ -27,7 +27,16 @@ public class Noticia implements Serializable {
     private String linkDaMateria;
     @SerializedName("id")
     private String idMateria;
+    private String dataBaseKey;
 
+
+    public String getDataBaseKey() {
+        return dataBaseKey;
+    }
+
+    public void setDataBaseKey(String dataBaseKey) {
+        this.dataBaseKey = dataBaseKey;
+    }
 
     public String getTextoCompleto() {
         return textoCompleto;

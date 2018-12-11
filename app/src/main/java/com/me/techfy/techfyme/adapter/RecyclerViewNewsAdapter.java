@@ -27,6 +27,8 @@ public class RecyclerViewNewsAdapter extends RecyclerView.Adapter<RecyclerViewNe
 
         void onExcluirClicado(Noticia noticia);
 
+
+
         void onShareClicado(Noticia noticia);
 
         void onArmazenar(Noticia noticia);
