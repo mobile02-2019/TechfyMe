@@ -117,7 +117,6 @@
 
             </View>
 
-
         </LinearLayout>
 
         <com.facebook.login.widget.LoginButton
@@ -128,14 +127,14 @@
             android:layout_gravity="center_horizontal"
             android:layout_marginTop="30dp"
             android:layout_marginBottom="30dp"
-            android:layout_marginLeft="18dp"
-            android:layout_marginStart="18dp"
-            android:layout_marginRight="18dp"
-            android:layout_marginEnd="18dp"
+            android:layout_marginLeft="19dp"
+            android:layout_marginStart="19dp"
+            android:layout_marginRight="19dp"
+            android:layout_marginEnd="19dp"
             android:textSize="16sp"
             android:textAllCaps="true"
-            android:paddingTop="14dp"
-            android:paddingBottom="14dp"
+            android:paddingTop="11dp"
+            android:paddingBottom="11dp"
             android:paddingLeft="14dp"
             android:padding="16dp"
             facebook:com_facebook_login_text="LOGIN COM FACEBOOK"
