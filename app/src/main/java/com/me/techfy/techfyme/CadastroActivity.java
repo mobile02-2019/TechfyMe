@@ -5,7 +5,6 @@ import android.content.res.ColorStateList;
 import android.graphics.Bitmap;
 import android.graphics.drawable.BitmapDrawable;
 import android.provider.MediaStore;
-import android.service.autofill.UserData;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BaseTransientBottomBar;
 import android.support.design.widget.Snackbar;
@@ -123,7 +122,7 @@ public class CadastroActivity extends AppCompatActivity {
         botaoCadastro = findViewById(R.id.button_cadastro_id);
         botaoCadastro.setOnClickListener(v -> cadastrarUsuario());
 
-        imagemUser = findViewById(R.id.image_user_cadastro);
+        imagemUser = findViewById(R.id.edit_image_user_cadastro);
         imagemUser.setOnClickListener(v -> getCameraImage());
 
 

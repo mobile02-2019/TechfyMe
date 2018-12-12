@@ -24,7 +24,7 @@
             android:layout_height="110dp"
             android:layout_gravity="center"
             android:layout_marginTop="16dp"
-            android:id="@+id/image_user_cadastro"
+            android:id="@+id/edit_image_user_cadastro"
             android:src="@drawable/user_icon_cadastrolapis" />
 
     <android.support.design.widget.TextInputLayout

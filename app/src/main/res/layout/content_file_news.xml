@@ -114,7 +114,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/text_descricao_id"
-        card_view:srcCompat="@drawable/save_icnoe2" />
+        app:srcCompat="@drawable/icone_salvar_noticia" />
 
 
 

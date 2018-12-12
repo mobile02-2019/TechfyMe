@@ -1,0 +1,172 @@
+<?xml version="1.0" encoding="utf-8"?>
+    <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".EditarPerfilFragment"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="4dp"
+                android:background="@color/verdePrimario">
+            </View>
+
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:layout_width="110dp"
+                android:layout_height="110dp"
+                android:layout_gravity="center"
+                android:layout_marginTop="16dp"
+                android:id="@+id/edit_image_user_cadastro"
+                android:src="@drawable/user_icon_cadastrolapis" />
+
+            <android.support.design.widget.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="24dp"
+                android:theme="@style/AppTheme2">
+
+                <android.support.design.widget.TextInputEditText
+                    android:id="@+id/edit_nome_usuario_id"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="Nome*"
+                    android:layout_marginRight="16dp"
+                    android:layout_marginLeft="16dp">
+
+                </android.support.design.widget.TextInputEditText>
+            </android.support.design.widget.TextInputLayout>
+
+
+            <android.support.design.widget.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:theme="@style/AppTheme2">
+
+                <android.support.design.widget.TextInputEditText
+                    android:id="@+id/edit_sobrenome_usuario_id"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="Sobrenome*"
+                    android:layout_marginRight="16dp"
+                    android:layout_marginLeft="16dp">
+
+                </android.support.design.widget.TextInputEditText>
+            </android.support.design.widget.TextInputLayout>
+
+            <android.support.design.widget.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:theme="@style/AppTheme2">
+
+                <com.vicmikhailau.maskededittext.MaskedEditText
+                    android:id="@+id/edit_data_nascimento_usuario_id"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="Data de nascimento"
+                    android:layout_marginRight="16dp"
+                    android:layout_marginLeft="16dp"
+                    android:inputType="number"
+                    app:mask="AA/AA/AAAA">
+
+                </com.vicmikhailau.maskededittext.MaskedEditText>
+            </android.support.design.widget.TextInputLayout>
+
+            <android.support.design.widget.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:theme="@style/AppTheme2"
+                android:layout_marginTop="8dp">
+
+                <com.weiwangcn.betterspinner.library.material.MaterialBetterSpinner
+                    android:id="@+id/edit_spinner_id"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="Gênero"
+                    android:layout_marginRight="20dp"
+                    android:layout_marginLeft="20dp">
+
+                </com.weiwangcn.betterspinner.library.material.MaterialBetterSpinner>
+            </android.support.design.widget.TextInputLayout>
+
+            <android.support.design.widget.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:theme="@style/AppTheme2">
+
+                <android.support.design.widget.TextInputEditText
+                    android:id="@+id/edit_email_usuario_id"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="Email*"
+                    android:inputType="textEmailAddress"
+                    android:layout_marginRight="16dp"
+                    android:layout_marginLeft="16dp">
+
+                </android.support.design.widget.TextInputEditText>
+            </android.support.design.widget.TextInputLayout>
+
+            <android.support.design.widget.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                app:passwordToggleEnabled="true"
+                android:theme="@style/AppTheme2">
+
+                <android.support.design.widget.TextInputEditText
+                    android:id="@+id/edit_senha_usuario_id"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="Senha*"
+                    android:inputType="textPassword"
+                    android:layout_marginRight="16dp"
+                    android:layout_marginLeft="16dp">
+
+                </android.support.design.widget.TextInputEditText>
+            </android.support.design.widget.TextInputLayout>
+
+            <android.support.design.widget.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                app:passwordToggleEnabled="true"
+                android:theme="@style/AppTheme2">
+
+                <android.support.design.widget.TextInputEditText
+                    android:id="@+id/edit_confirmacao_senha_usuario_id"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="Confirme sua senha"
+                    android:inputType="textPassword"
+                    android:layout_marginRight="16dp"
+                    android:layout_marginLeft="16dp">
+
+                </android.support.design.widget.TextInputEditText>
+            </android.support.design.widget.TextInputLayout>
+
+            <Button
+                android:id="@+id/button_editarperfil_id"
+                android:layout_gravity="center"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="16dp"
+                android:layout_marginTop="20dp"
+                android:layout_marginRight="16dp"
+                android:padding="16dp"
+                android:text="Cadastrar"
+                android:textColor="@color/branco"
+                android:textAllCaps="false"
+                android:backgroundTint="@color/colorPrimary"/>
+
+        </LinearLayout>
+    </ScrollView>
