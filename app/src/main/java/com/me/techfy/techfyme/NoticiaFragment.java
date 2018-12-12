@@ -1,6 +1,8 @@
 package com.me.techfy.techfyme;
 
 
+import android.arch.lifecycle.Observer;
+import android.arch.persistence.room.Room;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
@@ -24,6 +26,7 @@ import com.me.techfy.techfyme.DAO.NewsDAO;
 import com.me.techfy.techfyme.adapter.RecyclerViewNewsAdapter;
 import com.me.techfy.techfyme.database.AppDatabase;
 import com.me.techfy.techfyme.modelo.Noticia;
+import com.me.techfy.techfyme.modelo.NoticiaDb;
 import com.me.techfy.techfyme.modelo.ResultadoAPI;
 import com.me.techfy.techfyme.service.ServiceListener;
 
@@ -57,8 +60,6 @@ public class NoticiaFragment extends Fragment implements RecyclerViewNewsAdapter
     private ImageView botaoSalvar;
     private Noticia noticia;
 
-
-
     public NoticiaFragment() {
         // Required empty public constructor
     }
@@ -82,6 +83,8 @@ public class NoticiaFragment extends Fragment implements RecyclerViewNewsAdapter
             query = bundle.getString(CHAVE_KEY);
 
             setupRecyclerView(view);
+
+            db = Room.databaseBuilder(getActivity().getApplicationContext(), AppDatabase.class, "noticiadeletada").build();
 
         return view;
     }
@@ -174,8 +177,35 @@ public class NoticiaFragment extends Fragment implements RecyclerViewNewsAdapter
     @Override
     public void onSuccess(Object object) {
         ResultadoAPI resultadoAPI = (ResultadoAPI) object;
-        adapter.setNewsList(resultadoAPI.getNoticiaList());
-        progressBar.setVisibility(View.GONE);
+
+        db.noticiaDao().noiticiasDeletadas(firebaseAuth.getUid()).observe(getActivity(), new Observer<List<NoticiaDb>>() {
+                    @Override
+                    public void onChanged(@android.support.annotation.Nullable List<NoticiaDb> noticiaDbs) {
+                        ArrayList<Noticia> listaFiltrada = new ArrayList<>();
+                        for (Noticia noticia : resultadoAPI.getNoticiaList()) {
+                            if(!verificarIdDeletada(noticia.getTitulo(), noticiaDbs)){
+                                listaFiltrada.add(noticia);
+                            }
+
+                        }
+
+                        adapter.setNewsList(listaFiltrada);
+                        progressBar.setVisibility(View.GONE);
+                    }
+                });
+
+
+
+    }
+
+    private boolean verificarIdDeletada(String tituloNoticia, List<NoticiaDb> noticiaDbs) {
+        for (NoticiaDb noticia : noticiaDbs) {
+            if(noticia.getTituloNoticia().equals(tituloNoticia)){
+                return true;
+            }
+        }
+            return  false;
+
     }
 
     @Override
@@ -184,6 +214,9 @@ public class NoticiaFragment extends Fragment implements RecyclerViewNewsAdapter
 //        Snackbar.make(recyclerView,throwable.getMessage(),Snackbar.LENGTH_INDEFINITE).show();
         progressBar.setVisibility(View.GONE);
     }
-}
+
+    }
+
+
 
 
