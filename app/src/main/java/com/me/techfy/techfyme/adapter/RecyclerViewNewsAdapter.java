@@ -1,7 +1,5 @@
 package com.me.techfy.techfyme.adapter;
 
-import android.arch.lifecycle.LiveData;
-import android.arch.persistence.room.Database;
 import android.arch.persistence.room.Room;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
@@ -31,13 +29,10 @@ public class RecyclerViewNewsAdapter extends RecyclerView.Adapter<RecyclerViewNe
     private FirebaseAuth mAuth;
     private AppDatabase db;
 
-
     public interface CardPostClicado {
         void onCardClicado(Noticia noticia);
 
         void onExcluirClicado(Noticia noticia);
-
-
 
         void onShareClicado(Noticia noticia);
 
@@ -48,7 +43,6 @@ public class RecyclerViewNewsAdapter extends RecyclerView.Adapter<RecyclerViewNe
         this.noticiaList = noticiaListt;
         this.listener = listener;
     }
-
 
     @NonNull
     @Override
@@ -91,9 +85,6 @@ public class RecyclerViewNewsAdapter extends RecyclerView.Adapter<RecyclerViewNe
         private ImageView iconeCompartilhar;
         private ImageView iconeArmazenar;
 
-
-
-
         public String formatarData(String data) {
             SimpleDateFormat formatoInicial = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss");
             SimpleDateFormat formatoFinal = new SimpleDateFormat("dd/MM/yyyy");
@@ -119,8 +110,6 @@ public class RecyclerViewNewsAdapter extends RecyclerView.Adapter<RecyclerViewNe
             iconeLixeira = itemView.findViewById(R.id.icone_lixeira);
             iconeCompartilhar = itemView.findViewById(R.id.iconeCompartilhar);
             iconeArmazenar = itemView.findViewById(R.id.imageview_salvar_noticia_id);
-
-
         }
 
 
@@ -130,16 +119,13 @@ public class RecyclerViewNewsAdapter extends RecyclerView.Adapter<RecyclerViewNe
             titulo.setText(noticia.getTitulo());
             data.setText(formatarData(dataFormatoInicial));
             descricao.setText(noticia.getDescricao());
-//            data.setText(formatarData(dataFormatoInicial));
             Picasso.get().load(noticia.getImagemUrl()).into(imagemDaNoticia);
             imagemDaNoticia.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     listener.onCardClicado(noticia);
-
                 }
             });
-
 
             iconeLixeira.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -163,8 +149,6 @@ public class RecyclerViewNewsAdapter extends RecyclerView.Adapter<RecyclerViewNe
                 @Override
                 public void onClick(View v) {
                     listener.onShareClicado(noticia);
-
-
                 }
             });
 
@@ -181,11 +165,7 @@ public class RecyclerViewNewsAdapter extends RecyclerView.Adapter<RecyclerViewNe
                     listener.onCardClicado(noticia);
                 }
             });
-
-
         }
     }
-
-
 }
 

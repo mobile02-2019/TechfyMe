@@ -13,8 +13,6 @@ public class ResultadoAPI {
     @SerializedName("totalResults")
     private int totalResultados;
 
-
-
     public List<Noticia> getNoticiaList() {
         return noticiaList;
     }

@@ -81,7 +81,6 @@ public class LoginActivity extends AppCompatActivity {
             public void onSuccess(LoginResult loginResult) {
                 Log.d(TAG, "facebook:onSuccess:" + loginResult);
                 handleFacebookAccessToken(loginResult.getAccessToken());
-
             }
 
             @Override
@@ -139,7 +138,6 @@ public class LoginActivity extends AppCompatActivity {
                 }
             }
         });
-
     }
 
             private void handleFacebookAccessToken(AccessToken token) {
@@ -183,7 +181,6 @@ public class LoginActivity extends AppCompatActivity {
                 firebaseAuthWithGoogle(account);
             } catch (ApiException e) {
                 Log.w(TAG, "Google sign in failed", e);
-                // ...
             }
         }
     }
@@ -199,7 +196,7 @@ public class LoginActivity extends AppCompatActivity {
                         if (task.isSuccessful()) {
                             Log.d(TAG, "signInWithCredential:success");
                             FirebaseUser user = mAuth.getCurrentUser();
-                            // TODO passar nome para home
+
                             String nome = "Home";
                             irParaPreferencia(nome);
                         } else {
@@ -212,10 +209,7 @@ public class LoginActivity extends AppCompatActivity {
     @Override
     public void onStart() {
         super.onStart();
-        /*FirebaseUser currentUser = mAuth.getCurrentUser();
-        if (currentUser != null) {
-            irParaPreferencia(currentUser.getEmail());
-        }*/
+
         if(mAuth.getCurrentUser()!=null){
             FirebaseUser user = mAuth.getCurrentUser();
             verificarDadosPreferencia();
@@ -224,35 +218,31 @@ public class LoginActivity extends AppCompatActivity {
 
     private void verificarDadosPreferencia() {
         try {
-            //referencia database firebase
             database = FirebaseDatabase.getInstance();
             myRef = database.getReference("preferences/" + mAuth.getUid());
-            //tenta buscar preferencia
+
             myRef.addValueEventListener(new ValueEventListener() {
                 @Override
                 public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                    //tenta atribuir preferencia do firebase
+
                     Preferencia preference = dataSnapshot.getValue(Preferencia.class);
                     Log.d(TAG, "Value is: " + preference);
 
-                    //se existir preferencias, criar array de string com os generos e enviar para Home
                     if (preference != null) {
-                        //abre um intent
-                        //Cria bundle
+
                         Bundle bundleParaHome = new Bundle();
-                        //adiciona na lista string de generos
+
                         listaNoticiaChecada.add(preference.getPreferenciaSelecionada1());
                         listaNoticiaChecada.add(preference.getPreferenciaSelecionada2());
                         listaNoticiaChecada.add(preference.getPreferenciaSelecionada3());
                         listaNoticiaChecada.add(preference.getPreferenciaSelecionada4());
-                        //adiciona lista de string no bundle
+
                         bundleParaHome.putStringArrayList("checados" , listaNoticiaChecada);
                         Intent intent = new Intent(getApplicationContext(),MenuHomeActivity.class);
-                        //adiciona bundle no intent
+
                         intent.putExtras(bundleParaHome);
                         startActivity(intent);
-                    }else{//se nao existir preferencia, vai para tela de preferencias para serem criadas
-                        //abre a outra Activity
+                    }else{
                         Intent intent = new Intent(getApplicationContext(),PreferenciaActivity.class);
                         startActivity(intent);
                     }
@@ -264,8 +254,7 @@ public class LoginActivity extends AppCompatActivity {
                 }
             });
         } catch (Exception ex) {
-
-        }
+            }
     }
 
     private void irParaPreferencia(String nome) {
@@ -311,7 +300,6 @@ public class LoginActivity extends AppCompatActivity {
                         }
                     }
                 });
-
     }
 
 }

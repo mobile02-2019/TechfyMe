@@ -83,7 +83,6 @@ public class EditarPerfilFragment extends Fragment {
         storage = FirebaseStorage.getInstance();
         storageRef = storage.getReference();
 
-
         imagePerfil.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -93,12 +92,8 @@ public class EditarPerfilFragment extends Fragment {
 
         buscarDadosUsuario();
 
-
         return view;
-
     }
-
-
 
     public void buscarDadosUsuario(){
 
@@ -111,14 +106,12 @@ public class EditarPerfilFragment extends Fragment {
                 storageRef.child(firebaseAuth.getUid()).getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
                     @Override
                     public void onSuccess(Uri uri) {
-                        // Got the download URL for 'users/me/profile.png'
                         Picasso.get().load(uri).into(imagePerfil);
 
                     }
                 }).addOnFailureListener(new OnFailureListener() {
                     @Override
                     public void onFailure(@NonNull Exception exception) {
-                        // Handle any errors
                     }
                 });
             } else {
@@ -137,16 +130,13 @@ public class EditarPerfilFragment extends Fragment {
         }
     }
 
-
     private void definirDadosGoogle() {
-        //Toast.makeText(getApplicationContext(), "Usuário logado pelo Gmail", Toast.LENGTH_LONG).show();
         GoogleSignInAccount acct = GoogleSignIn.getLastSignedInAccount(getApplicationContext());
         String personEmail = acct.getEmail();
         editarEmail.setText(personEmail);
     }
 
     private void definirDadosFacebook() {
-        //Toast.makeText(getApplicationContext(), "Usuário logado pelo Facebook", Toast.LENGTH_LONG).show();
         GraphRequest request = GraphRequest.newMeRequest(
                 AccessToken.getCurrentAccessToken(),
                 new GraphRequest.GraphJSONObjectCallback() {
@@ -154,7 +144,6 @@ public class EditarPerfilFragment extends Fragment {
                     public void onCompleted(JSONObject object, GraphResponse response) {
                         Log.v("LoginActivity", response.toString());
 
-                        // Application code
                         String email = null;
                         try {
                             email = object.getString("email");
@@ -170,15 +159,10 @@ public class EditarPerfilFragment extends Fragment {
         request.executeAsync();
     }
 
-
-
     private void getCameraImage() {
         Intent takePictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
             getActivity().startActivityForResult(takePictureIntent,REQUEST_IMAGE_CAPTURE);
-
     }
-
-
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
@@ -186,11 +170,10 @@ public class EditarPerfilFragment extends Fragment {
             Bundle extras = data.getExtras();
             Bitmap imageBitmap = (Bitmap) extras.get("data");
             imagePerfil.setImageBitmap(imageBitmap);
-
         }
     }
+
     public void salvarImagemNoFirebase() {
-        // Get the data from an ImageView as bytes
         imagePerfil.setDrawingCacheEnabled(true);
         imagePerfil.buildDrawingCache();
         Bitmap bitmap = ((BitmapDrawable) imagePerfil.getDrawable()).getBitmap();
@@ -202,20 +185,15 @@ public class EditarPerfilFragment extends Fragment {
         uploadTask.addOnFailureListener(new OnFailureListener() {
             @Override
             public void onFailure(@NonNull Exception exception) {
-                Toast.makeText(getApplicationContext(), "Falhou ao salvar foto!" + exception.getMessage(), Toast.LENGTH_LONG).show();
                 Log.e("autenticacao", exception.getMessage());
             }
         }).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
             @Override
             public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
-                Toast.makeText(getApplicationContext(), "Foto armazenada!", Toast.LENGTH_SHORT).show();
-                // taskSnapshot.getMetadata() contains file metadata such as size, content-type, etc.
-                // ...
+                //Toast.makeText(getApplicationContext(), "Foto armazenada!", Toast.LENGTH_SHORT).show();
             }
         });
     }
-
-
 }
 
 

@@ -1,15 +1,10 @@
 package com.me.techfy.techfyme;
 
-import android.accounts.Account;
-import android.accounts.AccountManager;
-import android.content.Context;
 import android.content.Intent;
-import android.content.pm.PackageManager;
 import android.graphics.PorterDuff;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Bundle;
-import android.provider.MediaStore;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v4.app.FragmentManager;
@@ -23,11 +18,8 @@ import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
-import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import com.facebook.AccessToken;
 import com.facebook.GraphRequest;
 import com.facebook.GraphResponse;
@@ -46,15 +38,12 @@ import com.squareup.picasso.Picasso;
 
 import org.json.JSONException;
 import org.json.JSONObject;
-import org.w3c.dom.Text;
-
-import java.util.LinkedList;
-import java.util.List;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
 public class MenuHomeActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
+
     Bundle bundle;
     private BottomNavigationView menuDeBaixo;
     int contador = 0;
@@ -68,8 +57,6 @@ public class MenuHomeActivity extends AppCompatActivity
     private StorageReference storageRef;
     private FirebaseStorage storage;
 
-
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -82,12 +69,9 @@ public class MenuHomeActivity extends AppCompatActivity
         storage = FirebaseStorage.getInstance();
         storageRef = storage.getReference();
 
-
-
         Toolbar toolbar = findViewById(R.id.toolbar);
         toolbar.setLogo(getDrawable(R.drawable.techfyme_logo_action_bar));
         setSupportActionBar(toolbar);
-
 
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
@@ -100,11 +84,6 @@ public class MenuHomeActivity extends AppCompatActivity
 
         Intent intent = getIntent();
         bundle = intent.getExtras();
-
-
-//        menuDeBaixo.getMenu().clear();
-
-//        reSetupMenu();
 
         if (bundle.getBoolean(PreferenciaActivity.CK_ANDROID)) {
             setupMenuItem("Android", R.drawable.android_icon);
@@ -136,9 +115,7 @@ public class MenuHomeActivity extends AppCompatActivity
         if (bundle.getBoolean(PreferenciaActivity.CK_SISTEMAOPERACIONAL)) {
             setupMenuItem("S.O", R.drawable.icon_pc_preto);
         }
-
         bundleMenuHome(intent);
-
     }
 
     public void setupHome() {
@@ -162,7 +139,6 @@ public class MenuHomeActivity extends AppCompatActivity
                 return true;
             }
         });
-
     }
 
     private void setupHomeFragment(MenuItem item) {
@@ -177,16 +153,11 @@ public class MenuHomeActivity extends AppCompatActivity
         transaction.commit();
     }
 
-//    public void reSetupMenu(){
-//        menuDeBaixo.getMenu().clear();
-//    }
-
     private void setupMenuItem(String title, int icon) {
         if (contador == 2) {
             setupHome();
             contador++;
         }
-
 
         final MenuItem menuItem = menuDeBaixo.getMenu().add(0, contador, 0, title);
         menuItem.setIcon(icon);
@@ -221,6 +192,16 @@ public class MenuHomeActivity extends AppCompatActivity
         } else {
             super.onBackPressed();
         }
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        int id = item.getItemId();
+
+        if (id == R.id.menu_logout_id){
+            sair();
+        }
+        return super.onOptionsItemSelected(item);
     }
 
     @Override
@@ -321,13 +302,12 @@ public class MenuHomeActivity extends AppCompatActivity
                         textEmail.setText(email);
                     }
                 });
+
         Bundle parameters = new Bundle();
         parameters.putString("fields", "email");
         request.setParameters(parameters);
         request.executeAsync();
     }
-
-
 
     @SuppressWarnings("StatementWithEmptyBody")
     @Override
@@ -409,6 +389,4 @@ public class MenuHomeActivity extends AppCompatActivity
         transaction.replace(R.id.framelayout_home_id, noticiaSalvaFragment);
         transaction.commit();
     }
-
-
 }

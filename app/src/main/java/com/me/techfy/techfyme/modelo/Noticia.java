@@ -30,7 +30,6 @@ public class Noticia implements Serializable {
     private String idMateria;
     private String dataBaseKey;
 
-
     public String getDataBaseKey() {
         return dataBaseKey;
     }

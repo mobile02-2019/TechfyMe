@@ -8,7 +8,7 @@ import android.arch.persistence.room.PrimaryKey;
 import java.util.Date;
 
 
-@Entity //(tableName = "noticiaDeletada")
+@Entity
 public class NoticiaDb {
 
     @PrimaryKey
@@ -43,14 +43,5 @@ public class NoticiaDb {
     public void setIdUsuario(String idUsuario) {
         this.idUsuario = idUsuario;
     }
-
-
-    //    public Date getDataDbNoticia() {
-//        return dataDbNoticia;
-//    }
-//
-//    public void setDataDbNoticia(Date dataDbNoticia) {
-//        this.dataDbNoticia = dataDbNoticia;
-//    }
 
 }

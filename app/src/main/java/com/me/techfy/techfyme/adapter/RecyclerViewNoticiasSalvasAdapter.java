@@ -38,9 +38,6 @@ public class RecyclerViewNoticiasSalvasAdapter extends RecyclerView.Adapter<Recy
     private List<Noticia> noticiaList = new ArrayList<>();
     private FirebaseAuth mAuth;
 
-
-
-
     public RecyclerViewNoticiasSalvasAdapter(List<Noticia> noticiaList, RecyclerViewNewsAdapter.CardPostClicado listener) {
         this.noticiaList = noticiaList;
         this.listener = listener;
@@ -54,9 +51,7 @@ public class RecyclerViewNoticiasSalvasAdapter extends RecyclerView.Adapter<Recy
     @NonNull
     @Override
     public RecyclerViewNoticiasSalvasAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
-
        View view = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.content_item_news_save, viewGroup, false);
-
         return new ViewHolder(view);
     }
 
@@ -64,7 +59,6 @@ public class RecyclerViewNoticiasSalvasAdapter extends RecyclerView.Adapter<Recy
     public void onBindViewHolder(@NonNull RecyclerViewNoticiasSalvasAdapter.ViewHolder viewHolder, int i) {
         Noticia noticia = noticiaList.get(i);
         viewHolder.bind(noticia);
-
     }
 
 
@@ -89,23 +83,12 @@ public class RecyclerViewNoticiasSalvasAdapter extends RecyclerView.Adapter<Recy
 
     }
 
-
-
-
     public void onArmazenar(Noticia noticia) {
-
         noticiaList.add(noticia);
-
         mFirebaseInstance = FirebaseDatabase.getInstance();
-
         mFirebaseDatabase = mFirebaseInstance.getReference("users/" + firebaseAuth.getUid());
-
         mFirebaseDatabase.push().setValue(noticia);
-
-
     }
-
-
 
     public class ViewHolder extends RecyclerView.ViewHolder{
 
@@ -118,8 +101,6 @@ public class RecyclerViewNoticiasSalvasAdapter extends RecyclerView.Adapter<Recy
              imagemDaNoticia = itemView.findViewById(R.id.imagem_celulares_id);
              iconeLixeira = itemView.findViewById(R.id.icone_lixeira);
              iconeCompartilhar = itemView.findViewById(R.id.iconeCompartilhar);
-
-
 
          }
 
@@ -148,7 +129,6 @@ public class RecyclerViewNoticiasSalvasAdapter extends RecyclerView.Adapter<Recy
                  @Override
                  public void onClick(View v) {
                      listener.onShareClicado(noticia);
-
 
                  }
              });

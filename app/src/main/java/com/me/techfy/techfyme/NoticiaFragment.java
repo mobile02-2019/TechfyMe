@@ -41,7 +41,6 @@ import static com.me.techfy.techfyme.MenuHomeActivity.CHAVE_KEY;
  */
 public class NoticiaFragment extends Fragment implements RecyclerViewNewsAdapter.CardPostClicado,ServiceListener {
 
-
     public static final String NOTICIA_TITULO = "noticia_titulo";
     public static final String NOTICIA_FONTE = "noticia_fonte";
     public static final String NOTICIA_DESCRICAO = "noticia_descricao";
@@ -61,10 +60,10 @@ public class NoticiaFragment extends Fragment implements RecyclerViewNewsAdapter
     private Noticia noticia;
 
     public NoticiaFragment() {
-        // Required empty public constructor
+
     }
 
-    @Override // O que devo alterar aqui?
+    @Override
     public void onAttach(Context context) {
         super.onAttach(context);
     }
@@ -97,7 +96,6 @@ public class NoticiaFragment extends Fragment implements RecyclerViewNewsAdapter
         adapter = new RecyclerViewNewsAdapter(newsDAO.getNewsList(getContext(),this,query), this);
 
         recyclerView.setAdapter(adapter);
-
         recyclerView.setLayoutManager(new LinearLayoutManager(view.getContext()));
 
     }
@@ -115,7 +113,6 @@ public class NoticiaFragment extends Fragment implements RecyclerViewNewsAdapter
         bundle.putString(NOTICIA_DATA, dataNoticia);
         bundle.putString(NOTICIA_TEXTO, noticia.getTextoCompleto());
         bundle.putString(NOTICIA_URL,noticia.getLinkDaMateria());
-
 
         Intent intent = new Intent(getContext(), NoticiaDetalheActivity.class);
         intent.putExtras(bundle);
@@ -141,7 +138,6 @@ public class NoticiaFragment extends Fragment implements RecyclerViewNewsAdapter
                 .negativeColor(R.style.AppThemeDialog)
                 .negativeText("Cancel")
                 .show();
-
     }
 
 
@@ -173,7 +169,6 @@ public class NoticiaFragment extends Fragment implements RecyclerViewNewsAdapter
 
         }
 
-
     @Override
     public void onSuccess(Object object) {
         ResultadoAPI resultadoAPI = (ResultadoAPI) object;
@@ -186,16 +181,11 @@ public class NoticiaFragment extends Fragment implements RecyclerViewNewsAdapter
                             if(!verificarIdDeletada(noticia.getTitulo(), noticiaDbs)){
                                 listaFiltrada.add(noticia);
                             }
-
                         }
-
                         adapter.setNewsList(listaFiltrada);
                         progressBar.setVisibility(View.GONE);
                     }
                 });
-
-
-
     }
 
     private boolean verificarIdDeletada(String tituloNoticia, List<NoticiaDb> noticiaDbs) {
@@ -211,12 +201,6 @@ public class NoticiaFragment extends Fragment implements RecyclerViewNewsAdapter
     @Override
     public void onError(Throwable throwable) {
         Snackbar.make(recyclerView,"Ops! Algo deu errado, verifique sua conexão e tente novamente.",Snackbar.LENGTH_LONG).show();
-//        Snackbar.make(recyclerView,throwable.getMessage(),Snackbar.LENGTH_INDEFINITE).show();
         progressBar.setVisibility(View.GONE);
     }
-
-    }
-
-
-
-
+}

@@ -71,17 +71,10 @@ public class PreferenciaActivity extends Activity implements FirebasePreferencia
         Intent intent = getIntent();
         bundle = intent.getExtras();
         userId = FirebaseAuth.getInstance().getUid();
-//
-//        String auxiliar = bundle.getString(LoginActivity.CHAVE_EMAIL);
-//        if(auxiliar != null) {
-//            userId = bundle.getString(LoginActivity.CHAVE_EMAIL);
-//        }
 
         btnEnviar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
-//                MenuHomeActivity.reSetupMenu();
 
                 PreferenciaDTO usuarios = new PreferenciaDTO();
                 usuarios.setUsuarioId(userId);
@@ -99,7 +92,7 @@ public class PreferenciaActivity extends Activity implements FirebasePreferencia
                     preferencia.salvar(usuarios);
                     irParaHome();
                 } else {
-                    Toast.makeText(PreferenciaActivity.this, "Selecione 4 favoritos", Toast.LENGTH_LONG).show();
+                    Toast.makeText(PreferenciaActivity.this, "Selecione 4 favoritos", Toast.LENGTH_SHORT).show();
                     usuarios.limpar();
                 }
             }
@@ -111,10 +104,6 @@ public class PreferenciaActivity extends Activity implements FirebasePreferencia
         if (_preferenciaDTO != null && _preferenciaDTO.getChecados() != null && _preferenciaDTO.getChecados().size() == 4) {
             onDataChange(_preferenciaDTO);
         }
-//        if(veioDaLogin()) {
-//            irParaHome();
-//        }
-
     }
 
     @NonNull
@@ -194,7 +183,6 @@ public class PreferenciaActivity extends Activity implements FirebasePreferencia
                 if (checado.equals(CK_SISTEMAOPERACIONAL)) {
                     checkBoxSistemaOperacional.setChecked(true);
                 }
-
             }
 
             preferencia = new Preferencia();
@@ -207,7 +195,6 @@ public class PreferenciaActivity extends Activity implements FirebasePreferencia
             if (veioDaLogin()){
                 btnEnviar.callOnClick();
             }
-//            irParaHome();
         }
     }
 
@@ -221,9 +208,5 @@ public class PreferenciaActivity extends Activity implements FirebasePreferencia
 
     @Override
     public void onDataCanceled() {
-
-        // TODO exibir mensagem de erro
-
     }
-
 }

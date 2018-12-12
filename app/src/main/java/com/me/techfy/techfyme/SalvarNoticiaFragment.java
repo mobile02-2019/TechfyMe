@@ -70,7 +70,6 @@ public class SalvarNoticiaFragment extends Fragment implements RecyclerViewNewsA
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_salvar_noticia, container, false);
 
         db = Room.databaseBuilder(getApplicationContext(), AppDatabase.class,
@@ -80,12 +79,9 @@ public class SalvarNoticiaFragment extends Fragment implements RecyclerViewNewsA
         progressBar = view.findViewById(R.id.progressbar_id);
         progressBar.setVisibility(View.VISIBLE);
 
-
         setupRecyclerView(view);
 
         return view;
-
-
     }
 
 
@@ -113,7 +109,6 @@ public class SalvarNoticiaFragment extends Fragment implements RecyclerViewNewsA
             bundle.putString(NOTICIA_TEXTO, noticia.getTextoCompleto());
             bundle.putString(NOTICIA_URL,noticia.getLinkDaMateria());
 
-
             Intent intent = new Intent(getContext(), NoticiaDetalheActivity.class);
             intent.putExtras(bundle);
             startActivity(intent);
@@ -136,8 +131,6 @@ public class SalvarNoticiaFragment extends Fragment implements RecyclerViewNewsA
                         noticiaList.remove(noticia);
                         ((RecyclerViewNoticiasSalvasAdapter)recyclerView.getAdapter()).deletarNoticiaFavorita(noticia);
 
-//                        mref = database.getReference("users/" + FirebaseAuth.getInstance().getUid() + "/" + noticia.getDataBaseKey());
-//                        mref.removeValue();
                         Toast.makeText(getContext(), "Notícia excluída com sucesso", Toast.LENGTH_SHORT).show();
 
                     }
@@ -145,9 +138,6 @@ public class SalvarNoticiaFragment extends Fragment implements RecyclerViewNewsA
                 .negativeColor(R.style.AppThemeDialog)
                 .negativeText("Cancel")
                 .show();
-
-
-
     }
 
     @Override
@@ -162,7 +152,6 @@ public class SalvarNoticiaFragment extends Fragment implements RecyclerViewNewsA
 
     @Override
     public void onArmazenar(Noticia noticia) {
-
     }
 
     private void mostrarFavoritos() {
@@ -184,21 +173,14 @@ public class SalvarNoticiaFragment extends Fragment implements RecyclerViewNewsA
                     List<Noticia> noticiaFavoritaList = new ArrayList<>(noticiaCollection);
 
                     adapter.setMateriasFavoritasList(noticiaFavoritaList);
-
-
                 }
-
-
             }
 
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {
 
             }
-
         });
-
-
     }
 
     @Override

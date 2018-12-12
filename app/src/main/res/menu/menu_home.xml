@@ -4,7 +4,8 @@
 
 
     <item
-        android:title="Editar perfil"
+        android:id="@+id/menu_logout_id"
+        android:title="Logout"
         android:iconTint="@color/colorPrimary"
         android:iconTintMode="multiply"
         android:icon="@color/colorPrimary"

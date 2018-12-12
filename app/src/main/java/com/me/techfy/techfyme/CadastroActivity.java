@@ -85,14 +85,11 @@ public class CadastroActivity extends AppCompatActivity {
                 public void onClick(View v) {
                     senha.setTextColor(getResources().getColor(R.color.colorPrimary));
                     confirmaSenha.setTextColor(getResources().getColor(R.color.colorPrimary));
-
-
                 }
             }).show();
         }
         return retorno;
     }
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -120,11 +117,14 @@ public class CadastroActivity extends AppCompatActivity {
         senha = findViewById(R.id.senha_usuario_id);
         confirmaSenha = findViewById(R.id.confirmacao_senha_usuario_id);
         botaoCadastro = findViewById(R.id.button_cadastro_id);
-        botaoCadastro.setOnClickListener(v -> cadastrarUsuario());
+        botaoCadastro.setOnClickListener(v -> {
+            //senhasIguais(senha,confirmaSenha);
+            cadastrarUsuario();
+
+        });
 
         imagemUser = findViewById(R.id.edit_image_user_cadastro);
         imagemUser.setOnClickListener(v -> getCameraImage());
-
 
     }
 
@@ -166,17 +166,12 @@ public class CadastroActivity extends AppCompatActivity {
                         }
                     }
                 });
-
-
     }
 
     private void goToPreferencia() {
         Intent intent = new Intent(this, PreferenciaActivity.class);
         startActivity(intent);
     }
-
-
-
 
     private void getCameraImage() {
         Intent takePictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
@@ -191,12 +186,10 @@ public class CadastroActivity extends AppCompatActivity {
             Bundle extras = data.getExtras();
             Bitmap imageBitmap = (Bitmap) extras.get("data");
             imagemUser.setImageBitmap(imageBitmap);
-
         }
     }
 
     public void salvarImagemNoFirebase() {
-        // Get the data from an ImageView as bytes
         imagemUser.setDrawingCacheEnabled(true);
         imagemUser.buildDrawingCache();
         Bitmap bitmap = ((BitmapDrawable) imagemUser.getDrawable()).getBitmap();
@@ -214,15 +207,9 @@ public class CadastroActivity extends AppCompatActivity {
         }).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
             @Override
             public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
-                Toast.makeText(CadastroActivity.this, "Foto armazenada!", Toast.LENGTH_SHORT).show();
-                // taskSnapshot.getMetadata() contains file metadata such as size, content-type, etc.
-                // ...
+                //Toast.makeText(CadastroActivity.this, "Foto armazenada!", Toast.LENGTH_SHORT).show();
             }
         });
     }
 
 }
-
-
-
-

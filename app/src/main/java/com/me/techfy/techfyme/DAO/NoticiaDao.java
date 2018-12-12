@@ -28,10 +28,4 @@ public interface NoticiaDao {
     @Query("SELECT*  FROM NoticiaDb WHERE idUsuario = :idUsuario")
     LiveData<List<NoticiaDb>> noiticiasDeletadas(String idUsuario);
 
-    //public NoticiaDb getNoticiaByTitulo(String titulo);
-
-//    @Query("SELECT * FROM updateNoticia ORDER BY dataDbNoticia DESC")
-//    LiveData<List<NoticiaDb>> todasNoticias();
-
-
 }
