@@ -163,7 +163,7 @@ public class MenuHomeActivity extends AppCompatActivity
 
     private void setupHomeFragment(MenuItem item) {
         Bundle bundle = new Bundle();
-        bundle.putString(CHAVE_KEY, "getBundleToHome");
+        bundle.putString(CHAVE_KEY, "tecnologia");
 
         FragmentManager manager = getSupportFragmentManager();
         FragmentTransaction transaction = manager.beginTransaction();
@@ -325,7 +325,7 @@ public class MenuHomeActivity extends AppCompatActivity
             setupFragment("games");
         }
         else if (id == R.id.nav_home) {
-            setupFragment("Technology");
+            setupFragment("tecnologia");
         }
         else if (id == R.id.nav_inteligencia_artificial) {
             setupFragment("inteligencia artificial");
