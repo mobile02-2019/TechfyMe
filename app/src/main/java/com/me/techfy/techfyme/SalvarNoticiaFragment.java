@@ -15,6 +15,8 @@ import android.view.ViewGroup;
 import android.widget.ProgressBar;
 import android.widget.Toast;
 
+import com.afollestad.materialdialogs.DialogAction;
+import com.afollestad.materialdialogs.MaterialDialog;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -123,10 +125,28 @@ public class SalvarNoticiaFragment extends Fragment implements RecyclerViewNewsA
 
     @Override
     public void onExcluirClicado(Noticia noticia) {
-        noticiaList.remove(noticia);
-        mref = database.getReference("users/" + FirebaseAuth.getInstance().getUid() + "/" + noticia.getDataBaseKey());
-        mref.removeValue();
-        Toast.makeText(getContext(), "Notícia excluída com sucesso", Toast.LENGTH_SHORT).show();
+        new MaterialDialog.Builder(getContext())
+                .title("Atenção")
+                .content("Deseja realmente excluir a notícia?")
+                .positiveColor(R.style.AppThemeDialog)
+                .positiveText("ok")
+                .onPositive(new MaterialDialog.SingleButtonCallback() {
+                    @Override
+                    public void onClick(MaterialDialog dialog, DialogAction which) {
+                        noticiaList.remove(noticia);
+                        ((RecyclerViewNoticiasSalvasAdapter)recyclerView.getAdapter()).deletarNoticiaFavorita(noticia);
+
+//                        mref = database.getReference("users/" + FirebaseAuth.getInstance().getUid() + "/" + noticia.getDataBaseKey());
+//                        mref.removeValue();
+                        Toast.makeText(getContext(), "Notícia excluída com sucesso", Toast.LENGTH_SHORT).show();
+
+                    }
+                })
+                .negativeColor(R.style.AppThemeDialog)
+                .negativeText("Cancel")
+                .show();
+
+
 
     }
 
