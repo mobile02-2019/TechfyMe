@@ -36,7 +36,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="38dp"
+        android:layout_marginTop="50dp"
         android:text="Bem vindo!"
         android:textColor="@color/verdePrimario"
         app:layout_constraintStart_toEndOf="@+id/image_profile_id"
@@ -76,17 +76,17 @@
         app:layout_constraintTop_toBottomOf="@+id/textView_nome_id"
         app:layout_constraintVertical_bias="0.0" />
 
-    <TextView
-        android:id="@+id/textview_editar_perfil_id"
-        android:layout_width="wrap_content"
-        android:layout_height="15dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="4dp"
-        android:text="Editar Perfil"
-        android:textColor="@color/azulEscuroMenu"
-        android:textSize="12sp"
-        app:layout_constraintStart_toEndOf="@+id/image_profile_id"
-        app:layout_constraintTop_toBottomOf="@+id/textView_email_id" />
+    <!--<TextView-->
+        <!--android:id="@+id/textview_editar_perfil_id"-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="15dp"-->
+        <!--android:layout_marginStart="8dp"-->
+        <!--android:layout_marginTop="4dp"-->
+        <!--android:text="Editar Perfil"-->
+        <!--android:textColor="@color/azulEscuroMenu"-->
+        <!--android:textSize="12sp"-->
+        <!--app:layout_constraintStart_toEndOf="@+id/image_profile_id"-->
+        <!--app:layout_constraintTop_toBottomOf="@+id/textView_email_id" />-->
 
     <View
         android:id="@+id/view"

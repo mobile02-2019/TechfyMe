@@ -88,6 +88,7 @@ public class MenuHomeActivity extends AppCompatActivity
         toolbar.setLogo(getDrawable(R.drawable.techfyme_logo_action_bar));
         setSupportActionBar(toolbar);
 
+
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
@@ -229,7 +230,7 @@ public class MenuHomeActivity extends AppCompatActivity
         textEmail = findViewById(R.id.textView_email_id);
         imagePerfil = findViewById(R.id.image_profile_id);
 
-        setEditarPerfil();
+//        setEditarPerfil();
 
         FirebaseUser user = firebaseAuth.getCurrentUser();
 
@@ -268,31 +269,31 @@ public class MenuHomeActivity extends AppCompatActivity
         return true;
         }
 
-    private void setEditarPerfil() {
-        TextView editarPerfil = findViewById(R.id.textview_editar_perfil_id);
-        editarPerfil.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                for (UserInfo userInfo : firebaseAuth.getCurrentUser().getProviderData()) {
-                    if (userInfo.getProviderId().equals("facebook.com")) {
-                        Toast.makeText(MenuHomeActivity.this, "Você está logado pelo Facebook. Não é possível editar seu cadastro.", Toast.LENGTH_SHORT).show();
-
-                    } else if (userInfo.getProviderId().equals("google.com")) {
-                        Toast.makeText(MenuHomeActivity.this, "Você está logado pelo Google. Não é possível editar seu cadastro.", Toast.LENGTH_SHORT).show();
-                    } else {
-                        FragmentManager manager = getSupportFragmentManager();
-                        FragmentTransaction transaction = manager.beginTransaction();
-                        EditarPerfilFragment editarPerfilFragment = new EditarPerfilFragment();
-                        editarPerfilFragment.setArguments(bundle);
-                        transaction.replace(R.id.framelayout_home_id, editarPerfilFragment);
-                        transaction.commit();
-                        DrawerLayout drawer = findViewById(R.id.drawer_layout);
-                        drawer.closeDrawer(GravityCompat.START);
-                    }
-                }
-            }
-        });
-    }
+//    private void setEditarPerfil() {
+//        TextView editarPerfil = findViewById(R.id.textview_editar_perfil_id);
+//        editarPerfil.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                for (UserInfo userInfo : firebaseAuth.getCurrentUser().getProviderData()) {
+//                    if (userInfo.getProviderId().equals("facebook.com")) {
+//                        Toast.makeText(MenuHomeActivity.this, "Você está logado pelo Facebook. Não é possível editar seu cadastro.", Toast.LENGTH_SHORT).show();
+//
+//                    } else if (userInfo.getProviderId().equals("google.com")) {
+//                        Toast.makeText(MenuHomeActivity.this, "Você está logado pelo Google. Não é possível editar seu cadastro.", Toast.LENGTH_SHORT).show();
+//                    } else {
+//                        FragmentManager manager = getSupportFragmentManager();
+//                        FragmentTransaction transaction = manager.beginTransaction();
+//                        EditarPerfilFragment editarPerfilFragment = new EditarPerfilFragment();
+//                        editarPerfilFragment.setArguments(bundle);
+//                        transaction.replace(R.id.framelayout_home_id, editarPerfilFragment);
+//                        transaction.commit();
+//                        DrawerLayout drawer = findViewById(R.id.drawer_layout);
+//                        drawer.closeDrawer(GravityCompat.START);
+//                    }
+//                }
+//            }
+//        });
+//    }
 
     private void definirDadosGoogle() {
         //Toast.makeText(getApplicationContext(), "Usuário logado pelo Gmail", Toast.LENGTH_LONG).show();

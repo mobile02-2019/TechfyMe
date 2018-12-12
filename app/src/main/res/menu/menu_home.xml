@@ -8,6 +8,7 @@
         android:iconTint="@color/colorPrimary"
         android:iconTintMode="multiply"
         android:icon="@color/colorPrimary"
-        android:visible="true"/>
+        android:visible="true"
+        />
 
 </menu>
