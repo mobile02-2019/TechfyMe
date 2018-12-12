@@ -19,7 +19,6 @@
         android:roundIcon="@mipmap/ic_launcher"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".HomeActivity" />
         <activity android:name=".LoginActivity" />
         <activity android:name=".CadastroActivity" />
         <activity
@@ -66,7 +65,6 @@
                 <data android:scheme="@string/fb_login_protocol_scheme" />
             </intent-filter>
         </activity>
-        <activity android:name=".PictureUserActivity"></activity>
 
         <service android:name=".TechFirebaseService">
             <intent-filter>

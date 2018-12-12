@@ -16,14 +16,19 @@ public interface NoticiaDao {
     @Insert
     void inserirNoticia(NoticiaDb noticiaDb);
 
+    @Insert
+    void insertAll(NoticiaDb... noticiaDbs);
+
     @Update
     void atualizarNoticia(NoticiaDb noticiaDb);
 
     @Delete
     void deletarNoticia(NoticiaDb noticiaDb);
 
-    @Query("SELECT * FROM updateNoticia WHERE TituloNoticia LIKE (:titulo)")
-    public NoticiaDb getNoticiaByTitulo(String titulo);
+    @Query("SELECT*  FROM NoticiaDb WHERE idUsuario = :idUsuario")
+    LiveData<List<NoticiaDb>> noiticiasDeletadas(String idUsuario);
+
+    //public NoticiaDb getNoticiaByTitulo(String titulo);
 
 //    @Query("SELECT * FROM updateNoticia ORDER BY dataDbNoticia DESC")
 //    LiveData<List<NoticiaDb>> todasNoticias();

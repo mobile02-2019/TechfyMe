@@ -1,5 +1,8 @@
 package com.me.techfy.techfyme.adapter;
 
+import android.arch.lifecycle.LiveData;
+import android.arch.persistence.room.Database;
+import android.arch.persistence.room.Room;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -8,8 +11,12 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.google.firebase.auth.FirebaseAuth;
+import com.me.techfy.techfyme.DAO.NoticiaDao;
 import com.me.techfy.techfyme.R;
+import com.me.techfy.techfyme.database.AppDatabase;
 import com.me.techfy.techfyme.modelo.Noticia;
+import com.me.techfy.techfyme.modelo.NoticiaDb;
 import com.squareup.picasso.Picasso;
 
 import java.text.ParseException;
@@ -20,6 +27,9 @@ import java.util.List;
 public class RecyclerViewNewsAdapter extends RecyclerView.Adapter<RecyclerViewNewsAdapter.ViewHolder> {
     private List<Noticia> noticiaList;
     private CardPostClicado listener;
+    private NoticiaDao noticiaDao;
+    private FirebaseAuth mAuth;
+    private AppDatabase db;
 
 
     public interface CardPostClicado {
@@ -44,6 +54,8 @@ public class RecyclerViewNewsAdapter extends RecyclerView.Adapter<RecyclerViewNe
     @Override
     public RecyclerViewNewsAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
         View view = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.content_file_news, viewGroup, false);
+        mAuth = FirebaseAuth.getInstance();
+        db = Room.databaseBuilder(viewGroup.getContext().getApplicationContext(), AppDatabase.class, "noticiadeletada").build();
         return new ViewHolder(view);
     }
 
@@ -133,6 +145,17 @@ public class RecyclerViewNewsAdapter extends RecyclerView.Adapter<RecyclerViewNe
                 @Override
                 public void onClick(View v) {
                     listener.onExcluirClicado(noticia);
+                    //TODO inserir tituloMateria + UidUser no banco;
+                    NoticiaDb noticiaDb = new NoticiaDb();
+                    noticiaDb.setTituloNoticia(noticia.getTitulo());
+                    noticiaDb.setIdUsuario(mAuth.getUid());
+
+                    new Thread(new Runnable() {
+                        @Override
+                        public void run() {
+                           db.noticiaDao().insertAll(noticiaDb);
+                        }
+                    }).start();
                 }
             });
 
