@@ -12,6 +12,7 @@ import android.support.design.widget.TextInputEditText;
 import android.support.v4.view.ViewCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
@@ -56,41 +57,6 @@ public class CadastroActivity extends AppCompatActivity {
     private StorageReference storageRef;
     private EditText emailCadastrado;
 
-    public boolean verificarCampos(List<TextInputEditText> listaCampo) {
-        boolean retorno = true;
-        for (TextInputEditText textInputEditText : listaCampo) {
-            if (textInputEditText.getEditableText().toString().equals(emBranco)) {
-                ColorStateList colorStateList = ColorStateList.valueOf(getResources().getColor(R.color.colorErro));
-                ViewCompat.setBackgroundTintList(textInputEditText, colorStateList);
-                Toast.makeText(this, "Preencha os espaços obrigatórios", Toast.LENGTH_LONG).show();
-                retorno = false;
-            } else {
-                retorno = true;
-            }
-        }
-        return retorno;
-    }
-
-    public boolean senhasIguais(final TextInputEditText senha, final TextInputEditText confirmaSenha) {
-        boolean retorno;
-        if (senha.getEditableText().toString().equals(confirmaSenha.getEditableText().toString())) {
-            retorno = true;
-
-        } else {
-            retorno = false;
-            senha.setTextColor(getResources().getColor(R.color.colorErro));
-            confirmaSenha.setTextColor(getResources().getColor(R.color.colorErro));
-            Snackbar.make(botaoCadastro, "Senhas diferentes", BaseTransientBottomBar.LENGTH_LONG).setAction("OK entendi", new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    senha.setTextColor(getResources().getColor(R.color.colorPrimary));
-                    confirmaSenha.setTextColor(getResources().getColor(R.color.colorPrimary));
-                }
-            }).show();
-        }
-        return retorno;
-    }
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -118,7 +84,6 @@ public class CadastroActivity extends AppCompatActivity {
         confirmaSenha = findViewById(R.id.confirmacao_senha_usuario_id);
         botaoCadastro = findViewById(R.id.button_cadastro_id);
         botaoCadastro.setOnClickListener(v -> {
-            //senhasIguais(senha,confirmaSenha);
             cadastrarUsuario();
 
         });
@@ -128,44 +93,94 @@ public class CadastroActivity extends AppCompatActivity {
 
     }
 
+    public boolean verificarCampos(List<TextInputEditText> listaCampo) {
+        boolean retorno = true;
+        for (TextInputEditText textInputEditText : listaCampo) {
+            if (textInputEditText.getEditableText().toString().equals(emBranco)) {
+                ColorStateList colorStateList = ColorStateList.valueOf(getResources().getColor(R.color.colorErro));
+                ViewCompat.setBackgroundTintList(textInputEditText, colorStateList);
+                Toast.makeText(this, "Preencha os espaços obrigatórios", Toast.LENGTH_LONG).show();
+                retorno = false;
+            } else {
+                retorno = true;
+            }
+        }
+        return retorno;
+    }
+
+    public boolean senhasIguais(final TextInputEditText senha, final TextInputEditText confirmaSenha) {
+        boolean retorno;
+        if (senha.getEditableText().toString().equals(confirmaSenha.getEditableText().toString())) {
+            retorno = true;
+
+        } else {
+            retorno = false;
+            senha.setTextColor(getResources().getColor(R.color.colorErro));
+            confirmaSenha.setTextColor(getResources().getColor(R.color.colorErro));
+        }
+        return retorno;
+    }
+
     private void cadastrarUsuario() {
 
         final EditText nomeCadastrado = findViewById(R.id.nome_usuario_id);
         emailCadastrado = findViewById(R.id.email_usuario_id);
-        EditText senhaCadastrado = findViewById(R.id.senha_usuario_id);
+        EditText senhaCadastrada = findViewById(R.id.senha_usuario_id);
 
-        mAuth.createUserWithEmailAndPassword(emailCadastrado.getText().toString(), senhaCadastrado.getText().toString())
-                .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
-                    @Override
-                    public void onComplete(@NonNull Task<AuthResult> task) {
-                        if (task.isSuccessful()) {
-                            Log.d(TAG, "createUserWithEmail:success");
-                            FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+        if (TextUtils.isEmpty(senhaCadastrada.getEditableText().toString()) || senhaCadastrada.length()<6){
+            validacaoCaracteresDaSenha();
+        } else if(!senhasIguais(senha, confirmaSenha)){
+            Snackbar.make(botaoCadastro, "As senhas são diferentes", BaseTransientBottomBar.LENGTH_INDEFINITE).setAction("OK entendi", new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    senha.setTextColor(getResources().getColor(R.color.colorPrimary));
+                    confirmaSenha.setTextColor(getResources().getColor(R.color.colorPrimary));
+                }
+            }).show();
+        } else {
+            mAuth.createUserWithEmailAndPassword(emailCadastrado.getText().toString(), senhaCadastrada.getText().toString())
+                    .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
+                        @Override
+                        public void onComplete(@NonNull Task<AuthResult> task) {
+                            if (task.isSuccessful()) {
+                                Log.d(TAG, "createUserWithEmail:success");
+                                FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
 
-                            UserProfileChangeRequest profileUpdates = new UserProfileChangeRequest.Builder()
-                                    .setDisplayName(nomeCadastrado.getText().toString())
-                                    .build();
+                                UserProfileChangeRequest profileUpdates = new UserProfileChangeRequest.Builder()
+                                        .setDisplayName(nomeCadastrado.getText().toString())
+                                        .build();
 
-                            user.updateProfile(profileUpdates)
-                                    .addOnCompleteListener(new OnCompleteListener<Void>() {
-                                        @Override
-                                        public void onComplete(@NonNull Task<Void> task) {
-                                            if (task.isSuccessful()) {
-                                                Log.d(TAG, "User profile updated.");
-                                                goToPreferencia();
+                                user.updateProfile(profileUpdates)
+                                        .addOnCompleteListener(new OnCompleteListener<Void>() {
+                                            @Override
+                                            public void onComplete(@NonNull Task<Void> task) {
+                                                if (task.isSuccessful()) {
+                                                    Log.d(TAG, "User profile updated.");
+                                                    goToPreferencia();
+                                                }
                                             }
-                                        }
-                                    });
-                            salvarImagemNoFirebase();
+                                        });
+                                salvarImagemNoFirebase();
 
-                        } else {
-                            Log.w(TAG, "createUserWithEmail:failure", task.getException());
-                            Toast.makeText(CadastroActivity.this, "Authentication failed.",
-                                    Toast.LENGTH_SHORT).show();
-                            goToPreferencia();
+                            } else {
+                                Log.w(TAG, "createUserWithEmail:failure", task.getException());
+                                Toast.makeText(CadastroActivity.this, "Authentication failed.",
+                                        Toast.LENGTH_SHORT).show();
+                                goToPreferencia();
+                            }
                         }
-                    }
-                });
+                    });
+        }
+    }
+
+    private void validacaoCaracteresDaSenha() {
+        Snackbar.make(botaoCadastro, "Sua senha deve conter no mínimo 6 caracteres.", BaseTransientBottomBar.LENGTH_INDEFINITE).setAction("OK, entendi", new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                senha.setTextColor(getResources().getColor(R.color.colorPrimary));
+                confirmaSenha.setTextColor(getResources().getColor(R.color.colorPrimary));
+            }
+        }).show();
     }
 
     private void goToPreferencia() {
