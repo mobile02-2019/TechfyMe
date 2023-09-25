@@ -13,7 +13,7 @@ Este é um aplicativo de notícias de tecnologia que oferece aos usuários infor
 - Salvamento de Favoritos: Os usuários podem salvar artigos favoritos para acessar posteriormente.
 
 # 🛠 Tecnologias
-The following tools were used in building the project:
+As seguintes ferramentas foram usadas na construção do projeto:
 - RecyclerView
 - Database
 - WebView
