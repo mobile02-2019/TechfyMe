@@ -26,11 +26,12 @@ As seguintes ferramentas foram usadas na construção do projeto:
 - ImageView Circular
 
 # 👩‍💻👨‍💻 Desenvolvedores
+
+- Thiago Gonçalves lptd99
 - Luara Ramos (Lise)
-- Andreza Campbell
 - Thays Spolaor
+- Andreza Campbell
 - Raphael Bathe
-- Thiago lptd99
 - Tatiana Miranda Dias
 - Ademirpaj
 - Rodrigo Corrêa Tavares
